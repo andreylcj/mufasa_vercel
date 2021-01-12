@@ -7,9 +7,10 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <link rel="stylesheet" type="text/css" href="/librarys/bootstrap/css/bootstrap.min.css" />
+                    <link rel="stylesheet" type="text/css" href="/librarys/bootstrap5/bootstrap.min.css" />
+                    <script src="/librarys/jQuery/jquery-3.5.1.slim.min.js" />
+                    <script src="/librarys/bootstrap5/bootstrap.bundle.min.js" />
                     <link rel="stylesheet" type="text/css" href="/librarys/font-awesome/css/all.min.css" />
-                    <link rel="shortcut icon" type="image/jpg" href="/images/logos/original_logo.png" />
                 </Head>
                 <body>
                     <Main />
