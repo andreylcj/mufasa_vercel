@@ -9,7 +9,7 @@
 1. instalar o git no pc
 2. criar pasta no seu pc para armazenar o projeto
 3. abrir no terminal o diretorio da pasta
-4. executar o comando "git clone https://github.com/andreylcj/mufasa.git"
+4. executar o comando "git clone https://github.com/andreylcj/mufasa_vercel.git"
 
   # Run Application
 Command: npm run dev
