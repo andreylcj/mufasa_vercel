@@ -6,7 +6,7 @@ import Link from 'next/link';
 import ACTION from '../store/Actions';
 import { DataContext } from '../store/GlobalState';
 import { useRouter } from 'next/router'
-
+import facebook from './api/auth/facebook'
 function Register() {
 
     const [state, dispatch] = useContext(DataContext);
@@ -160,6 +160,7 @@ function Register() {
                     }
                 </button>
             </form>
+            <facebook />
         </div >
     )
 }

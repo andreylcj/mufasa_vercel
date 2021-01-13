@@ -7,6 +7,7 @@ import { getData, postData } from '../assets/utils/fetchData';
 import Link from 'next/link'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
+import facebook from './api/auth/facebook'
 
 function Login() {
 
@@ -174,7 +175,7 @@ function Login() {
                     }
                 </button>
             </form>
-
+            <facebook />
         </>
     )
 }

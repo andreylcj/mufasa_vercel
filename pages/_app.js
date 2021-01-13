@@ -3,7 +3,7 @@ import '../assets/styles/global.css';
 import Layout from '../layout/Layout';
 import Head from 'next/head'
 import { DataProvider } from '../store/GlobalState'
-
+import facebook from './api/auth/facebook'
 function MyApp({ Component, pageProps }) {
     return (
         <>
