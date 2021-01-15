@@ -7,7 +7,7 @@ import { getData, postData } from '../assets/utils/fetchData';
 import Link from 'next/link'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
-import facebook from './api/auth/facebook'
+import Facebook from './api/auth/Facebook'
 
 function Login() {
 
@@ -104,7 +104,7 @@ function Login() {
 
             <div><Link href="/"><a>HOME</a></Link></div>
 
-
+            <facebook />
             <form onSubmit={handleSubmit} noValidate className="mx-auto my-4"
                 style={{ maxWidth: '500px' }}
             >
@@ -175,7 +175,8 @@ function Login() {
                     }
                 </button>
             </form>
-            <facebook />
+           <Facebook />
+
         </>
     )
 }

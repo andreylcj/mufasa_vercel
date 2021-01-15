@@ -38,6 +38,7 @@ function Home() {
                         <>
                             <Link href="/entrar"><a>Entrar</a></Link>
                             <Link href="/registrar"><a>Registrar</a></Link>
+                            
                         </>
                     ) : (
                         loggedRouter()
