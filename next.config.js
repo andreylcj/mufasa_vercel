@@ -1,5 +1,6 @@
 module.exports = {
     env: {
+        "HTTPS":true,
         "BASE_URL": "https://mufasa.vercel.app/",
         //"BASE_URL": "http://localhost:3000/",
         "MONGODB_URL": "mongodb+srv://andrey:andj180198@cluster0.sdihk.mongodb.net/mufasa?retryWrites=true&w=majority",

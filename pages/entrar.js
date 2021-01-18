@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 import Facebook from './api/auth/Facebook'
+import GoogleLogin from 'react-google-login'
 
 function Login() {
 
