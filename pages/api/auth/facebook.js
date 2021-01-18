@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login'
 import ReactDOM from 'react-dom';
-import { DataContext } from '../../store/GlobalState'
+
 
 export default class Facebook
  extends Component {
