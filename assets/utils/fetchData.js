@@ -25,7 +25,7 @@ export const postData = async (url, post, token) => {
     console.log('sexret variable => ' + process.env.ACCESS_TOKEN_SECRET)
     console.log(`${baseURL}${url}`)
     if (token) {
-        res = await fetch(`${baseURL}${url}`, {
+        res = await fetch(`${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
