@@ -21,6 +21,7 @@ export const getData = async (url, token) => {
 
 export const postData = async (url, post, token) => {
     let res
+    console.log(`${baseURL}${url}`)
     if (token) {
         res = await fetch(`${baseURL}${url}`, {
             method: 'POST',
