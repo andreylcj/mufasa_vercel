@@ -1,4 +1,5 @@
 const baseURL = process.env.BASE_URL
+const baseURL = ''
 
 export const getData = async (url, token) => {
     let res
@@ -21,11 +22,6 @@ export const getData = async (url, token) => {
 
 export const postData = async (url, post, token) => {
     let res
-    if (process.env.ACCESS_TOKEN_SECRET) {
-        console.log('ok existe')
-    } else {
-        console.log('ok nao existe')
-    }
     if (token) {
         res = await fetch(`${baseURL}${url}`, {
             method: 'POST',
