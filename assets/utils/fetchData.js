@@ -1,5 +1,5 @@
 //const baseURL = process.env.BASE_URL
-const baseURL = ''
+const baseURL = '/'
 
 export const getData = async (url, token) => {
     let res
