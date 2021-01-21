@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Link from 'next/link';
 import { DataContext } from '../store/GlobalState';
 import Cookie from 'js-cookie'
-import ACTION from '../store/Actions';
+import { ACTION } from '../store/Actions';
 
 function Home() {
 
@@ -10,7 +10,7 @@ function Home() {
     const { auth } = state
 
     const handleLogout = () => {
-        Cookie.remove('refreshToken', { path: '/api/auth/token' })
+        Cookie.remove('refreshToken', { path: '/api/auth/accessToken' })
         localStorage.removeItem('firstLogin')
         dispatch({
             type: ACTION.AUTH,
@@ -19,11 +19,32 @@ function Home() {
     }
 
     const loggedRouter = () => {
+        let email = auth.user ? auth.user.email : ''
+        let role = auth.user ? auth.user.email : ''
         return (
-            <div className="m-1">
-                <p>LOGADO</p>
-                <button onClick={handleLogout}>Logout</button>
-            </div>
+            <>
+                <div className="m-1 d-flex flex-column align-items-center">
+                    <p>Bem vindo, {email}</p >
+                    <p>Você é um {role}</p >
+                    {
+                        auth.user && auth.user.admin ?
+                            (
+                                <>
+
+                                    <Link href="/bend-admin/home">
+                                        <a>Área de administrador</a>
+                                    </Link>
+                                </>
+                            ) : (
+                                null
+                            )
+                    }
+                    <button
+                        onClick={handleLogout}
+                        className="my-2"
+                    >Logout</button>
+                </div >
+            </>
         )
     }
 

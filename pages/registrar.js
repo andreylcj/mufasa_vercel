@@ -3,9 +3,10 @@ import validRegister from '../assets/utils/ValidRegister'
 import Loading from '../snnipets/Loading'
 import { postData } from '../assets/utils/fetchData';
 import Link from 'next/link';
-import ACTION from '../store/Actions';
+import { ACTION } from '../store/Actions';
 import { DataContext } from '../store/GlobalState';
 import { useRouter } from 'next/router'
+import Cookie from 'js-cookie'
 
 function Register() {
 
@@ -54,6 +55,12 @@ function Register() {
 
         if (res.emailMessage)
             return
+
+        Cookie.set('refreshToken', res.refreshToken, {
+            path: '/api/auth/accessToken',
+            expires: 25
+        })
+        localStorage.setItem('firstLogin', true)
 
         //set new auth
         const new_auth = await fetch('api/auth/accessToken', {
@@ -143,10 +150,12 @@ function Register() {
                         }
                     </div>
                 </div>
-                <div className="mb-3 form-check">
+                {/*
+                    <div className="mb-3 form-check">
                     <input type="checkbox" className="form-check-input" id="checkMeOut" />
                     <label className="form-check-label" htmlFor="checkMeOut">Lembrar de mim</label>
                 </div>
+                */}
                 <button type="submit" className="btn btn-primary d-flex mx-auto">
                     {
                         loading ?

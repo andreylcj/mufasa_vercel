@@ -98,23 +98,13 @@ export const patchData = async (url, post, token) => {
 
 export const deleteData = async (url, token) => {
 
-    let res
-    if (token) {
-        res = await fetch(`${baseURL}${url}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-            }
-        })
-    } else {
-        res = await fetch(`${baseURL}${url}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-    }
+    let res = await fetch(`${baseURL}${url}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
 
     const data = await res.json();
     return data

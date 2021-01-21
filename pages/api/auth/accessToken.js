@@ -8,6 +8,7 @@ ConnectDB()
 
 export default async (req, res) => {
     try {
+
         const rf_token = req.cookies.refreshToken
         if (!rf_token) return res.status(400).json({ err: 'Por favor, faça login' })
 

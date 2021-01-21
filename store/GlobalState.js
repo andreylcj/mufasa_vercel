@@ -1,12 +1,18 @@
 import React, { createContext, useEffect, useReducer } from 'react'
 import reducers from './Reducers'
-import ACTION from '../store/Actions'
+import { ACTION } from '../store/Actions'
 import { getData } from '../assets/utils/fetchData'
 
 export const DataContext = createContext();
 
 export const initialState = {
+    modal: {
+
+    },
     auth: {
+
+    },
+    notify: {
 
     },
     loading: false,
@@ -14,30 +20,48 @@ export const initialState = {
         email: '',
         password: '',
     },
+    users: [
+
+    ],
 }
 
 export const DataProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducers, initialState)
 
+    const { auth } = state
+
+    // AUTH
     useEffect(async () => {
-        console.log('ok')
         const firstLogin = localStorage.getItem('firstLogin')
         if (firstLogin) {
-            const res = await fetch('http://localhost:3000/api/auth/accessToken', {
-                method: 'GET',
-            })
-            const data = await res.json()
+            const res = await getData('api/auth/accessToken')
 
             dispatch({
                 type: ACTION.AUTH,
                 payload: {
-                    token: data.accessToken,
-                    user: data.user
+                    token: res.accessToken,
+                    user: res.user
                 }
             })
         }
     }, [])
+
+    // USERS
+    useEffect(async () => {
+        if (auth.token) {
+            if (auth.user.role === 'admin' || auth.user.role === 'master admin') {
+                getData('api/user', auth.token)
+                    .then(res => {
+                        if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+                        dispatch({ type: 'ADD_USERS', payload: res.users })
+                    })
+            }
+        } else {
+            dispatch({ type: 'ADD_USERS', payload: [] })
+        }
+    }, [auth.token])
+
 
     return (
         <DataContext.Provider value={[state, dispatch]}>

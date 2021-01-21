@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../store/GlobalState'
-import ACTION from '../store/Actions'
+import { ACTION } from '../store/Actions';
 import Loading from '../snnipets/Loading'
 import validLogin from '../assets/utils/ValidLogin';
 import { getData, postData } from '../assets/utils/fetchData';
@@ -64,7 +64,7 @@ function Login() {
         }
 
         Cookie.set('refreshToken', res.refreshToken, {
-            path: 'api/auth/accessToken',
+            path: '/api/auth/accessToken',
             expires: 25
         })
         localStorage.setItem('firstLogin', true)
@@ -94,7 +94,6 @@ function Login() {
     const router = useRouter()
 
     useEffect(() => {
-        console.log(auth)
         if (Object.keys(auth).length !== 0) router.push('/')
     }, [auth])
 
@@ -157,10 +156,12 @@ function Login() {
                         }
                     </div>
                 </div>
-                <div className="mb-3 form-check">
+                {/*
+                    <div className="mb-3 form-check">
                     <input type="checkbox" className="form-check-input" id="checkMeOut" />
                     <label className="form-check-label" htmlFor="checkMeOut">Lembrar de mim</label>
                 </div>
+                */}
                 <button type="submit" className="btn btn-primary d-flex mx-auto">
                     {
                         loading ?

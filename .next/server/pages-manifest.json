@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/registrar": "pages/registrar.js",
-  "/entrar": "pages/entrar.js"
+  "/bend-admin/users": "pages/bend-admin/users.js",
+  "/bend-admin/home": "pages/bend-admin/home.js"
 }

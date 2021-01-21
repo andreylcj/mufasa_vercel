@@ -1,4 +1,4 @@
-import ACTION from './Actions'
+import { ACTION } from './Actions'
 import { initialState } from './GlobalState'
 
 const reducers = (state, action) => {
@@ -6,6 +6,27 @@ const reducers = (state, action) => {
     const draftState = Object.assign({}, state)
 
     switch (action.type) {
+
+        // NOTIFY
+        case ACTION.ADD_MODAL:
+            return {
+                ...draftState,
+                modal: action.payload
+            }
+
+        // NOTIFY
+        case ACTION.NOTIFY:
+            return {
+                ...draftState,
+                notify: action.payload
+            }
+
+        // ADD USERS
+        case ACTION.ADD_USERS:
+            return {
+                ...draftState,
+                users: action.payload
+            }
 
         // AUTH
         case ACTION.AUTH:

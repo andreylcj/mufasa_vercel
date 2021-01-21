@@ -13,5 +13,3 @@
 
   # Run Application
 Command: npm run dev
-
-teste

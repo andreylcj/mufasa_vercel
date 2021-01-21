@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/entrar": [
+    "/bend-admin/home": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/entrar.js"
+      "static/chunks/pages/bend-admin/home.js"
     ],
-    "/registrar": [
+    "/bend-admin/users": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/registrar.js"
+      "static/chunks/pages/bend-admin/users.js"
     ]
   },
   "ampFirstPages": []
