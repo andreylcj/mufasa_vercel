@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 
 function Login() {
 
+    console.log('teste variable => ' + process.env.ACCESS_TOKEN_SECRET)
+
     const [state, dispatch] = useContext(DataContext);
     const { loading } = state
     const { userData } = state
