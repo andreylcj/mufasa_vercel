@@ -21,7 +21,7 @@ export const getData = async (url, token) => {
 
 export const postData = async (url, post, token) => {
     let res
-    console.log('vercel variable => ' + process.env.VERCEL_URL)
+    console.log('teste variable => ' + process.env.BASE_URL)
     console.log(`${baseURL}${url}`)
     if (token) {
         res = await fetch(`${baseURL}${url}`, {
