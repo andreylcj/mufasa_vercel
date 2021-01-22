@@ -20,7 +20,7 @@ function Home() {
 
     const loggedRouter = () => {
         let email = auth.user ? auth.user.email : ''
-        let role = auth.user ? auth.user.email : ''
+        let role = auth.user ? auth.user.role : ''
         return (
             <>
                 <div className="m-1 d-flex flex-column align-items-center">
