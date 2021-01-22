@@ -1,7 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
-  "/_error": "pages/_error.js",
-  "/bend-admin/users": "pages/bend-admin/users.js",
-  "/bend-admin/home": "pages/bend-admin/home.js"
-}
