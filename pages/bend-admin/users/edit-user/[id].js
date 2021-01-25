@@ -6,14 +6,13 @@ import Loading from '../../../../snnipets/Loading'
 import { updateItem } from '../../../../store/Actions'
 
 function EditUser() {
-
-    const allRoles = ['user', 'admin', 'master admin']
-
     const router = useRouter()
     const { id } = router.query
 
     const [state, dispatch] = useContext(DataContext)
-    const { users, auth } = state
+    const { users, auth, roles } = state
+
+    const allRoles = roles
     const loading = state.loading
 
     const [editUser, setEditUser] = useState([])
@@ -79,7 +78,7 @@ function EditUser() {
                     <select
                         id="role"
                         onChange={(e) => { setRole(e.target.value) }}
-                        className="text-capitalize"
+                        className="text-capitalize form-select form-select-sm d-inline-block w-auto"
                         value={role}
                     >
                         {

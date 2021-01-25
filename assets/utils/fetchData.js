@@ -1,5 +1,5 @@
 //const baseURL = process.env.BASE_URL
-const baseURL = '/'
+const baseURL = 'http://localhost:3000/'
 
 export const getData = async (url, token) => {
     let res
