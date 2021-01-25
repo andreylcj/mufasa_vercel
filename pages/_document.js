@@ -11,6 +11,8 @@ class MyDocument extends Document {
                     <script src="/librarys/jQuery/jquery-3.5.1.min.js" />
                     <script src="/librarys/bootstrap5/bootstrap.bundle.min.js" />
                     <link rel="stylesheet" type="text/css" href="/librarys/font-awesome/css/all.min.css" />
+                    <link rel="stylesheet" type="text/css" href="/librarys/DataTables/datatables.min.css" />
+                    <script type="text/javascript" src="/librarys/DataTables/datatables.min.js"></script>
                 </Head>
                 <body>
                     <Main />

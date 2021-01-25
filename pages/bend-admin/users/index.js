@@ -30,13 +30,17 @@ function Users() {
     useEffect(async () => {
         if (!auth.token) return
 
-        const res = await getData(
+        /*const res = await getData(
             `api/user?role=${role}&sort=${sort}&search=${search}`,
             auth.token
         )
 
-        setUsersFiltered(res.users)
-    }, [auth, router.query])
+        setUsersFiltered(res.users)*/
+
+        setUsersFiltered(users)
+
+        //}, [auth, router.query])
+    }, [auth, users])
 
     // jQuery ==============
     useEffect(() => {
@@ -51,13 +55,7 @@ function Users() {
 
         <div className="table-responsive">
             <Head>
-                <link rel="stylesheet" type="text/css" href="/librarys/DataTables/datatables.min.css" />
-
-                <script type="text/javascript" src="/librarys/DataTables/datatables.min.js"></script>
-
-
                 <title>Usuários</title>
-
             </Head>
 
             <div className="mb-4">
