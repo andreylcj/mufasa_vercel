@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
-import { DataContext } from '../../store/GlobalState';
+import { DataContext } from '../../../store/GlobalState';
 import Cookie from 'js-cookie'
-import { ACTION } from '../../store/Actions';
+import { ACTION } from '../../../store/Actions';
 import { useRouter } from 'next/router'
 
 function Home() {

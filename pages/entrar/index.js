@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { DataContext } from '../store/GlobalState'
-import { ACTION } from '../store/Actions';
-import Loading from '../snnipets/Loading'
-import validLogin from '../assets/utils/ValidLogin';
-import { getData, postData } from '../assets/utils/fetchData';
+import { DataContext } from '../../store/GlobalState'
+import { ACTION } from '../../store/Actions';
+import Loading from '../../snnipets/Loading'
+import validLogin from '../../assets/utils/ValidLogin';
+import { getData, postData } from '../../assets/utils/fetchData';
 import Link from 'next/link'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'

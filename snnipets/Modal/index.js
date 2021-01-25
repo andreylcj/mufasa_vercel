@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { deleteData } from '../assets/utils/fetchData'
-import { deleteItem } from '../store/Actions'
-import { DataContext } from '../store/GlobalState'
+import { deleteData } from '../../assets/utils/fetchData'
+import { deleteItem } from '../../store/Actions'
+import { DataContext } from '../../store/GlobalState'
 
 function Modal() {
 
