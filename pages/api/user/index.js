@@ -12,13 +12,50 @@ export default async (req, res) => {
     }
 }
 
+class APIfeatures {
+    constructor(query, queryString) {
+        this.query = query;
+        this.queryString = queryString;
+    }
+    filtering() {
+
+        const queryObj = { ...this.queryString }
+
+        const excludeFields = ['sort']
+        excludeFields.forEach(el => delete (queryObj[el]))
+
+        if (queryObj.role !== 'all' && queryObj.role)
+            this.query.find({ role: queryObj.role })
+        if (queryObj.search !== 'all' && queryObj.search)
+            this.query.find({ email: { $regex: queryObj.search } })
+
+        this.query.find()
+        return this;
+    }
+
+    sorting() {
+        if (this.queryString.sort) {
+            const sortBy = this.queryString.sort.split(',').join('')
+            this.query = this.query.sort(sortBy)
+        } else {
+            this.query = this.query.sort('-createdAt')
+        }
+
+        return this;
+    }
+}
+
+
 const getUsers = async (req, res) => {
     try {
 
         const result = await auth(req, res)
         if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
 
-        const users = await Users.find().select('-password')
+        const features = new APIfeatures(Users.find().select('-password'), req.query)
+            .filtering().sorting()
+
+        const users = await features.query
         res.json({ users })
 
     } catch (err) {

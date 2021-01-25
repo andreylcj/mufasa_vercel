@@ -6,6 +6,11 @@ import { getData } from '../assets/utils/fetchData'
 export const DataContext = createContext();
 
 export const initialState = {
+    roles: [
+        'master admin',
+        'admin',
+        'user'
+    ],
     modal: {
 
     },

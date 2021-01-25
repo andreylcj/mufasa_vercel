@@ -1,17 +1,24 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Head from 'next/head'
 import { DataContext } from '../../../store/GlobalState'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { deleteItem } from '../../../store/Actions'
-import { deleteData } from '../../../assets/utils/fetchData'
+import BendFilterUsers from '../../../snnipets/BendFilterUsers'
+import { getData } from '../../../assets/utils/fetchData'
+import { useRouter } from 'next/router';
 
 function Users() {
+
+    const router = useRouter()
+    const query = router.query
+
+    const role = query.role || 'all'
+    const search = query.search || 'all'
+    const sort = query.sort || ''
 
     const [state, dispatch] = useContext(DataContext)
     const { users, auth } = state
 
-    const router = useRouter()
+    const [usersFiltered, setUsersFiltered] = useState(users)
 
     useEffect(() => {
         if (Object.keys(auth).length !== 0 && !auth.user.admin) {
@@ -20,17 +27,50 @@ function Users() {
 
     }, [auth])
 
+    useEffect(async () => {
+        if (!auth.token) return
+
+        /*const res = await getData(
+            `api/user?role=${role}&sort=${sort}&search=${search}`,
+            auth.token
+        )
+
+        setUsersFiltered(res.users)*/
+
+        setUsersFiltered(users)
+
+        //}, [auth, router.query])
+    }, [auth, users])
+
+    // jQuery ==============
+    useEffect(() => {
+        if (!usersFiltered.length || !auth.user) return
+
+        // jQuery ==============
+        $('#usersTable').DataTable();
+
+    }, [usersFiltered, auth])
+
     return (
+
         <div className="table-responsive">
-            <Head><title>Users</title></Head>
+            <Head>
+                <title>Usuários</title>
+            </Head>
 
             <div className="mb-4">
-                <button className="btn btn-dark" onClick={() => { router.back() }}>
+                <button className="btn btn-dark" onClick={() => { router.push('/bend-admin/home') }}>
                     <i className="fas fa-long-arrow-alt-left"></i> Voltar
             </button>
             </div>
 
-            <table className="w-100 table">
+            {/*
+                <div className="mb-4">
+                    <BendFilterUsers state={state} />
+              </div>
+            */}
+
+            <table className="w-100 table" id='usersTable'>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -48,7 +88,7 @@ function Users() {
                 </thead>
                 <tbody>
                     {
-                        users.map((user, index) => (
+                        usersFiltered.map((user, index) => (
                             <tr key={user._id}>
                                 <th>{index + 1}</th>
                                 <th>{user._id}</th>
