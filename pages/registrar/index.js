@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
-import validRegister from '../assets/utils/ValidRegister'
-import Loading from '../snnipets/Loading'
-import { postData } from '../assets/utils/fetchData';
+import validRegister from '../../assets/utils/ValidRegister'
+import Loading from '../../snnipets/Loading'
+import { postData } from '../../assets/utils/fetchData';
 import Link from 'next/link';
-import { ACTION } from '../store/Actions';
-import { DataContext } from '../store/GlobalState';
+import { ACTION } from '../../store/Actions';
+import { DataContext } from '../../store/GlobalState';
 import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
 
