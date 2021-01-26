@@ -12,6 +12,13 @@ export default async (req, res) => {
         case "DELETE":
             await deleteUser(req, res)
             break
+        case 'GET':
+            await getUser(req, res)
+            break;
+       /* case 'PUT':
+            await modifyUser(req, res)
+            break;
+            */
     }
 }
 
@@ -52,3 +59,41 @@ const deleteUser = async (req, res) => {
         return res.status(500).json({ err: err.message })
     }
 }
+
+const getUser = async (req, res) => {
+    try {
+        const { id } = req.query
+
+        //const result = await auth(req, res)
+        //if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
+
+        const user = await Users.findById(id)
+
+        if (!user) {
+            return res.status(400).json({succes: false})
+    
+        }
+
+        res.status(200).json({succes: true, data: user})
+    }catch(err){
+        return res.status(500).json({ err: err.message })
+    }
+}
+
+/*const modifyUser = async (req, res) => {
+    try {
+        const { id } = req.query
+        const { role } = req.body
+        const user = await Users.findByIdAndUpdate(id, req, rolenpm run dev , {
+            new: true,
+            runValidators:true
+        })
+    if (!user) {
+        return res.status(400).json({succes: false})
+
+    }
+    res.status(200).json({succes: true, data: user})
+    }catch(err){
+        return res.status(500).json({ err: err.message })
+    }
+}*/

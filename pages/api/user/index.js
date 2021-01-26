@@ -49,8 +49,8 @@ class APIfeatures {
 const getUsers = async (req, res) => {
     try {
 
-        const result = await auth(req, res)
-        if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
+        //const result = await auth(req, res)
+        //if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
 
         const features = new APIfeatures(Users.find().select('-password'), req.query)
             .filtering().sorting()

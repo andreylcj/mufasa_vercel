@@ -26,6 +26,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: '',
     },
+    transactions : {
+        bsonType: Object
+    },
+    CPF:{
+        type: String,
+        default:'',
+    },
+    CEIpassword:{
+        type:String
+    }
 }, {
     timestamps: true
 })
