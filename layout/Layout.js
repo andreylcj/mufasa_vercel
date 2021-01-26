@@ -3,6 +3,7 @@ import Header from '../sections/Header';
 import Notify from '../snnipets/Notify';
 import Modal from '../snnipets/Modal';
 import { useRouter } from 'next/router'
+import BendHeader from '../sections/BendHeader';
 
 function Layout({ children }) {
 
@@ -17,9 +18,11 @@ function Layout({ children }) {
                 (pathName.indexOf("denied-access") !== -1) ?
                     (
                         ''
+                    ) : (pathName.indexOf("bend-admin") !== -1) ? (
+                        <BendHeader />
                     ) : (
-                        <Header />
-                    )
+                            <Header />
+                        )
             }
 
             {

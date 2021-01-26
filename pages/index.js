@@ -26,6 +26,9 @@ function Home() {
                 <div className="m-1 d-flex flex-column align-items-center">
                     <p>Bem vindo, {email}</p >
                     <p>Você é um {role}</p >
+                    <Link href="/CEI">
+                        <a>CEI</a>
+                    </Link>
                     {
                         auth.user && auth.user.admin ?
                             (
