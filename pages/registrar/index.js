@@ -11,9 +11,7 @@ import Cookie from 'js-cookie'
 function Register() {
 
     const [state, dispatch] = useContext(DataContext);
-    const { loading } = state
-    const { userData } = state
-    const { auth } = state
+    const { loading, userData, auth } = state
 
     const [submitStatus, setSubmitStatus] = useState({
         emailMessage: '',
