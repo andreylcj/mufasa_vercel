@@ -12,7 +12,7 @@ function Home() {
     const { auth } = state
 
     const handleUpdateProfile = e => {
-        
+        e.preventDefault()
 
         if(CPF !== auth.user.name || CEIpassword) updateInfor()
     }
@@ -24,7 +24,7 @@ function Home() {
         
 
         putData('user', {
-            CPF , CEIpassword: CPF ? media[0].url : auth.user.CPF
+            CPF , CEIpassword
         }, auth.token).then(res => {
             if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
 
