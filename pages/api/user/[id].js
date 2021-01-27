@@ -78,11 +78,11 @@ const getUser = async (req, res) => {
         const user = await Users.findById(id)
 
         if (!user) {
-            return res.status(400).json({succes: false})
+            return res.status(400).json({success: false})
     
         }
 
-        res.status(200).json({succes: true, data: user})
+        res.status(200).json({success: true, data: user})
     }catch(err){
         return res.status(500).json({ err: err.message })
     }

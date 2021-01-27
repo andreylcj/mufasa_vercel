@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { DataContext } from '../../../store/GlobalState';
 import Cookie from 'js-cookie'
 import { ACTION } from '../../../store/Actions';
-import { useRouter } from 'next/router'
-import { putData } from '../utils/fetchData'
+import { useRouter } from 'next/router';
+import { putData } from '../../../assets/utils/fetchData';
 
 function Home() {
 
@@ -14,7 +14,7 @@ function Home() {
     const handleUpdateProfile = e => {
         e.preventDefault()
 
-        if(CPF !== auth.user.name || CEIpassword) updateInfor()
+        if(CPF !== auth.user.CPF || CEIpassword) updateInfor()
     }
     
     const updateInfor = async () => {
