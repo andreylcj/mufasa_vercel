@@ -1,8 +1,8 @@
-import connectDB from '../../../assets/utils/ConnectDB'
-import auth from '../../../assets/middleware/auth'
-import Users from '../../../assets/models/UserModel'
+import connectDB from '../../../assets/utils/ConnectDB';
+import auth from '../../../assets/middleware/auth';
+import Users from '../../../assets/models/UserModel';
 
-connectDB()
+connectDB();
 
 export default async (req, res) => {
     switch (req.method) {
@@ -24,30 +24,40 @@ class APIfeatures {
 
         const queryObj = { ...this.queryString }
 
-        const excludeFields = ['sort']
-        excludeFields.forEach(el => delete (queryObj[el]))
+    default:
+  }
+};
 
-        if (queryObj.role !== 'all' && queryObj.role)
-            this.query.find({ role: queryObj.role })
-        if (queryObj.search !== 'all' && queryObj.search)
-            this.query.find({ email: { $regex: queryObj.search } })
+class APIfeatures {
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryString = queryString;
+  }
 
-        this.query.find()
-        return this;
+  filtering() {
+    const queryObj = { ...this.queryString };
+
+    const excludeFields = ['sort'];
+    excludeFields.forEach((el) => delete (queryObj[el]));
+
+    if (queryObj.role !== 'all' && queryObj.role) this.query.find({ role: queryObj.role });
+    if (queryObj.search !== 'all' && queryObj.search) this.query.find({ email: { $regex: queryObj.search } });
+
+    this.query.find();
+    return this;
+  }
+
+  sorting() {
+    if (this.queryString.sort) {
+      const sortBy = this.queryString.sort.split(',').join('');
+      this.query = this.query.sort(sortBy);
+    } else {
+      this.query = this.query.sort('-createdAt');
     }
 
-    sorting() {
-        if (this.queryString.sort) {
-            const sortBy = this.queryString.sort.split(',').join('')
-            this.query = this.query.sort(sortBy)
-        } else {
-            this.query = this.query.sort('-createdAt')
-        }
-
-        return this;
-    }
+    return this;
+  }
 }
-
 
 const getUsers = async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const usermaSchema = new mongoose.Schema({
     name: {
@@ -39,8 +39,8 @@ const usermaSchema = new mongoose.Schema({
         default: '',
     }
 }, {
-    timestamps: true
-})
+  timestamps: true,
+});
 
 let dataset = mongoose.models.userma || mongoose.model('userma', usermaSchema)
 export default dataset
