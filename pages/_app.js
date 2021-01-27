@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 import '../assets/styles/global.css';
+import Head from 'next/head';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Layout from '../layout/Layout';
-import Head from 'next/head'
-import { DataProvider } from '../store/GlobalState'
-
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { DataProvider } from '../store/GlobalState';
 import db from '../db.json';
 
 const GlobalStyle = createGlobalStyle`
@@ -26,9 +25,9 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
-`
+`;
 
-const theme = db.theme;
+const { theme } = db;
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -48,7 +47,7 @@ function MyApp({ Component, pageProps }) {
 
       </DataProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

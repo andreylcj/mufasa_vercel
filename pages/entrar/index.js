@@ -2,18 +2,17 @@ import React, { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { ACTION } from '../../store/Actions';
 import Loading from '../../snnipets/Loading'
-import validLogin from '../../assets/utils/ValidLogin';
+import validLogin from '../../assets/utils/ValidateData/ValidLogin';
 import { getData, postData } from '../../assets/utils/fetchData';
 import Link from 'next/link'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
+import GoBackButton from '../../snnipets/GoBackButton';
 
 function Login() {
 
     const [state, dispatch] = useContext(DataContext);
-    const { loading } = state
-    const { userData } = state
-    const { auth } = state
+    const { loading, userData, auth } = state
 
     const [submitStatus, setSubmitStatus] = useState({
         emailMessage: '',
@@ -100,8 +99,7 @@ function Login() {
     return (
         <>
 
-            <div><Link href="/"><a>HOME</a></Link></div>
-
+            <GoBackButton />
 
             <form onSubmit={handleSubmit} noValidate className="mx-auto my-4"
                 style={{ maxWidth: '500px' }}

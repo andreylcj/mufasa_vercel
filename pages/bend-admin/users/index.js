@@ -5,6 +5,7 @@ import Link from 'next/link'
 import BendFilterUsers from '../../../snnipets/BendFilterUsers'
 import { getData } from '../../../assets/utils/fetchData'
 import { useRouter } from 'next/router';
+import GoBackButton from '../../../snnipets/GoBackButton'
 
 function Users() {
 
@@ -18,14 +19,7 @@ function Users() {
     const [state, dispatch] = useContext(DataContext)
     const { users, auth } = state
 
-    const [usersFiltered, setUsersFiltered] = useState(users)
-
-    useEffect(() => {
-        if (Object.keys(auth).length !== 0 && !auth.user.admin) {
-            router.push('/bend-admin/denied-access')
-        }
-
-    }, [auth])
+    const [usersFiltered, setUsersFiltered] = useState([])
 
     useEffect(async () => {
         if (!auth.token) return
@@ -58,11 +52,7 @@ function Users() {
                 <title>Usuários</title>
             </Head>
 
-            <div className="mb-4">
-                <button className="btn btn-dark" onClick={() => { router.push('/bend-admin/home') }}>
-                    <i className="fas fa-long-arrow-alt-left"></i> Voltar
-            </button>
-            </div>
+            <GoBackButton url='/bend-admin/home' />
 
             {/*
                 <div className="mb-4">

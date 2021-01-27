@@ -19,7 +19,10 @@ const updateRole = async (req, res) => {
     try {
 
         const result = await auth(req, res)
+
         if (result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
+
+
 
         const { id } = req.query
         const { role } = req.body

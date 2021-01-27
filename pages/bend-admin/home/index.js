@@ -33,8 +33,6 @@ function Home() {
     useEffect(() => {
         if (Object.keys(auth).length === 0) {
             router.push('/bend-admin/')
-        } else if (Object.keys(auth).length !== 0 && !auth.user.admin) {
-            router.push('/bend-admin/denied-access')
         }
 
     }, [auth])
