@@ -1,164 +1,151 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Head from 'next/head'
-import { DataContext } from '../../../store/GlobalState'
-import Link from 'next/link'
-import BendFilterUsers from '../../../snnipets/BendFilterUsers'
-import { getData } from '../../../assets/utils/fetchData'
-import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+// import { useRouter } from 'next/router';
+import { DataContext } from '../../../store/GlobalState';
+import GoBackButton from '../../../snnipets/GoBackButton';
 
 function Users() {
+  /* const router = useRouter();
+  const { query } = router;
 
-    const router = useRouter()
-    const query = router.query
+  const role = query.role || 'all';
+  const search = query.search || 'all';
+  const sort = query.sort || ''; */
 
-    const role = query.role || 'all'
-    const search = query.search || 'all'
-    const sort = query.sort || ''
+  const [state, dispatch] = useContext(DataContext);
+  const { users, auth } = state;
 
-    const [state, dispatch] = useContext(DataContext)
-    const { users, auth } = state
+  const [usersFiltered, setUsersFiltered] = useState([]);
 
-    const [usersFiltered, setUsersFiltered] = useState(users)
+  useEffect(async () => {
+    if (!auth.token) return;
 
-    useEffect(() => {
-        if (Object.keys(auth).length !== 0 && !auth.user.admin) {
-            router.push('/bend-admin/denied-access')
-        }
-
-    }, [auth])
-
-    useEffect(async () => {
-        if (!auth.token) return
-
-        const res = await getData(
+    /* const res = await getData(
             `api/user?role=${role}&sort=${sort}&search=${search}`,
             auth.token
         )
 
-        setUsersFiltered(res.users)
-    }, [auth, router.query])
+        setUsersFiltered(res.users) */
+
+    setUsersFiltered(users);
+
+    // }, [auth, router.query])
+  }, [auth, users]);
+
+  // jQuery ==============
+  useEffect(() => {
+    if (!usersFiltered.length || !auth.user) return;
 
     // jQuery ==============
-    useEffect(() => {
-        if (!usersFiltered.length || !auth.user) return
+    // eslint-disable-next-line no-undef
+    $('#usersTable').DataTable();
+  }, [usersFiltered, auth]);
 
-        // jQuery ==============
-        $('#usersTable').DataTable();
+  return (
 
-    }, [usersFiltered, auth])
+    <div className="table-responsive">
+      <Head>
+        <title>Usuários</title>
+      </Head>
 
-    return (
+      <GoBackButton url="/bend-admin/home" />
 
-        <div className="table-responsive">
-            <Head>
-                <link rel="stylesheet" type="text/css" href="/librarys/DataTables/datatables.min.css" />
-
-                <script type="text/javascript" src="/librarys/DataTables/datatables.min.js"></script>
-
-
-                <title>Usuários</title>
-
-            </Head>
-
-            <div className="mb-4">
-                <button className="btn btn-dark" onClick={() => { router.push('/bend-admin/home') }}>
-                    <i className="fas fa-long-arrow-alt-left"></i> Voltar
-            </button>
-            </div>
-
-            {/*
+      {/*
                 <div className="mb-4">
                     <BendFilterUsers state={state} />
               </div>
             */}
 
-            <table className="w-100 table" id='usersTable'>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        {
+      <table className="w-100 table" id="usersTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Admin</th>
+            {
                             (auth.user && (auth.user.role === 'master admin')) ? (
-                                <th>Action</th>
+                              <th>Action</th>
                             ) : (
-                                    null
-                                )
+                              null
+                            )
                         }
-                    </tr>
-                </thead>
-                <tbody>
-                    {
+          </tr>
+        </thead>
+        <tbody>
+          {
                         usersFiltered.map((user, index) => (
-                            <tr key={user._id}>
-                                <th>{index + 1}</th>
-                                <th>{user._id}</th>
-                                <th>{user.email}</th>
-                                <th>
-                                    {
-                                        user.admin ?
-                                            (
-                                                (user.role === 'master admin') ?
-                                                    (
-                                                        <>
-                                                            <i className="fas fa-check text-success"></i>
-                                                            <font className="text-success"> Master Admin</font>
-                                                        </>
-                                                    ) : (
-                                                        <i className="fas fa-check text-success"></i>
-                                                    )
-                                            ) : (
-                                                <i className="fas fa-times text-danger"></i>
-                                            )
-                                    }
-                                </th>
-                                {
-                                    (auth.user && (auth.user.role === 'master admin')) ?
-                                        (
-                                            (auth.user.email !== user.email) ? (
+                          <tr key={user._id}>
+                            <th>{index + 1}</th>
+                            <th>{user._id}</th>
+                            <th>{user.email}</th>
+                            <th>
+                              {
+                                        user.admin
+                                          ? (
+                                            (user.role === 'master admin')
+                                              ? (
                                                 <>
-                                                    <th>
-                                                        <Link href={`/bend-admin/users/edit-user/${user._id}`}>
-                                                            <a><i className="fas fa-edit text-info mr-2" title="Edit"></i></a>
-                                                        </Link>
-
-                                                        <i className="fas fa-trash-alt text-danger ms-2"
-                                                            title="Remove"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                            style={{ cursor: 'pointer' }}
-                                                            onClick={() => {
-                                                                dispatch({
-                                                                    type: 'ADD_MODAL',
-                                                                    payload: {
-                                                                        data: users,
-                                                                        title: user.email,
-                                                                        id: user._id,
-                                                                        type: 'ADD_USERS'
-                                                                    }
-                                                                })
-                                                            }}
-                                                        ></i>
-                                                    </th>
+                                                  <i className="fas fa-check text-success" />
+                                                  <font className="text-success"> Master Admin</font>
                                                 </>
-                                            ) : (
-                                                    <th>
-                                                        <Link href={`/bend-admin/myprofile`}>
-                                                            <a><i className="fas fa-user text-dark mr-2" title="My Profile"></i></a>
-                                                        </Link>
-                                                    </th>
-                                                )
+                                              ) : (
+                                                <i className="fas fa-check text-success" />
+                                              )
+                                          ) : (
+                                            <i className="fas fa-times text-danger" />
+                                          )
+                                    }
+                            </th>
+                            {
+                                    (auth.user && (auth.user.role === 'master admin'))
+                                      ? (
+                                        (auth.user.email !== user.email) ? (
+                                          <>
+                                            <th>
+                                              <Link href={`/bend-admin/users/edit-user/${user._id}`}>
+                                                <a><i className="fas fa-edit text-info mr-2" title="Edit" /></a>
+                                              </Link>
+
+                                              <i
+                                                className="fas fa-trash-alt text-danger ms-2"
+                                                title="Remove"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={() => {
+                                                  dispatch({
+                                                    type: 'ADD_MODAL',
+                                                    payload: {
+                                                      data: users,
+                                                      title: user.email,
+                                                      id: user._id,
+                                                      type: 'ADD_USERS',
+                                                    },
+                                                  });
+                                                }}
+                                              />
+                                            </th>
+                                          </>
                                         ) : (
-                                            null
+                                          <th>
+                                            <Link href="/bend-admin/myprofile">
+                                              <a><i className="fas fa-user text-dark mr-2" title="My Profile" /></a>
+                                            </Link>
+                                          </th>
                                         )
+                                      ) : (
+                                        null
+                                      )
                                 }
-                            </tr>
+                          </tr>
                         ))
                     }
-                </tbody>
-            </table>
-        </div>
-    )
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-export default Users
+export default Users;

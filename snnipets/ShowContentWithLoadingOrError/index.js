@@ -1,22 +1,22 @@
 import React from 'react';
-import Loading from './Loading'
-import Error from './Error'
+import Loading from '../Loading';
+import Error from '../Error';
 
 function ShowContentWithLoadingOrError(props) {
-    const { loading, error, children } = props;
-    return (
-        <>
-            {
+  const { loading, error, children } = props;
+  return (
+    <>
+      {
                 loading ? (
-                    <Loading />
+                  <Loading />
                 ) : error ? (
-                    <Error message={error} />
+                  <Error message={error} />
                 ) : (
-                            children
-                        )
+                  children
+                )
             }
-        </>
-    )
+    </>
+  );
 }
 
-export default ShowContentWithLoadingOrError
+export default ShowContentWithLoadingOrError;

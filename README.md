@@ -4,6 +4,7 @@
       exemplo: Cabeçalho
   - Colocar commit direito, sem preguiça e que de pra entender oq a pessoa está fazendo a partir do commit
   - Sempre editar numa branch secundaria
+2. Usar tab como sendo 2 espaços
   
   # Connect repository
 1. instalar o git no pc
