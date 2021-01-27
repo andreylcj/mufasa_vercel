@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const Header = styled.header`
     padding: 20px;
@@ -22,11 +22,11 @@ const Header = styled.header`
 `;
 
 function BendHeader() {
-    return (
-        <Header>
-            Bend Header
-        </Header>
-    )
+  return (
+    <Header>
+      Bend Header
+    </Header>
+  );
 }
 
-export default BendHeader
+export default BendHeader;
