@@ -57,8 +57,8 @@ function insertCEIinfo() {
     });
 
     const CEIdata = {
-      cpf: submitData.cpf.split('.').join('').split('-').join(''),
-      password: submitData.password,
+      CPF: submitData.cpf.split('.').join('').split('-').join(''),
+      CEIpassword: submitData.password,
       _id: submitData.user_id,
     };
 
