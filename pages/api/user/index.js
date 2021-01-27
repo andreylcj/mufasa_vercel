@@ -16,19 +16,6 @@ export default async (req, res) => {
 }
 
 class APIfeatures {
-    constructor(query, queryString) {
-        this.query = query;
-        this.queryString = queryString;
-    }
-    filtering() {
-
-        const queryObj = { ...this.queryString }
-
-    default:
-  }
-};
-
-class APIfeatures {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
