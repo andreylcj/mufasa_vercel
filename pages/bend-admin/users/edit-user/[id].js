@@ -94,7 +94,7 @@ function EditUser() {
                                 value={roleName}
                                 className="text-capitalize"
                               >
-                                {role}
+                                {roleName}
                               </option>
                             ))
                         }

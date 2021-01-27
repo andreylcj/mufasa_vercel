@@ -52,13 +52,14 @@ const BendFilterUsers = ({ state }) => {
           <option value="all">Todos</option>
 
           {
-                        roles.map((role, index) => (
+                        roles.map((roleName, index) => (
                           <option
+                            // eslint-disable-next-line react/no-array-index-key
                             key={index}
-                            value={role}
+                            value={roleName}
                             className="text-capitalize"
                           >
-                            {role}
+                            {roleName}
                           </option>
                         ))
                     }

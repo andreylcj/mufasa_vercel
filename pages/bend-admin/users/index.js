@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { DataContext } from '../../../store/GlobalState';
 import GoBackButton from '../../../snnipets/GoBackButton';
+// import BendFilterUsers from '../../../snnipets/BendFilterUsers';
+// import { getData } from '../../../assets/utils/fetchData';
 
 function Users() {
-  /* const router = useRouter();
+  const router = useRouter();
   const { query } = router;
 
-  const role = query.role || 'all';
-  const search = query.search || 'all';
-  const sort = query.sort || ''; */
+  // const role = query.role || 'all';
+  // const search = query.search || 'all';
+  // const sort = query.sort || '';
 
   const [state, dispatch] = useContext(DataContext);
   const { users, auth } = state;
@@ -19,19 +21,21 @@ function Users() {
   const [usersFiltered, setUsersFiltered] = useState([]);
 
   useEffect(async () => {
-    if (!auth.token) return;
+    /* if (!auth.token) return;
 
-    /* const res = await getData(
-            `api/user?role=${role}&sort=${sort}&search=${search}`,
-            auth.token
-        )
+    const res = await getData(
+      `api/user?role=${role}&sort=${sort}&search=${search}`,
+      auth.token,
+    );
 
-        setUsersFiltered(res.users) */
+    console.log(res);
+
+    setUsersFiltered(res.users); */
 
     setUsersFiltered(users);
 
     // }, [auth, router.query])
-  }, [auth, users]);
+  }, [auth, users, query]);
 
   // jQuery ==============
   useEffect(() => {
@@ -51,11 +55,9 @@ function Users() {
 
       <GoBackButton url="/bend-admin/home" />
 
-      {/*
-                <div className="mb-4">
-                    <BendFilterUsers state={state} />
-              </div>
-            */}
+      {/* <div className="mb-4">
+        <BendFilterUsers state={state} />
+      </div> */}
 
       <table className="w-100 table" id="usersTable">
         <thead>
@@ -75,30 +77,30 @@ function Users() {
         </thead>
         <tbody>
           {
-                        usersFiltered.map((user, index) => (
-                          <tr key={user._id}>
-                            <th>{index + 1}</th>
-                            <th>{user._id}</th>
-                            <th>{user.email}</th>
-                            <th>
-                              {
-                                        user.admin
-                                          ? (
-                                            (user.role === 'master admin')
-                                              ? (
-                                                <>
-                                                  <i className="fas fa-check text-success" />
-                                                  <font className="text-success"> Master Admin</font>
-                                                </>
-                                              ) : (
-                                                <i className="fas fa-check text-success" />
-                                              )
-                                          ) : (
-                                            <i className="fas fa-times text-danger" />
-                                          )
-                                    }
-                            </th>
-                            {
+            usersFiltered.map((user, index) => (
+              <tr key={user._id}>
+                <th>{index + 1}</th>
+                <th>{user._id}</th>
+                <th>{user.email}</th>
+                <th>
+                  {
+                    user.admin
+                      ? (
+                        (user.role === 'master admin')
+                          ? (
+                            <>
+                              <i className="fas fa-check text-success" />
+                              <font className="text-success"> Master Admin</font>
+                            </>
+                          ) : (
+                            <i className="fas fa-check text-success" />
+                          )
+                      ) : (
+                        <i className="fas fa-times text-danger" />
+                      )
+                  }
+                </th>
+                {
                                     (auth.user && (auth.user.role === 'master admin'))
                                       ? (
                                         (auth.user.email !== user.email) ? (
@@ -139,8 +141,8 @@ function Users() {
                                         null
                                       )
                                 }
-                          </tr>
-                        ))
+              </tr>
+            ))
                     }
         </tbody>
       </table>
