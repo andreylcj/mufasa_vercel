@@ -4,11 +4,38 @@ import { DataContext } from '../../../store/GlobalState';
 import Cookie from 'js-cookie'
 import { ACTION } from '../../../store/Actions';
 import { useRouter } from 'next/router'
+import { putData } from '../utils/fetchData'
 
 function Home() {
 
     const [state, dispatch] = useContext(DataContext);
     const { auth } = state
+
+    const handleUpdateProfile = e => {
+        
+
+        if(CPF !== auth.user.name || CEIpassword) updateInfor()
+    }
+    
+    const updateInfor = async () => {
+       
+        dispatch({type: 'NOTIFY', payload: {loading: true}})
+
+        
+
+        putData('user', {
+            CPF , CEIpassword: CPF ? media[0].url : auth.user.CPF
+        }, auth.token).then(res => {
+            if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
+
+            dispatch({type: 'AUTH', payload: {
+                token: auth.token,
+                user: res.user
+            }})
+            return dispatch({type: 'NOTIFY', payload: {success: res.msg}})
+        })
+    }
+
 
     const handleLogout = () => {
         Cookie.remove('refreshToken', { path: '/api/auth/accessToken' })

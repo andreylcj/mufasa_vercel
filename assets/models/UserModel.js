@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const userSchema = new mongoose.Schema({
+const usermaSchema = new mongoose.Schema({
     name: {
         type: String,
         required: false,
@@ -27,18 +27,20 @@ const userSchema = new mongoose.Schema({
         default: '',
     },
     transactions : {
-        bsonType: Object
+        bsonType: Object,
+        default:{}
     },
     CPF:{
         type: String,
         default:'',
     },
     CEIpassword:{
-        type:String
+        type:String,
+        default: '',
     }
 }, {
     timestamps: true
 })
 
-let dataset = mongoose.models.user || mongoose.model('user', userSchema)
+let dataset = mongoose.models.userma || mongoose.model('userma', usermaSchema)
 export default dataset

@@ -5,6 +5,11 @@ import Users from '../../../assets/models/UserModel'
 connectDB()
 
 export default async (req, res) => {
+    const {
+        query: { id },
+        method
+    
+    } = req;
     switch (req.method) {
         case "PATCH":
             await updateRole(req, res)
@@ -15,10 +20,13 @@ export default async (req, res) => {
         case 'GET':
             await getUser(req, res)
             break;
-       /* case 'PUT':
+        /*case 'PUT':
             await modifyUser(req, res)
+            break;*/
+            
+        case "PUT":
+            await uploadInfor (req, res)
             break;
-            */
     }
 }
 
@@ -83,8 +91,8 @@ const getUser = async (req, res) => {
 /*const modifyUser = async (req, res) => {
     try {
         const { id } = req.query
-        const { role } = req.body
-        const user = await Users.findByIdAndUpdate(id, req, rolenpm run dev , {
+        
+        const user = await Users.findByIdAndUpdate(id, req, req.body , {
             new: true,
             runValidators:true
         })
@@ -97,3 +105,35 @@ const getUser = async (req, res) => {
         return res.status(500).json({ err: err.message })
     }
 }*/
+
+const uploadInfor = async (req, res) => {
+    try {
+
+        //const result = await auth(req, res)
+        //if (result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
+
+        const { id } = req.query
+        
+        const {CPF, CEIpassword} =req.body
+
+        const newUser = await Users.findOneAndUpdate({ _id: id }, { CPF,CEIpassword }).select("-password")
+
+        res.json({ 
+            msg: 'Update Success' ,
+            user:{
+                CPF,
+                CEIpassword,
+                role:newUser.role,
+                name:newUser.name,
+                email:newUser.email,
+                avatar_image:newUser.avatar_image,
+                admin:newUser.admin
+            }
+    
+    })
+
+
+    } catch (err) {
+        return res.status(500).json({ err: err.message })
+    }
+}
