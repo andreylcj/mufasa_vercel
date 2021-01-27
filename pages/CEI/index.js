@@ -4,6 +4,7 @@ import { DataContext } from '../../store/GlobalState';
 import Loading from '../../snnipets/Loading';
 import validCpfAuth from '../../assets/utils/ValidateData/ValidCpf';
 import GoBackButton from '../../snnipets/GoBackButton';
+import { putData } from '../../assets/utils/fetchData';
 
 const CEI = styled.div`
 
@@ -62,10 +63,37 @@ function insertCEIinfo() {
       _id: submitData.user_id,
     };
 
+    const CPF = CEIdata.CPF;
+    const CEIpassword = CEIdata.CEIpassword;
+
     console.log(CEIdata);
 
     dispatch({ type: 'START_LOADING' });
-    // save on mongo db
+
+    const updateInfor = async () => {
+       
+      dispatch({type: 'NOTIFY', payload: {loading: true}})
+
+      
+
+      putData('api/user/', CEIdata._id, {
+          CPF , CEIpassword
+      }, auth.token).then(res => {
+          if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
+
+          dispatch({type: 'AUTH', payload: {
+              token: auth.token,
+              user: res.user
+          }})
+          return dispatch({type: 'NOTIFY', payload: {success: res.msg}})
+      })
+  }
+
+
+
+
+  updateInfor();
+
     dispatch({ type: 'END_LOADING' });
   };
 
