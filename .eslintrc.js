@@ -27,5 +27,13 @@ module.exports = {
     'import/no-cycle': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-use-before-define': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'no-nested-ternary': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
+    'vars-on-top': 'off',
+    'no-plusplus': 'off',
+    'block-scoped-var': 'off',
   },
 };

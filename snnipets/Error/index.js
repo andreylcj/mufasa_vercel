@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-function Error(props) {
-    return (
-        <div className="alert alert-error">
-            <i className="fas fa-exclamation-triangle"></i>
-            <p>{props.message}</p>
-        </div>
-    )
+function Error({ message }) {
+  return (
+    <div className="alert alert-error">
+      <i className="fas fa-exclamation-triangle" />
+      <p>{message}</p>
+    </div>
+  );
 }
 
-export default Error
+export default Error;
