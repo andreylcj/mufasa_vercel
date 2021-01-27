@@ -45,7 +45,7 @@ export const postData = async (url, post, token) => {
 };
 
 export const putData = async (url, post, token) => {
-  const res = await fetch(`${baseURL}${url}`, {
+  const res = await fetch(`${baseURL}api/${url}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const putData = async (url, post, token) => {
 };
 
 export const patchData = async (url, post, token) => {
-  const res = await fetch(`${baseURL}${url}`, {
+  const res = await fetch(`${baseURL}api/${url}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
