@@ -1,69 +1,67 @@
-import { ACTION } from './Actions'
-import { initialState } from './GlobalState'
+import { ACTION } from './Actions';
+import initialState from './InitialState';
 
 const reducers = (state, action) => {
+  const draftState = { ...state };
 
-    const draftState = Object.assign({}, state)
+  switch (action.type) {
+    // ADD_MODAL
+    case ACTION.ADD_MODAL:
+      return {
+        ...draftState,
+        modal: action.payload,
+      };
 
-    switch (action.type) {
+      // NOTIFY
+    case ACTION.NOTIFY:
+      return {
+        ...draftState,
+        notify: action.payload,
+      };
 
-        // NOTIFY
-        case ACTION.ADD_MODAL:
-            return {
-                ...draftState,
-                modal: action.payload
-            }
+      // ADD USERS
+    case ACTION.ADD_USERS:
+      return {
+        ...draftState,
+        users: action.payload,
+      };
 
-        // NOTIFY
-        case ACTION.NOTIFY:
-            return {
-                ...draftState,
-                notify: action.payload
-            }
+      // AUTH
+    case ACTION.AUTH:
+      return {
+        ...draftState,
+        auth: action.payload,
+      };
 
-        // ADD USERS
-        case ACTION.ADD_USERS:
-            return {
-                ...draftState,
-                users: action.payload
-            }
+      // INITIAL STATE
+    case ACTION.INITIAL_STATE:
+      return initialState;
 
-        // AUTH
-        case ACTION.AUTH:
-            return {
-                ...draftState,
-                auth: action.payload
-            }
+      // loading Register And Login ==========================================================
+    case ACTION.START_LOADING:
+      return {
+        ...draftState,
+        loading: true,
+      };
+    case ACTION.END_LOADING:
+      return {
+        ...draftState,
+        loading: false,
+      };
 
-        // INITIAL STATE
-        case ACTION.INITIAL_STATE:
-            return initialState
+      // Update user data ========================================================================
+    case ACTION.UPDATE_USER_DATA:
+      return {
+        ...draftState,
+        userData: {
+          ...draftState.userData,
+          ...action.payload,
+        },
+      };
 
-        //loading Register And Login ========================================================================
-        case ACTION.START_LOADING:
-            return {
-                ...draftState,
-                loading: true
-            }
-        case ACTION.END_LOADING:
-            return {
-                ...draftState,
-                loading: false,
-            }
+    default:
+      return state;
+  }
+};
 
-        //Update user data ========================================================================
-        case ACTION.UPDATE_USER_DATA:
-            return {
-                ...draftState,
-                userData: {
-                    ...draftState.userData,
-                    ...action.payload,
-                }
-            }
-
-        default:
-            return state
-    }
-}
-
-export default reducers
+export default reducers;

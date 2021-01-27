@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import validRegister from '../../assets/utils/ValidRegister'
+import validRegister from '../../assets/utils/ValidateData/ValidRegister'
 import Loading from '../../snnipets/Loading'
 import { postData } from '../../assets/utils/fetchData';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { ACTION } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
 import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
+import GoBackButton from '../../snnipets/GoBackButton';
 
 function Register() {
 
@@ -96,7 +97,7 @@ function Register() {
 
         <div>
 
-            <div><Link href="/"><a>HOME</a></Link></div>
+            <GoBackButton />
 
             <form onSubmit={handleSubmit} noValidate className="mx-auto my-4"
                 style={{ maxWidth: '500px' }}

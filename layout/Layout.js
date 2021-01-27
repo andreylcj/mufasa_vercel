@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../sections/Header';
 import Notify from '../snnipets/Notify';
 import Modal from '../snnipets/Modal';
 import { useRouter } from 'next/router'
 import BendHeader from '../sections/BendHeader';
+import { DataContext } from '../store/GlobalState';
 
 function Layout({ children }) {
 
     const router = useRouter()
     const pathName = router.pathname
+
+    const [state, dispatch] = useContext(DataContext)
+    const { auth } = state
+
+    useEffect(() => {
+        if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf("bend-admin") !== -1)) {
+            router.push('/bend-admin/denied-access')
+        }
+    }, [pathName, auth])
 
     return (
         <div className="container">

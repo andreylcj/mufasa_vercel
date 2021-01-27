@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { patchData } from '../../../../assets/utils/fetchData'
 import Loading from '../../../../snnipets/Loading'
 import { updateItem } from '../../../../store/Actions'
+import GoBackButton from '../../../../snnipets/GoBackButton'
 
 function EditUser() {
     const router = useRouter()
@@ -29,6 +30,13 @@ function EditUser() {
 
     const handleUpdate = async () => {
         dispatch({ type: 'START_LOADING', });
+
+        if (Object.keys(auth).length === 0 || (Object.keys(auth).length !== 0 && auth.user.role !== 'master admin')) {
+            router.push('/bend-admin/denied-access')
+            dispatch({ type: 'END_LOADING', });
+            return
+        }
+
         await patchData(`api/user/${editUser._id}`, { role }, auth.token)
             .then(res => {
                 if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
@@ -50,20 +58,15 @@ function EditUser() {
     }
 
     useEffect(() => {
-        if (Object.keys(auth).length !== 0 && !auth.user.admin) {
-            router.push('/bend-admin/denied-access')
-        } else if (Object.keys(auth).length !== 0 && auth.user.role !== 'master admin') {
+        if (Object.keys(auth).length !== 0 && auth.user.role !== 'master admin') {
             router.push('/bend-admin/home')
         }
     }, [auth])
 
     return (
         <div className='my-4'>
-            <div>
-                <button className="btn btn-dark" onClick={() => { router.back() }}>
-                    <i className="fas fa-long-arrow-alt-left"></i> Voltar
-            </button>
-            </div>
+
+            <GoBackButton />
 
             <div className="col-md-4 mx-auto my-4 w-100">
                 <h2 className="text-secondary">Editar Usuário</h2>
