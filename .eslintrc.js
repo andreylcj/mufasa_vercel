@@ -23,7 +23,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     camelcase: 'off',
     'consistent-return': 'off',
-    'react/prop-types': 'off',
     'import/no-cycle': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-use-before-define': 'off',
@@ -34,6 +33,5 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 'off',
     'vars-on-top': 'off',
     'no-plusplus': 'off',
-    'block-scoped-var': 'off',
   },
 };

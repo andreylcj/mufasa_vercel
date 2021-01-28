@@ -41,10 +41,8 @@ function EditUser() {
       .then((res) => {
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
 
-        // eslint-disable-next-line no-var
-        var admin = false;
+        let admin = false;
         if (role === 'admin' || role === 'master admin') {
-          // eslint-disable-next-line no-var
           admin = true;
         }
 

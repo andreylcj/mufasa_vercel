@@ -1,12 +1,13 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
-function GoBackButton(props) {
+function GoBackButton({ url }) {
   const router = useRouter();
 
   const handleBack = () => {
-    if (props.url) {
-      router.push(props.url);
+    if (url) {
+      router.push(url);
     } else {
       router.back();
     }
@@ -22,5 +23,9 @@ function GoBackButton(props) {
     </div>
   );
 }
+
+GoBackButton.propTypes = {
+  url: PropTypes.string.isRequired,
+};
 
 export default GoBackButton;

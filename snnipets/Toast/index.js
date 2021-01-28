@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Toast = ({ msg, handleShow, bgColor }) => (
   <div
@@ -31,5 +32,14 @@ const Toast = ({ msg, handleShow, bgColor }) => (
     </div>
   </div>
 );
+
+Toast.propTypes = {
+  msg: PropTypes.PropTypes.shape({
+    msg: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  handleShow: PropTypes.func.isRequired,
+  bgColor: PropTypes.string.isRequired,
+};
 
 export default Toast;

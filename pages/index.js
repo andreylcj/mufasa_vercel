@@ -35,18 +35,18 @@ function Home() {
             <a>CEI</a>
           </Link>
           {
-                        auth.user && auth.user.admin
-                          ? (
-                            <>
+            auth.user && auth.user.admin
+              ? (
+                <>
 
-                              <Link href="/bend-admin/home">
-                                <a>Área de administrador</a>
-                              </Link>
-                            </>
-                          ) : (
-                            null
-                          )
-                    }
+                  <Link href="/bend-admin/home">
+                    <a>Área de administrador</a>
+                  </Link>
+                </>
+              ) : (
+                null
+              )
+            }
           <button
             type="submit"
             onClick={handleLogout}

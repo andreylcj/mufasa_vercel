@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Loading from '../Loading';
 import Error from '../Error';
 
-function ShowContentWithLoadingOrError(props) {
-  const { loading, error, children } = props;
+function ShowContentWithLoadingOrError({ loading, error, children }) {
   return (
     <>
       {
@@ -18,5 +18,17 @@ function ShowContentWithLoadingOrError(props) {
     </>
   );
 }
+
+ShowContentWithLoadingOrError.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  children: PropTypes.element,
+};
+
+ShowContentWithLoadingOrError.defaultProps = {
+  loading: false,
+  error: '',
+  children: null,
+};
 
 export default ShowContentWithLoadingOrError;

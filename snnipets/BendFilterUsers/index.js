@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const filterSearchBendUsers = ({
   router, role, sort, search,
@@ -52,17 +53,17 @@ const BendFilterUsers = ({ state }) => {
           <option value="all">Todos</option>
 
           {
-                        roles.map((roleName, index) => (
-                          <option
-                            // eslint-disable-next-line react/no-array-index-key
-                            key={index}
-                            value={roleName}
-                            className="text-capitalize"
-                          >
-                            {roleName}
-                          </option>
-                        ))
-                    }
+            roles.map((roleName, index) => (
+              <option
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                value={roleName}
+                className="text-capitalize"
+              >
+                {roleName}
+              </option>
+            ))
+          }
         </select>
       </div>
 
@@ -92,6 +93,12 @@ const BendFilterUsers = ({ state }) => {
 
     </div>
   );
+};
+
+BendFilterUsers.propTypes = {
+  state: PropTypes.shape({
+    roles: PropTypes.arrayOf(PropTypes.string.isRequired),
+  }).isRequired,
 };
 
 export default BendFilterUsers;

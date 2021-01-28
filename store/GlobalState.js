@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import reducers from './Reducers';
 import { ACTION } from './Actions';
 import { getData } from '../assets/utils/fetchData';
@@ -48,4 +49,8 @@ export const DataProvider = ({ children }) => {
     </DataContext.Provider>
 
   );
+};
+
+DataProvider.propTypes = {
+  children: PropTypes.element.isRequired,
 };
