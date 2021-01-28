@@ -78,8 +78,6 @@ function EditUser() {
 
     setEditUser(res.data);
     setRole(res.data.role);
-
-    console.log(res);
   }, [id, auth]);
 
   return (
