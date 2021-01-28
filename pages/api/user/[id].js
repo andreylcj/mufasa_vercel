@@ -52,8 +52,10 @@ const deleteUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
+    // eslint-disable-next-line no-unused-vars
     const result = await auth(req, res);
-    if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' });
+    // if (result.role !== 'admin' && result.role !== 'master admin')
+    // return res.status(400).json({ err: 'Autenticação inválida' });
 
     const { id } = req.query;
 

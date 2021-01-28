@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { DataContext } from '../../../../store/GlobalState';
 import { getData, patchData } from '../../../../assets/utils/fetchData';
-import Loading from '../../../../snnipets/Loading';
 import { updateItem } from '../../../../store/Actions';
 import GoBackButton from '../../../../snnipets/GoBackButton';
 import UpdateButton from '../../../../snnipets/UpdateButton';

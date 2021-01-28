@@ -25,8 +25,11 @@ function UpdateButton({ onClick, loading, textContent }) {
 
 UpdateButton.propTypes = {
   textContent: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   loading: PropTypes.bool.isRequired,
+};
+UpdateButton.defaultProps = {
+  onClick: () => {},
 };
 
 export default UpdateButton;

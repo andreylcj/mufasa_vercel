@@ -38,7 +38,6 @@ function Home() {
             auth.user && auth.user.admin
               ? (
                 <>
-
                   <Link href="/bend-admin/home">
                     <a>Área de administrador</a>
                   </Link>

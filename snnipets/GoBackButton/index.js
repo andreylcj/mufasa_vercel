@@ -25,7 +25,10 @@ function GoBackButton({ url }) {
 }
 
 GoBackButton.propTypes = {
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
+};
+GoBackButton.defaultProps = {
+  url: '',
 };
 
 export default GoBackButton;
