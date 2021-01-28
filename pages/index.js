@@ -44,7 +44,11 @@ function Home() {
                   </Link>
                 </>
               ) : (
-                null
+                <>
+                  <Link href="/profile/home">
+                    <a>Área do Usuário</a>
+                  </Link>
+                </>
               )
             }
           <button
