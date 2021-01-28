@@ -4,6 +4,7 @@ import { DataContext } from '../../store/GlobalState';
 import Loading from '../../snnipets/Loading';
 import validCpfAuth from '../../assets/utils/ValidateData/ValidCpf';
 import GoBackButton from '../../snnipets/GoBackButton';
+import { patchData } from '../../assets/utils/fetchData';
 
 const CEI = styled.div`
 
@@ -24,7 +25,7 @@ function insertCEIinfo() {
   const [submitData, setSubmitData] = useState({
     cpf: '',
     password: '',
-    user_id: '',
+    // user_id: '',
   });
 
   const handleInputChange = (e) => {
@@ -57,26 +58,36 @@ function insertCEIinfo() {
     });
 
     const CEIdata = {
-      cpf: submitData.cpf.split('.').join('').split('-').join(''),
-      password: submitData.password,
-      _id: submitData.user_id,
+      CPF: submitData.cpf.split('.').join('').split('-').join(''),
+      CEIpassword: submitData.password,
+      // _id: submitData.user_id,
     };
 
-    console.log(CEIdata);
+    const { CPF, CEIpassword } = CEIdata;
 
     dispatch({ type: 'START_LOADING' });
-    // save on mongo db
+
+    await patchData('api/user', { CPF, CEIpassword }, auth.token)
+      .then((res) => {
+        if (res.err) {
+          console.log(res.err);
+          return;
+        }
+
+        console.log(res);
+      });
+
     dispatch({ type: 'END_LOADING' });
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!auth.user) return;
 
     setSubmitData({
       ...submitData,
       user_id: auth.user._id,
     });
-  }, [auth.user]);
+  }, [auth.user]); */
 
   return (
     <>

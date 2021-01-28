@@ -12,7 +12,9 @@ export default async (req, res) => {
     case 'DELETE':
       await deleteUser(req, res);
       break;
-
+    case 'GET':
+      await getUser(req, res);
+      break;
     default:
   }
 };
@@ -43,8 +45,23 @@ const deleteUser = async (req, res) => {
     const { id } = req.query;
 
     await Users.findByIdAndDelete(id);
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
 
-    res.json({ msg: 'Delete Success' });
+const getUser = async (req, res) => {
+  try {
+    const result = await auth(req, res);
+    if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' });
+
+    const { id } = req.query;
+
+    const user = await Users.findById(id).select('-password');
+
+    if (!user) return res.status(400).json({ success: false, err: 'User not found' });
+
+    res.status(200).json({ success: true, data: user });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

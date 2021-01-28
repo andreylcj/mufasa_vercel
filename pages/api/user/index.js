@@ -9,7 +9,9 @@ export default async (req, res) => {
     case 'GET':
       await getUsers(req, res);
       break;
-
+    case 'PATCH':
+      await uploadInfo(req, res);
+      break;
     default:
   }
 };
@@ -55,6 +57,29 @@ const getUsers = async (req, res) => {
 
     const users = await features.query;
     res.json({ users });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+
+const uploadInfo = async (req, res) => {
+  try {
+    const result = await auth(req, res);
+
+    const { CPF, CEIpassword } = req.body;
+
+    const newUser = await Users.findOneAndUpdate({ _id: result.id }, { CPF, CEIpassword }).select('-password');
+
+    res.json({
+      message: 'Update Success',
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        CPF,
+        CEIpassword,
+        role: newUser.role,
+      },
+    });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

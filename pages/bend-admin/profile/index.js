@@ -1,38 +1,28 @@
-import React, { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { DataContext } from '../../../../store/GlobalState';
-import { getData, patchData } from '../../../../assets/utils/fetchData';
-import Loading from '../../../../snnipets/Loading';
-import { updateItem } from '../../../../store/Actions';
-import GoBackButton from '../../../../snnipets/GoBackButton';
-import UpdateButton from '../../../../snnipets/UpdateButton';
+import React, { useContext, useState, useEffect } from 'react';
+import { getData, patchData } from '../../../assets/utils/fetchData';
+import GoBackButton from '../../../snnipets/GoBackButton';
+import UpdateButton from '../../../snnipets/UpdateButton';
+import { updateItem } from '../../../store/Actions';
+import { DataContext } from '../../../store/GlobalState';
 
-function EditUser() {
+function Profile() {
   const router = useRouter();
-  const { id } = router.query;
 
   const [state, dispatch] = useContext(DataContext);
-  const { users, auth, roles } = state;
+  const {
+    users, auth, loading,
+  } = state;
 
-  const allRoles = roles;
-  const { loading } = state;
+  const id = auth.user && auth.user._id;
 
   const [editUser, setEditUser] = useState([]);
   const [role, setRole] = useState('');
 
-  /* useEffect(() => {
-    users.forEach((user) => {
-      if (user._id === id) {
-        setEditUser(user);
-        setRole(user.role);
-      }
-    });
-  }, [users]); */
-
   const handleUpdate = async () => {
     dispatch({ type: 'START_LOADING' });
 
-    if (Object.keys(auth).length === 0 || (Object.keys(auth).length !== 0 && auth.user.role !== 'master admin')) {
+    if (Object.keys(auth).length === 0) {
       router.push('/bend-admin/denied-access');
       dispatch({ type: 'END_LOADING' });
       return;
@@ -63,12 +53,6 @@ function EditUser() {
       });
     dispatch({ type: 'END_LOADING' });
   };
-
-  useEffect(() => {
-    if (Object.keys(auth).length !== 0 && auth.user.role !== 'master admin') {
-      router.push('/bend-admin/home');
-    }
-  }, [auth]);
 
   useEffect(async () => {
     if (!id || !auth.token) return;
@@ -117,27 +101,8 @@ function EditUser() {
         </div>
 
         <div className="my-2">
-          <label className="me-2">Role</label>
-          <select
-            id="role"
-            onChange={(e) => { setRole(e.target.value); }}
-            className="text-capitalize form-select form-select-sm d-inline-block w-auto"
-            value={role}
-          >
-            {
-                            allRoles.map((roleName, index) => (
-                              <option
-                                // eslint-disable-next-line react/no-array-index-key
-                                key={index}
-                                value={roleName}
-                                className="text-capitalize"
-                              >
-                                {roleName}
-                              </option>
-                            ))
-                        }
-
-          </select>
+          <label htmlFor="role" className="me-2">Role</label>
+          <input type="text" id="role" defaultValue={editUser.role} disabled />
         </div>
 
         <UpdateButton
@@ -151,4 +116,4 @@ function EditUser() {
   );
 }
 
-export default EditUser;
+export default Profile;
