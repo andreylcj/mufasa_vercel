@@ -5,15 +5,16 @@ import Users from '../../../assets/models/UserModel';
 connectDB();
 
 export default async (req, res) => {
-    switch (req.method) {
-        case "GET":
-            await getUsers(req, res)
-            break
-        case "PATCH":
-            await uploadInfor (req, res)
-            break;
-    }
-}
+  switch (req.method) {
+    case 'GET':
+      await getUsers(req, res);
+      break;
+    case 'PATCH':
+      await uploadInfo(req, res);
+      break;
+    default:
+  }
+};
 
 class APIfeatures {
   constructor(query, queryString) {
@@ -47,44 +48,39 @@ class APIfeatures {
 }
 
 const getUsers = async (req, res) => {
-    try {
+  try {
+    const result = await auth(req, res);
+    if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' });
 
-        //const result = await auth(req, res)
-        //if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
+    const features = new APIfeatures(Users.find().select('-password'), req.query)
+      .filtering().sorting();
 
-        const features = new APIfeatures(Users.find().select('-password'), req.query)
-            .filtering().sorting()
+    const users = await features.query;
+    res.json({ users });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
 
-        const users = await features.query
-        res.json({ users })
+const uploadInfo = async (req, res) => {
+  try {
+    const result = await auth(req, res);
 
-    } catch (err) {
-        return res.status(500).json({ err: err.message })
-    }
-}
+    const { CPF, CEIpassword } = req.body;
 
-const uploadInfor = async (req, res) => {
-    try {
+    const newUser = await Users.findOneAndUpdate({ _id: result.id }, { CPF, CEIpassword }).select('-password');
 
-        const result= await auth (req,res)
-
-        const {CPF, CEIpassword}= req.body
-
-        const newUser = await Users.findOneAndUpdate({_id:result.id},{CPF, CEIpassword}).select("-password")
-
-        res.json({
-            message: "Update Success",
-            user: {
-                name:newUser.name,
-                email:newUser.email,
-                CPF,
-                CEIpassword,
-                role:newUser.role
-            }
-        })
-
-
-    }catch (err){
-        return res.status(500).json({err: err.message})
-    }
-}
+    res.json({
+      message: 'Update Success',
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        CPF,
+        CEIpassword,
+        role: newUser.role,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};

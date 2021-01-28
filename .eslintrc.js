@@ -23,7 +23,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     camelcase: 'off',
     'consistent-return': 'off',
-    'react/prop-types': 'off',
+    // 'react/prop-types': 'off',
     'import/no-cycle': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-use-before-define': 'off',

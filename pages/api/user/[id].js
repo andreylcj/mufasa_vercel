@@ -5,28 +5,19 @@ import Users from '../../../assets/models/UserModel';
 connectDB();
 
 export default async (req, res) => {
-    const {
-        query: { id },
-        method
-    
-    } = req;
-    switch (req.method) {
-        case "PATCH":
-            await updateRole(req, res)
-            break
-        case "DELETE":
-            await deleteUser(req, res)
-            break
-        case 'GET':
-            await getUser(req, res)
-            break;
-        
-            
-        case "PUT":
-            await uploadInfor (req, res)
-            break;
-    }
-}
+  switch (req.method) {
+    case 'PATCH':
+      await updateRole(req, res);
+      break;
+    case 'DELETE':
+      await deleteUser(req, res);
+      break;
+    case 'GET':
+      await getUser(req, res);
+      break;
+    default:
+  }
+};
 
 const updateRole = async (req, res) => {
   try {
@@ -54,31 +45,24 @@ const deleteUser = async (req, res) => {
     const { id } = req.query;
 
     await Users.findByIdAndDelete(id);
-
-    } catch (err) {
-        return res.status(500).json({ err: err.message })
-    }
-}
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
 
 const getUser = async (req, res) => {
-    try {
-        const { id } = req.query
+  try {
+    const result = await auth(req, res);
+    if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' });
 
-        const result = await auth(req, res)
-        if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' })
+    const { id } = req.query;
 
-        const user = await Users.findById(id)
+    const user = await Users.findById(id).select('-password');
 
-        if (!user) {
-            return res.status(400).json({success: false})
-    
-        }
+    if (!user) return res.status(400).json({ success: false, err: 'User not found' });
 
-        res.status(200).json({success: true, data: user})
-    }catch(err){
-        return res.status(500).json({ err: err.message })
-    }
-}
-
-
-
+    res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};

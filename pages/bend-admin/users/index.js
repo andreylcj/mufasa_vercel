@@ -132,7 +132,7 @@ function Users() {
                                           </>
                                         ) : (
                                           <th>
-                                            <Link href="/bend-admin/myprofile">
+                                            <Link href="/bend-admin/profile">
                                               <a><i className="fas fa-user text-dark mr-2" title="My Profile" /></a>
                                             </Link>
                                           </th>

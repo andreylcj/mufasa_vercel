@@ -25,7 +25,7 @@ function insertCEIinfo() {
   const [submitData, setSubmitData] = useState({
     cpf: '',
     password: '',
-    user_id: '',
+    // user_id: '',
   });
 
   const handleInputChange = (e) => {
@@ -60,49 +60,34 @@ function insertCEIinfo() {
     const CEIdata = {
       CPF: submitData.cpf.split('.').join('').split('-').join(''),
       CEIpassword: submitData.password,
-      _id: submitData.user_id,
+      // _id: submitData.user_id,
     };
 
-    const CPF = CEIdata.CPF;
-    const CEIpassword = CEIdata.CEIpassword;
+    const { CPF, CEIpassword } = CEIdata;
 
     dispatch({ type: 'START_LOADING' });
 
-    const updateInfor = async () => {
-       
-      dispatch({type: 'NOTIFY', payload: {loading: true}})
+    await patchData('api/user', { CPF, CEIpassword }, auth.token)
+      .then((res) => {
+        if (res.err) {
+          console.log(res.err);
+          return;
+        }
 
-      
-
-      patchData('user', {
-          CPF , CEIpassword
-      }, auth.token).then(res => {
-          if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
-
-          dispatch({type: 'AUTH', payload: {
-              token: auth.token,
-              user: res.user
-          }})
-          return dispatch({type: 'NOTIFY', payload: {success: res.msg}})
-      })
-  }
-
-
-
-
-  updateInfor();
+        console.log(res);
+      });
 
     dispatch({ type: 'END_LOADING' });
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!auth.user) return;
 
     setSubmitData({
       ...submitData,
       user_id: auth.user._id,
     });
-  }, [auth.user]);
+  }, [auth.user]); */
 
   return (
     <>
