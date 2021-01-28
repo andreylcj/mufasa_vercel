@@ -44,13 +44,11 @@ function Home() {
                   </Link>
                 </>
               ) : (
-                <>
-                  <Link href="/profile/home">
-                    <a>Área do Usuário</a>
-                  </Link>
-                </>
+                <Link href="/profile/home">
+                  <a>Área do Usuário</a>
+                </Link>
               )
-            }
+          }
           <button
             type="submit"
             onClick={handleLogout}
