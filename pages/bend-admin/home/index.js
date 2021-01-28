@@ -42,7 +42,7 @@ function Home() {
     <div className="d-flex flex-column">
       <p className="mx-auto my-4">ADMIN HOME</p>
       <Link href="/"><a className="mx-auto my-3">SITE</a></Link>
-      <Link href="/bend-admin/my-profile"><a className="mx-auto my-3">Meu Perfil</a></Link>
+      <Link href="/bend-admin/profile"><a className="mx-auto my-3">Meu Perfil</a></Link>
       <Link href="/bend-admin/users"><a className="mx-auto my-3">Users</a></Link>
 
       {

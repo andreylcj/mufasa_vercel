@@ -76,6 +76,11 @@ function Profile() {
         <h2 className="text-secondary">Editar Usuário</h2>
 
         <div className="my-2">
+          <label htmlFor="userId" className="me-2">ID</label>
+          <input type="text" id="userId" defaultValue={editUser._id} disabled />
+        </div>
+
+        <div className="my-2">
           <label htmlFor="email" className="me-2">Email</label>
           <input type="text" id="email" defaultValue={editUser.email} disabled />
         </div>
