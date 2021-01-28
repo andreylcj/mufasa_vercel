@@ -5,6 +5,7 @@ import { getData, patchData } from '../../../../assets/utils/fetchData';
 import Loading from '../../../../snnipets/Loading';
 import { updateItem } from '../../../../store/Actions';
 import GoBackButton from '../../../../snnipets/GoBackButton';
+import UpdateButton from '../../../../snnipets/UpdateButton';
 
 function EditUser() {
   const router = useRouter();
@@ -141,22 +142,11 @@ function EditUser() {
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-dark"
+        <UpdateButton
           onClick={handleUpdate}
-        >
-          {
-                        loading
-                          ? (
-                            <>
-                              <Loading />
-                            </>
-                          ) : (
-                            'Update'
-                          )
-                    }
-        </button>
+          loading={loading}
+          textContent="Update"
+        />
       </div>
 
     </div>
