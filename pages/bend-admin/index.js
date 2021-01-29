@@ -43,7 +43,7 @@ function Login() {
     }
 
     dispatch({ type: ACTION.START_LOADING });
-    const res = await postData('api/api-bend-admin/login', userData);
+    const res = await postData('api/bend-admin/login', userData);
     dispatch({ type: ACTION.END_LOADING });
 
     setSubmitStatus({
