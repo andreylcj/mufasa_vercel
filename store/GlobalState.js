@@ -1,48 +1,56 @@
-import React, { createContext, useEffect, useReducer } from 'react'
-import reducers from './Reducers'
-import ACTION from '../store/Actions'
-import { getData } from '../assets/utils/fetchData'
+import React, { createContext, useEffect, useReducer } from 'react';
+import PropTypes from 'prop-types';
+import reducers from './Reducers';
+import { ACTION } from './Actions';
+import { getData } from '../assets/utils/fetchData';
+import initialState from './InitialState';
 
 export const DataContext = createContext();
 
-export const initialState = {
-    auth: {
-
-    },
-    loading: false,
-    userData: {
-        email: '',
-        password: '',
-    },
-}
-
 export const DataProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducers, initialState);
 
-    const [state, dispatch] = useReducer(reducers, initialState)
+  const { auth } = state;
 
-    useEffect(async () => {
-        console.log('ok')
-        const firstLogin = localStorage.getItem('firstLogin')
-        if (firstLogin) {
-            const res = await fetch('http://localhost:3000/api/auth/accessToken', {
-                method: 'GET',
-            })
-            const data = await res.json()
+  // AUTH
+  useEffect(async () => {
+    const firstLogin = localStorage.getItem('firstLogin');
+    if (firstLogin) {
+      const res = await getData('api/auth/accessToken');
 
-            dispatch({
-                type: ACTION.AUTH,
-                payload: {
-                    token: data.accessToken,
-                    user: data.user
-                }
-            })
-        }
-    }, [])
+      dispatch({
+        type: ACTION.AUTH,
+        payload: {
+          token: res.accessToken,
+          user: res.user,
+        },
+      });
+    }
+  }, []);
 
-    return (
-        <DataContext.Provider value={[state, dispatch]}>
-            {children}
-        </DataContext.Provider>
+  // USERS
+  useEffect(async () => {
+    if (auth.token) {
+      if (auth.user.role === 'admin' || auth.user.role === 'master admin') {
+        getData('api/user', auth.token)
+          .then((res) => {
+            if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
+            dispatch({ type: 'ADD_USERS', payload: res.users });
+          });
+      }
+    } else {
+      dispatch({ type: 'ADD_USERS', payload: [] });
+    }
+  }, [auth.token]);
 
-    )
-}
+  return (
+    <DataContext.Provider value={[state, dispatch]}>
+      {children}
+    </DataContext.Provider>
+
+  );
+};
+
+DataProvider.propTypes = {
+  children: PropTypes.element.isRequired,
+};

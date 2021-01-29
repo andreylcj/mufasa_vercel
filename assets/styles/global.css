@@ -1,4 +1,4 @@
-:root{
+/*:root{
     --morant_letter_red: #ff3859;
     --gold: #ffd700;
     --beauty_blue: #00d4ff;
@@ -16,6 +16,13 @@
                             inset -5px -5px 15px rgba(255,255,255,0.1),
                             5px 5px 15px rgba(0,0,0,0.3),
                             -5px -5px 15px rgba(255,255,255,0.1);
-}
+}*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/* ROOT ====================================================================== */
+h1, h2, h3, h4, h5, h6, a,p,span,div, ul, li, strong, small, html, body, i, font{
+    font-family: 'Poppins', sans-serif;
+}
+
+/*@import url("errorAndRquestLoading.css");
+@import url('header.css');*/
