@@ -6,6 +6,7 @@ import Modal from '../snnipets/Modal';
 import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
 
+// eslint-disable-next-line react/prop-types
 function Layout({ children }) {
   const router = useRouter();
   const pathName = router.pathname;
