@@ -7,7 +7,6 @@ import { ACTION } from '../../store/Actions';
 import Loading from '../../snnipets/Loading';
 import validLogin from '../../assets/utils/ValidateData/ValidLogin';
 import { getData, postData } from '../../assets/utils/fetchData';
-// eslint-disable-next-line import/no-named-as-default
 import Facebook from '../api/auth/facebook';
 
 function Login() {
