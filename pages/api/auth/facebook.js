@@ -1,53 +1,36 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import FacebookLogin from 'react-facebook-login';
 
-
 import Cookie from 'js-cookie';
-import { useRouter } from 'next/router';
 import { postData, getData } from '../../../assets/utils/fetchData';
-import { DataContext } from '../../../store/GlobalState';
-import { ACTION } from '../../../store/Actions';
 
 export default function Facebook() {
-  const [state, dispatch] = useContext(DataContext);
+  const componentClicked = () => {
+    console.log('funcionou');
+  };
 
-  const { userData } = state;
-  const { auth } = state;
+  const responseFacebook = async (response) => {
+    console.log(response);
 
-  const [isLoggedin, setisLoggedin] = useState(false);
+    const userData = response.email;
+    const res = await postData('api/auth/login', userData);
 
-  const [submitStatus, setSubmitStatus] = useState({
-    emailMessage: '',
-    nameMessage: '',
-    emailNotExist: '',
-  });
-
-  const componentClicked = ()=> {
-    console.log("funcionou");
-  }
-
-
-  const { email } = userData;
-
-  const responseFacebook = async (e) => {
-    // console.log(response);
-    console.log("funcionou");
-    
-    const emailMessage = userData.email;
-
-    setSubmitStatus({
-      emailMessage,
-    });
-
-    if (emailMessage) {
+    if (res.emailMessage) {
+      console.log(res.emailMessage);
       return;
     }
 
-    const res = await postData('api/auth/login', userData);
-    setSubmitStatus({
-      emailNotExist: res.emailMessage,
-
+    Cookie.set('refreshToken', res.refreshToken, {
+      path: '/api/auth/accessToken',
+      expires: 25,
     });
+    localStorage.setItem('firstLogin', true);
+  };
+
+  /* const responseFacebook = async (e) => {
+    // console.log(response);
+    console.log("funcionou");
+
     setisLoggedin({
       isLoggedin: true,
     });
@@ -75,54 +58,17 @@ export default function Facebook() {
         user: new_auth.user,
       },
     });
-  };
+  }; */
 
-  const router = useRouter();
-
-  useEffect(() => {
-    dispatch({
-      type: ACTION.UPDATE_USER_DATA,
-      payload: {
-        email: '',
-      },
-    });
-  }, []);
-
-  useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
-  }, [auth]);
-
-  let fbContent;
-  if (isLoggedin) {
-    fbContent = (
-      <div style={{
-        width: '400px',
-        margin: 'auto',
-        backgroud: 'grey',
-        padding: '20px',
-      }}
-      >
-        <h2>
-          {' '}
-          Bem vindo
-          {email}
-        </h2>
-      </div>
-    );
-  } else {
-    fbContent = (
+  return (
+    <div>
       <FacebookLogin
         appId="2790121004649262"
-        autoLoad
+          // autoLoad
         fields="name,email,picture"
         onClick={componentClicked}
         callback={responseFacebook}
       />
-    );
-  }
-  return (
-    <div>
-      {fbContent}
     </div>
   );
 }
