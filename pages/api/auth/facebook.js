@@ -1,19 +1,30 @@
 import React, { useState, useContext, useEffect } from 'react';
 import FacebookLogin from 'react-facebook-login';
-
+import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 import { postData, getData } from '../../../assets/utils/fetchData';
+import { ACTION } from '../../../store/Actions';
+import { DataContext } from '../../../store/GlobalState';
 
 export default function Facebook() {
   const componentClicked = () => {
     console.log('funcionou');
   };
 
+
+  const [state, dispatch] = useContext(DataContext);
+
+  const { auth } = state;
   const responseFacebook = async (response) => {
     console.log(response);
 
-    const userData = response.email;
-    const res = await postData('api/auth/login', userData);
+    
+    const userData = {
+      email: response.email ,
+    };
+    console.log(userData);
+
+    const res = await postData('api/auth/registerm', userData);
 
     if (res.emailMessage) {
       console.log(res.emailMessage);
@@ -25,31 +36,11 @@ export default function Facebook() {
       expires: 25,
     });
     localStorage.setItem('firstLogin', true);
-  };
 
-  /* const responseFacebook = async (e) => {
-    // console.log(response);
-    console.log("funcionou");
-
-    setisLoggedin({
-      isLoggedin: true,
+    // set new auth
+    const new_auth = await fetch('api/auth/accessToken', {
+      method: 'GET',
     });
-
-    if (res.emailMessage || res.passwordMessage) {
-      return;
-    }
-
-    if (res.err) {
-      return;
-    }
-
-    Cookie.set('refreshToken', res.refreshToken, {
-      path: '/api/auth/accessToken',
-      expires: 25,
-    });
-    localStorage.setItem('firstLogin', true);
-
-    const new_auth = await getData('api/auth/accessToken');
 
     dispatch({
       type: ACTION.AUTH,
@@ -58,13 +49,18 @@ export default function Facebook() {
         user: new_auth.user,
       },
     });
-  }; */
+  };
+  const router = useRouter();
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push('/');
+  }, [auth]);
 
   return (
     <div>
       <FacebookLogin
         appId="2790121004649262"
-          // autoLoad
+        // autoLoad
         fields="name,email,picture"
         onClick={componentClicked}
         callback={responseFacebook}

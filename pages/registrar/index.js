@@ -7,6 +7,7 @@ import Loading from '../../snnipets/Loading';
 import { postData } from '../../assets/utils/fetchData';
 import { ACTION } from '../../store/Actions';
 import { DataContext } from '../../store/GlobalState';
+import Facebook from '../api/auth/facebook';
 
 function Register() {
   const [state, dispatch] = useContext(DataContext);
@@ -182,6 +183,7 @@ function Register() {
                     }
         </button>
       </form>
+      <Facebook />
     </div>
   );
 }

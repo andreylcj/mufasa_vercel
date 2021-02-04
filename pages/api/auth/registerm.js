@@ -17,17 +17,12 @@ export default async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email } = req.body;
 
     const user = await Users.findOne({ email });
     if (user) return res.status(405).json({ emailMessage: 'Email já cadastrado' });
 
-    if (password) {
-      const passwordHash = await bcrypt.hash(password, 12);
-    }
-    const passwordHash = null;
-
-    const newUser = new Users({ email, password: passwordHash });
+    const newUser = new Users({ email, password: 'Facebookpass' });
 
     console.log(newUser);
 
