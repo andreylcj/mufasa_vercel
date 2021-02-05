@@ -11,23 +11,22 @@ export default function Facebook() {
     console.log('funcionou');
   };
 
-
   const [state, dispatch] = useContext(DataContext);
-
+  let resposta;
   const { auth } = state;
+
   const responseFacebook = async (response) => {
     console.log(response);
 
-    
     const userData = {
-      email: response.email ,
+      email: response.email,
     };
     console.log(userData);
 
     const res = await postData('api/auth/registerm', userData);
-
     if (res.emailMessage) {
       console.log(res.emailMessage);
+      resposta = res.emailMessage;
       return;
     }
 
@@ -41,12 +40,13 @@ export default function Facebook() {
     const new_auth = await fetch('api/auth/accessToken', {
       method: 'GET',
     });
+    const data = await new_auth.json();
 
     dispatch({
       type: ACTION.AUTH,
       payload: {
-        token: new_auth.accessToken,
-        user: new_auth.user,
+        token: data.accessToken,
+        user: data.user,
       },
     });
   };
@@ -56,7 +56,13 @@ export default function Facebook() {
     if (Object.keys(auth).length !== 0) router.push('/');
   }, [auth]);
 
-  return (
+  if (resposta = 'Email já cadastrado') {
+    return (
+      <div>
+        va para pagina de Login
+      </div>
+    );
+  } return (
     <div>
       <FacebookLogin
         appId="2790121004649262"
