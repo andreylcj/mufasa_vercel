@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+
 import ConnectDB from '../../../assets/utils/ConnectDB';
 import Users from '../../../assets/models/UserModel';
 import { createAccessToken, createRefreshToken } from '../../../assets/utils/GenerateToken';
@@ -22,7 +22,7 @@ const register = async (req, res) => {
     const user = await Users.findOne({ email });
     if (user) return res.status(405).json({ emailMessage: 'Email já cadastrado' });
 
-    const newUser = new Users({ email, password: 'Facebookpass' });
+    const newUser = new Users({ email, password: '' });
 
     console.log(newUser);
 

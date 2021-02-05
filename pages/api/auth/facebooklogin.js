@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
-import { postData } from '../../../assets/utils/fetchData';
+import { postData, getData } from '../../../assets/utils/fetchData';
 import { ACTION } from '../../../store/Actions';
 import { DataContext } from '../../../store/GlobalState';
 
-export default function Facebook() {
+export default function Facebooke() {
   const componentClicked = () => {
     console.log('funcionou');
   };
@@ -23,10 +23,8 @@ export default function Facebook() {
     };
     console.log(userData);
 
-    const res = await postData('api/auth/registerfacebook', userData);
+    const res = await postData('api/auth/login', userData);
     if (res.emailMessage) {
-      console.log(res.emailMessage);
-      resposta = res.emailMessage;
       return;
     }
 
@@ -56,13 +54,7 @@ export default function Facebook() {
     if (Object.keys(auth).length !== 0) router.push('/');
   }, [auth]);
 
-  if (resposta = 'Email já cadastrado') {
-    return (
-      <div>
-        Você está registrado pelo facebook, vá para a pagina de Login
-      </div>
-    );
-  } return (
+ return (
     <div>
       <FacebookLogin
         appId="2790121004649262"
