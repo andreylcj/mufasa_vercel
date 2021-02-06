@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
-import FacebookLogin from 'react-facebook-login';
+import React, { useContext, useEffect } from 'react';
+import GoogleLogin from 'react-google-login';
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
-import { postData, getData } from '../../../assets/utils/fetchData';
+import { postData } from '../../../assets/utils/fetchData';
 import { ACTION } from '../../../store/Actions';
 import { DataContext } from '../../../store/GlobalState';
 
-export default function Facebooke() {
+export default function GoogleLog() {
   const componentClicked = () => {
     console.log('funcionou');
   };
@@ -15,13 +15,12 @@ export default function Facebooke() {
   let resposta;
   const { auth } = state;
 
-  const responseFacebook = async (response) => {
-    console.log(response);
-
+  const responseGoogle = async (response) => {
+    
     const userData = {
-      email: response.email,
+      email: response.Es.kt,
     };
-    console.log(userData);
+    console.log(response);
 
     const res = await postData('api/auth/login', userData);
     if (res.emailMessage) {
@@ -52,16 +51,14 @@ export default function Facebooke() {
 
   useEffect(() => {
     if (Object.keys(auth).length !== 0) router.push('/');
-  }, [auth]);
-
-  return (
+  }, [auth]); return (
     <div>
-      <FacebookLogin
-        appId="2790121004649262"
-        // autoLoad
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
+      <GoogleLogin
+        clientId="563786372572-bbe6ifo4eslnm6710fh6b4ujog0qh0nb.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy="single_host_origin"
       />
     </div>
   );

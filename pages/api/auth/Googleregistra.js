@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
-import FacebookLogin from 'react-facebook-login';
+import React, { useContext, useEffect } from 'react';
+import GoogleLogin from 'react-google-login';
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
-import { postData, getData } from '../../../assets/utils/fetchData';
+import { postData } from '../../../assets/utils/fetchData';
 import { ACTION } from '../../../store/Actions';
 import { DataContext } from '../../../store/GlobalState';
 
-export default function Facebooke() {
+export default function Google() {
   const componentClicked = () => {
     console.log('funcionou');
   };
@@ -15,16 +15,17 @@ export default function Facebooke() {
   let resposta;
   const { auth } = state;
 
-  const responseFacebook = async (response) => {
-    console.log(response);
-
+  const responseGoogle = async (response) => {
+    
     const userData = {
-      email: response.email,
+      email: response.Es.kt,
     };
     console.log(userData);
 
-    const res = await postData('api/auth/login', userData);
+    const res = await postData('api/auth/registerfacebook', userData);
     if (res.emailMessage) {
+      console.log(res.emailMessage);
+      resposta = res.emailMessage;
       return;
     }
 
@@ -54,14 +55,20 @@ export default function Facebooke() {
     if (Object.keys(auth).length !== 0) router.push('/');
   }, [auth]);
 
-  return (
+  if (resposta = 'Email já cadastrado') {
+    return (
+      <div>
+        Você está registrado, vá para a pagina de Login
+      </div>
+    );
+  } return (
     <div>
-      <FacebookLogin
-        appId="2790121004649262"
-        // autoLoad
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
+      <GoogleLogin
+        clientId="563786372572-bbe6ifo4eslnm6710fh6b4ujog0qh0nb.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy="single_host_origin"
       />
     </div>
   );

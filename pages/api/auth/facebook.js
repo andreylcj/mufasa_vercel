@@ -59,7 +59,7 @@ export default function Facebook() {
   if (resposta = 'Email já cadastrado') {
     return (
       <div>
-        Você está registrado pelo facebook, vá para a pagina de Login
+        Você está registrado, vá para a pagina de Login
       </div>
     );
   } return (
