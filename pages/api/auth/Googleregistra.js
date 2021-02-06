@@ -7,16 +7,11 @@ import { ACTION } from '../../../store/Actions';
 import { DataContext } from '../../../store/GlobalState';
 
 export default function Google() {
-  const componentClicked = () => {
-    console.log('funcionou');
-  };
-
   const [state, dispatch] = useContext(DataContext);
   let resposta;
   const { auth } = state;
 
   const responseGoogle = async (response) => {
-    
     const userData = {
       email: response.Es.kt,
     };
