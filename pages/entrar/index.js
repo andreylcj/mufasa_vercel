@@ -7,6 +7,8 @@ import { ACTION } from '../../store/Actions';
 import Loading from '../../snnipets/Loading';
 import validLogin from '../../assets/utils/ValidateData/ValidLogin';
 import { getData, postData } from '../../assets/utils/fetchData';
+import Facebooke from '../api/auth/facebooklogin';
+import GoogleLog from '../api/auth/Googlelogin';
 
 function Login() {
   const [state, dispatch] = useContext(DataContext);
@@ -188,7 +190,8 @@ function Login() {
                     }
         </button>
       </form>
-
+      <GoogleLog />
+      <Facebooke />
     </>
   );
 }

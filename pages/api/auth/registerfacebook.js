@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import ConnectDB from '../../../assets/utils/ConnectDB';
 import Users from '../../../assets/models/UserModel';
 import { createAccessToken, createRefreshToken } from '../../../assets/utils/GenerateToken';
@@ -17,13 +16,12 @@ export default async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email } = req.body;
 
     const user = await Users.findOne({ email });
     if (user) return res.status(405).json({ emailMessage: 'Email já cadastrado' });
 
-    const passwordHash = await bcrypt.hash(password, 12);
-    const newUser = new Users({ email, password: passwordHash });
+    const newUser = new Users({ email, password: '' });
 
     console.log(newUser);
 

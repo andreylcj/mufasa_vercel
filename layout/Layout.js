@@ -6,6 +6,7 @@ import Modal from '../snnipets/Modal';
 import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
 
+// eslint-disable-next-line react/prop-types
 function Layout({ children }) {
   const router = useRouter();
   const pathName = router.pathname;
@@ -14,11 +15,11 @@ function Layout({ children }) {
   const [state, dispatch] = useContext(DataContext);
   const { auth } = state;
 
-  useEffect(() => {
+ /*useEffect(() => {
     if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
       router.push('/bend-admin/denied-access');
     }
-  }, [pathName, auth]);
+  }, [pathName, auth]);*/
 
   return (
     <div className="container">
