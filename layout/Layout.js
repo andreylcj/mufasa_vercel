@@ -15,11 +15,11 @@ function Layout({ children }) {
   const [state, dispatch] = useContext(DataContext);
   const { auth } = state;
 
- /*useEffect(() => {
+  useEffect(() => {
     if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
       router.push('/bend-admin/denied-access');
     }
-  }, [pathName, auth]);*/
+  }, [pathName, auth]);
 
   return (
     <div className="container">
