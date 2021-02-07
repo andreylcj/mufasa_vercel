@@ -19,54 +19,7 @@ const middleWareReiLeao = async (req, res) => {
     // const auth = await authReiLeao(req, res);
     // if (!auth.success) return auth.status(400).json({ err: 'Ação não sucedida' });
 
-    // const usersOnDB = await Users.find({ CEIpassword: { $exists: true, $ne: '' },  })
-    // .select('CPF CEIpassword _id');
-    /* const usersOnDB = await Users.find({
-      transactions: { $ne: {} },
-      firstCEIpasswordInsert: { $ne: true },
-    }).select('CPF CEIpassword _id lastTransaction'); */
-
     const usersOnDB = await Users.find().select('CPF CEIpassword _id');
-
-    if (usersOnDB.length === 0) {
-      res.json({
-        success: 'Success',
-        msg: 'Nothing to update',
-        usersOnDB,
-      });
-    }
-
-    // do stuff
-    // get user to update
-
-    const users = [
-      {
-        CPF: '1231231',
-        CEIPassword: '123',
-        _id: '23132313',
-        lastTransaction: '1231232132',
-      },
-      {
-        CPF: '1231231',
-        CEIPassword: '123',
-        _id: '23132313',
-        lastTransaction: '1231232132',
-      },
-      {
-        CPF: '1231231',
-        CEIPassword: '123',
-        _id: '23132313',
-        lastTransaction: '1231232132',
-      },
-      {
-        CPF: '1231231',
-        CEIPassword: '123',
-        _id: '23132313',
-        lastTransaction: '1231232132',
-      },
-    ];
-
-    // const response = await ReiLeao(users)
 
     res.json({
       success: 'Success',

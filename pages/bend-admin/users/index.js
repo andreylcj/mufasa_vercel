@@ -11,9 +11,9 @@ function Users() {
   const router = useRouter();
   const { query } = router;
 
-  // const role = query.role || 'all';
-  // const search = query.search || 'all';
-  // const sort = query.sort || '';
+  /* const role = query.role || 'all';
+  const search = query.search || 'all';
+  const sort = query.sort || ''; */
 
   const [state, dispatch] = useContext(DataContext);
   const { users, auth } = state;
@@ -26,11 +26,11 @@ function Users() {
     const res = await getData(
       `api/user?role=${role}&sort=${sort}&search=${search}`,
       auth.token,
-    );
+    ); */
 
-    console.log(res);
+    // console.log(res);
 
-    setUsersFiltered(res.users); */
+    // setUsersFiltered(res.users);
 
     setUsersFiltered(users);
 
@@ -48,7 +48,7 @@ function Users() {
 
   return (
 
-    <div className="table-responsive">
+    <div className="table-responsive container">
       <Head>
         <title>Usuários</title>
       </Head>

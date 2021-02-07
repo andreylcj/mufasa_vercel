@@ -1,10 +1,25 @@
 import React, { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 import Header from '../sections/Header';
 import Notify from '../snnipets/Notify';
 import Modal from '../snnipets/Modal';
 import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
+
+const Main = styled.main`
+
+  transform: translateY(64px);
+  will-change: transform;
+  text-align:center;
+
+  @media screen and (min-width: 768px){
+    transform: translateY(64px);
+  }
+  @media screen and (min-width: 1024px){
+    transform: translateY(80px);
+  }
+`;
 
 function Layout({ children }) {
   const router = useRouter();
@@ -21,15 +36,13 @@ function Layout({ children }) {
   }, [pathName, auth]);
 
   return (
-    <div className="container">
+    <>
 
       {
                 // exclude header from page denied-access ========================
                 (pathName.indexOf('denied-access') !== -1)
                   ? (
                     ''
-                  ) : (pathName.indexOf('bend-admin') !== -1) ? (
-                    <BendHeader />
                   ) : (
                     <Header />
                   )
@@ -47,13 +60,11 @@ function Layout({ children }) {
 
       <Modal />
 
-      <main className="text-center my-4">
-        <div>
-          {children}
-        </div>
-      </main>
+      <Main>
+        {children}
+      </Main>
 
-    </div>
+    </>
   );
 }
 
