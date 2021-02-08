@@ -78,6 +78,10 @@ const NavOptions = styled.div`
       color: #c95206;
     }
 
+    a.selected-nav:hover{
+      color: #c95206;
+    }
+
     a:hover{
       color: #fda46b;
     }

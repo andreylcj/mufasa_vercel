@@ -5,7 +5,7 @@ import OpenViewFormSection from '../OpenViewFormSection';
 
 const LionBack = styled.div`
   background-image: url("/images/LionBg/LpLion.jpg");
-  background-position-y: center;
+  background-position-y: -65vh;
   background-size: cover;
   background-repeat: no-repeat;
 `;
