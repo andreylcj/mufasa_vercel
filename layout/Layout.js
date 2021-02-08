@@ -30,9 +30,9 @@ function Layout({ children }) {
   const { auth } = state;
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
-      router.push('/bend-admin/denied-access');
-    }
+    //if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
+    //  router.push('/bend-admin/denied-access');
+    //}
   }, [pathName, auth]);
 
   return (

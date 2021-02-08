@@ -10,11 +10,12 @@ const DetailContainer = styled.div`
   }
 
   @media (min-width: 1024px){
-    padding: 15vh 8vw 2vh 8vw;
+    padding: 15vh 10vw 15vh 10vw;
   }
 
   h1{
-    margin-bottom: 50px;
+    margin-bottom: 75px;
+    font-weight: bold;
   }
 `;
 
@@ -29,7 +30,6 @@ const OnlyMufasa = styled.div`
   grid-template-rows: auto 14rem 6rem 1fr;
 
   @media (min-width: 768px) {
-    min-height: calc(100vh - 4rem);
     gap: 48px 32px;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: auto 1fr;
@@ -38,9 +38,8 @@ const OnlyMufasa = styled.div`
   @media (min-width: 1024px){
     -webkit-box-align: center;
     align-items: flex-start;
-    row-gap: 0px;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto auto;
   }
 `;
 
@@ -114,6 +113,13 @@ const DifCont = styled.div`
 
   .text-div{
     text-align: left;
+  }
+
+  h3{
+    font-weight: bold;
+  }
+  p{
+    font-weight: regular;
   }
 
   img {

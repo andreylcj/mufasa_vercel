@@ -20,7 +20,7 @@ grid-template-rows: auto 14rem 6rem 1fr;
 padding: 48px 16px;
 
 @media (min-width: 768px) {
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 80px);
   gap: 48px 32px;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: auto 1fr;
@@ -45,29 +45,45 @@ grid-column: 1 / span 5;
 font-size: 25px;
 
 h3{
-  font-weight: 600;
+  font-weight: bold;
   margin-bottom: 25px;
   font-size: 35px
+}
+p{
+  font-weight: medium;
 }
 `;
 
 const FormBox = styled.div`
 text-align: center;
-grid-column: 8 / span 5;
 font-size: 18px;
 background: #fff;
 border-radius: 5px;
 box-shadow: #2b1304 0px 16px 24px;
 padding: 40px;
+justify-self: center;
+grid-area: 3 / 1 / span 2 / span 4;
+
+@media (min-width: 768px) {
+  place-self: flex-end;
+  grid-area: 2 / 4 / auto / span 3;
+}
+
+@media (min-width: 1024px){
+  align-self: auto;
+  grid-area: 1 / 9 / auto / span 4;
+  min-width: 400px;
+}
 
 h4{
   color:#883906; 
-  font-weight: 600;
+  font-weight: bold;
   font-size: 30px;
 }
 h6{
   color: #707070;
   font-size: 15px;
+  font-weight: regular;
 }
 .security{
   color: #CDD1DC;
@@ -75,6 +91,7 @@ h6{
   font-size:12px;
   align-items: center;
   margin-top: 25px;
+  font-weight: bold;
 
   .security-icon{
     margin-right: 7px;
@@ -160,7 +177,7 @@ form{
     align-items: center;
     background: #C95206;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: semibold;
     transition: background 0.15s;
     border-radius: 4px;
     width: 100%;

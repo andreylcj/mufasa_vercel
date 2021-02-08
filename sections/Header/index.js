@@ -74,8 +74,12 @@ const NavOptions = styled.div`
       }   
     }
 
-    a:hover{
+    .selected-nav{
       color: #c95206;
+    }
+
+    a:hover{
+      color: #fda46b;
     }
   }
 `;
@@ -108,33 +112,34 @@ const DeskLoginButon = styled.div`
 function Header() {
   const router = useRouter();
   const pathName = router.pathname;
-  const [navTitles, setNavTitles] = useState([]);
+
+  const lpHeader = [
+    {
+      title: 'Início',
+      href: '/',
+    },
+    {
+      title: 'Produtos',
+      href: '/produtos',
+    },
+    {
+      title: 'Sobre Nós',
+      href: '/sobre-nos',
+    },
+    {
+      title: 'Contato',
+      href: '/contato',
+    },
+    {
+      title: 'Conteúdo',
+      href: '/conteudo',
+    },
+  ];
+
+  const [navTitles, setNavTitles] = useState(lpHeader);
 
   useEffect(() => {
-    if (pathName.indexOf('bend-admin') === -1) {
-      setNavTitles([
-        {
-          title: 'Início',
-          href: '/',
-        },
-        {
-          title: 'Produtos',
-          href: '/',
-        },
-        {
-          title: 'Sobre Nós',
-          href: '/',
-        },
-        {
-          title: 'Contato',
-          href: '/',
-        },
-        {
-          title: 'Conteúdo',
-          href: '/',
-        },
-      ]);
-    } else {
+    if (pathName.indexOf('bend-admin') !== -1) {
       setNavTitles([
         {
           title: 'Website',
@@ -169,7 +174,12 @@ function Header() {
             navTitles.map((navTitle, index) => {
               const navTitleId = `navTitle__${index}`;
               return (
-                <NavTitle title={navTitle.title} href={navTitle.href} key={navTitleId} />
+                <NavTitle
+                  title={navTitle.title}
+                  href={navTitle.href}
+                  pathName={pathName}
+                  key={navTitleId}
+                />
               );
             })
           }
@@ -190,11 +200,11 @@ function Header() {
   );
 }
 
-function NavTitle({ title, href }) {
+function NavTitle({ title, href, pathName }) {
   return (
     <li>
       <Link href={href}>
-        <a>
+        <a className={`${pathName === href ? 'selected-nav' : ''}`}>
           {title}
         </a>
       </Link>
