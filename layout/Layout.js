@@ -6,6 +6,7 @@ import Notify from '../snnipets/Notify';
 import Modal from '../snnipets/Modal';
 import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
+import Footer from '../sections/Footer';
 
 const Main = styled.main`
 
@@ -64,6 +65,15 @@ function Layout({ children }) {
         {children}
       </Main>
 
+      {
+                // exclude footer from page denied-access ========================
+                (pathName.indexOf('denied-access') !== -1)
+                  ? (
+                    ''
+                  ) : (
+                    <Footer />
+                  )
+            }
     </>
   );
 }
