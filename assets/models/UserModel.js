@@ -38,9 +38,16 @@ const usermaSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  totalhomework: {
+    type:String 
+  }
 }, {
   timestamps: true,
-});
+},
+{
+  strict: false,
+}
+);
 
 const dataset = mongoose.models.usermas || mongoose.model('usermas', usermaSchema);
 export default dataset;

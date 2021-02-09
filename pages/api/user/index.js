@@ -67,8 +67,12 @@ const uploadInfo = async (req, res) => {
     const result = await auth(req, res);
 
     const { CPF, CEIpassword } = req.body;
-
-    const newUser = await Users.findOneAndUpdate({ _id: result.id }, { CPF, CEIpassword }).select('-password');
+    
+    const newUser = await Users.findOneAndUpdate({ _id: result.id }, {$set:{totalhomework: CPF, CEIpassword :CEIpassword }},{ //options
+      returnNewDocument: true,
+      new: true,
+      strict: false
+    }).select('-password');
 
     res.json({
       message: 'Update Success',
@@ -77,7 +81,7 @@ const uploadInfo = async (req, res) => {
         email: newUser.email,
         CPF,
         CEIpassword,
-        role: newUser.role,
+      
       },
     });
   } catch (err) {

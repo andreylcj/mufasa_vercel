@@ -83,11 +83,6 @@ function insertCEIinfo() {
           return;
         }
 
-        setDbData({
-          cpf: res.user.CPF,
-          password: res.user.CEIpassword,
-        });
-
         console.log(res);
       });
 
