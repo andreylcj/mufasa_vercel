@@ -5,17 +5,22 @@ const DetailContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.85);
   padding: 48px 16px;
   color: #707070;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   @media (min-width: 768px) {
   }
 
   @media (min-width: 1024px){
-    padding: 15vh 10vw 15vh 10vw;
+    padding: 10vh 8vw;
   }
 
   h1{
     margin-bottom: 75px;
-    font-weight: bold;
+    font-weight: 500;
   }
 `;
 
@@ -80,7 +85,7 @@ function OnlyInMufasa() {
   return (
     <DetailContainer>
       <h1>
-        DIFERENCIAIS MUFASA
+        Diferenciais Mufasa
       </h1>
       <OnlyMufasa>
         {
@@ -104,6 +109,20 @@ function OnlyInMufasa() {
 
 const DifCont = styled.div`
   display: flex;
+  transform: scale(1);
+  transition: all 0.2s;
+
+  &:hover{
+    transform: scale(1.07);
+
+    h3{
+      color: #cecdcd;
+    }
+
+    img{
+      border-color: #cecdcd;
+    }
+  }
 
   .img-div{
     display:flex;
@@ -116,7 +135,7 @@ const DifCont = styled.div`
   }
 
   h3{
-    font-weight: bold;
+    font-weight: 500;
   }
   p{
     font-weight: regular;

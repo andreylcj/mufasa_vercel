@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -88,31 +89,6 @@ const NavOptions = styled.div`
   }
 `;
 
-const DeskLoginButon = styled.div`
-  flex-grow: 0;
-  margin-left: 16px;
-  margin-right: 16px;
-
-  a{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #c95206;
-    transition: background-size 0.2s ease-in-out 0s;
-    background-image: linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%);
-    background-repeat: no-repeat;
-    background-position: 0px 100%, 100% 100%;
-    background-size: 0 8%;
-    i{
-      margin-left:10px;
-    }
-
-    &:hover{
-      background-size: 100% 8%;
-    }
-  }
-`;
-
 function Header() {
   const router = useRouter();
   const pathName = router.pathname;
@@ -190,14 +166,14 @@ function Header() {
           </ul>
         </NavOptions>
 
-        <DeskLoginButon>
-          <Link href="/entrar">
-            <a>
-              Login
-              <i className="fas fa-sign-in-alt" />
-            </a>
-          </Link>
-        </DeskLoginButon>
+        <ButtonUnderlineHover
+          href="/entrar"
+          color="#c95206"
+          bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
+        >
+          Login
+          <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
+        </ButtonUnderlineHover>
 
       </Nav>
     </HeaderContainer>
