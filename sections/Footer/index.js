@@ -10,14 +10,18 @@ const FooterContainer = styled.footer`
   will-change: transform;
   text-align: center;
   display: grid;
-  grid-gap: 24px 50px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 50px 25px;
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
+  padding: 5vh 5vw;
+  font-size: 0.8125rem;
+  line-height: 1rem;
   
   @media screen and (min-width: 768px) {
     -webkit-transform: translateY(64px);
     -ms-transform: translateY(64px);
     transform: translateY(64px);
+    grid-template-columns: repeat(2, 1fr);
   }
   
   @media screen and (min-width: 1024px){
@@ -27,10 +31,12 @@ const FooterContainer = styled.footer`
 
     -webkit-box-align: center;
     align-items: center;
+    grid-gap: 24px 50px;
     row-gap: 0px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
     padding: 10vh 5vw;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   h4{
@@ -65,6 +71,8 @@ FootColumn.Title = styled.div`
 `;
 
 const ListNavItem = styled.li`
+
+  padding: 0px 0px 8px;
   
   a{
     color: #ffffff;
@@ -179,7 +187,6 @@ function Footer() {
           <ListNav text="Como Começar?" href="/" />
           <ListNav text="O que preciso para criar a conta?" href="/" />
           <ListNav text="Não tem nenhuma taxa?" href="/" />
-          <ListNav text="Conteúdo" href="/" />
         </ul>
       </FootColumn>
 

@@ -15,9 +15,9 @@ const BgImage = styled.div`
   min-height: calc(100vh - 80px);
   max-height: calc(100vh - 80px);
   display: flex;
-  
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  transform: scale(1.1); 
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
 `;
 
 const Bg = styled.div`
