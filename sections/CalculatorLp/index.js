@@ -24,7 +24,7 @@ const SideText = styled.div`
   flex-grow: 0;
 
   @media (max-width: 768px) {
-    padding: 10vh 5vw 10vh 5vw;
+    padding: 10vh 10vw;
   }
 
   @media (min-width: 768px) {
