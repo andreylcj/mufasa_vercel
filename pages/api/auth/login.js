@@ -22,11 +22,11 @@ const login = async (req, res) => {
     const user = await Users.findOne({ email });
     if (!user) return res.status(400).json({ emailMessage: 'Esse email não está cadastrado' });
 
-    if(password){
+    if (password) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) return res.status(400).json({ passwordMessage: 'Senha incorreta' });
     }
- 
+
     const accessToken = createAccessToken({ id: user._id });
     const refreshToken = createRefreshToken({ id: user._id });
 

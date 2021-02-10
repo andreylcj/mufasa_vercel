@@ -5,7 +5,7 @@ import Cookie from 'js-cookie';
 import { postData } from '../../../assets/utils/fetchData';
 import { ACTION } from '../../../store/Actions';
 import { DataContext } from '../../../store/GlobalState';
-import * as cron from 'node-cron'
+
 
 export default function Facebook() {
   const componentClicked = () => {

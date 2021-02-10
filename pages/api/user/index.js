@@ -72,7 +72,9 @@ const uploadInfo = async (req, res) => {
       returnNewDocument: true,
       new: true,
       strict: false
-    }).select('-password');
+    }.then(users) => {
+      return Users.findByIdAndUpdate({_id: result.id }, {CPF: CPF})
+    } )
 
     res.json({
       message: 'Update Success',
