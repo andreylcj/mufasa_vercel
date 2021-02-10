@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const SecContainer = styled.div`
   position:relative;
   min-height: calc(100vh - 80px);
+  overflow: hidden;
 `;
 
 const ImageBg = styled.div`
@@ -34,9 +35,10 @@ const BlackBg = styled.div`
 const FeaturedTitle = styled.div`
   text-align: center;
   padding-top: 10vh;
+  max-width: 700px;
+  margin: auto;
 
   p{
-    display: contents;
     text-align: center;
     color: #707070;
     font-size: 1.75rem;
@@ -61,7 +63,6 @@ function OpenViewAboutUs() {
       <FeaturedTitle>
         <p>
           No ano de 2020, mais de um milhão de
-          <br />
           brasileiros caiu na malha fina.
         </p>
 

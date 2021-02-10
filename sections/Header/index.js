@@ -235,7 +235,7 @@ const ButtonOpenMobile = styled.button`
   }
 
   &:active{
-    background-color: #f1bea1;
+    background-color: #f5b18a;
     outline: none;
   }
 

@@ -52,7 +52,6 @@ const Text = styled.div`
     color: ${({ theme }) => theme.colors.fullWhite};
     max-width: 20rem;
     font-size: 1.5rem;
-    display: contents;
   }
 `;
 
@@ -66,15 +65,10 @@ function DarfLp() {
           </h3>
           <p>
             A Calculadora do Mufasa,
-            <br />
             além de realizar os cálculos,
-            <br />
             disponibiliza a impressão do
-            <br />
             DARF quando você opera
-            <br />
             com lucro.
-            <br />
           </p>
           <ButtonUnderlineHover
             href="/entrar"

@@ -43,7 +43,6 @@ const SideText = styled.div`
     color: ${({ theme }) => theme.colors.fullBlack};
     max-width: 20rem;
     font-size: 1.5rem;
-    display: contents;
   }
 `;
 
@@ -86,18 +85,11 @@ function WalletLp() {
         </h3>
         <p>
           Importe seus dados do
-          <br />
           CEI (Canal Eletrônico do
-          <br />
           Investidor), e acesse em
-          <br />
           tempo real seu extrato
-          <br />
           para analisar a evolução
-          <br />
           da sua carteira.
-          <br />
-
         </p>
         <ButtonUnderlineHover
           href="/entrar"

@@ -51,7 +51,6 @@ const SideText = styled.div`
     color: ${({ theme }) => theme.colors.fullBlack};
     max-width: 20rem;
     font-size: 1.5rem;
-    display: contents;
   }
 `;
 
@@ -94,18 +93,10 @@ function CalculatorLp() {
         </h3>
         <p>
           Calcule seus impostos de
-          {' '}
-          <br />
           forma 100% automática,
-          <br />
           levando em conta as
-          {' '}
-          <br />
           movimentações e as
-          {' '}
-          <br />
           compensações acumuladas.
-          <br />
         </p>
         <ButtonUnderlineHover
           href="/entrar"
