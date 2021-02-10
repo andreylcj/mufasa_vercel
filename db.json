@@ -3,6 +3,7 @@
         "colors": {
             "mufasaOrange": "#C95206",
             "lightMufasaOrange": "#E49447",
+            "verySoftMufasaOrange": "#f3d8c8",
             "fullBlack": "#000000",
             "fullWhite": "#ffffff",
             "lightGrayBg": "#ECECEC",

@@ -12,7 +12,7 @@ const FooterContainer = styled.footer`
   display: grid;
   grid-gap: 50px 25px;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: auto auto;
   padding: 5vh 5vw;
   font-size: 0.8125rem;
   line-height: 1rem;
@@ -22,6 +22,7 @@ const FooterContainer = styled.footer`
     -ms-transform: translateY(64px);
     transform: translateY(64px);
     grid-template-columns: repeat(2, 1fr);
+    padding: 5vh 10vw;
   }
   
   @media screen and (min-width: 1024px){
@@ -36,7 +37,6 @@ const FooterContainer = styled.footer`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
     padding: 10vh 5vw;
-    grid-template-columns: repeat(4, 1fr);
   }
 
   h4{
@@ -61,6 +61,14 @@ const FootColumn = styled.div`
   place-self: flex-start;
   text-align: left;
   margin-top: 0;
+  
+  @media screen and (min-width: 768px) {
+    margin-left: 10vw;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin-left: 0;
+  }
 `;
 
 FootColumn.Title = styled.div`
@@ -68,11 +76,20 @@ FootColumn.Title = styled.div`
   color: ${({ theme }) => theme.colors.mufasaOrange};
   font-weight: 500;
   margin-bottom: 15px;
+  line-height: 1.25rem;
+
+  @media(max-width: 768px){
+    font-size: 1.2rem;
+  }
 `;
 
 const ListNavItem = styled.li`
 
   padding: 0px 0px 8px;
+
+  @media(max-width: 768px){
+    font-size: 0.8125rem;
+  }
   
   a{
     color: #ffffff;
@@ -91,6 +108,8 @@ const ListNavItem = styled.li`
   
 `;
 const ListNavItemSocialMedia = styled.li`
+  margin-top: 15px;
+
   a{
     display: inline-block;
     background-color: #5f5e5e;
@@ -191,8 +210,8 @@ function Footer() {
       </FootColumn>
 
       <FootColumn>
-        <FootColumn.Title>Siga o Mufasa</FootColumn.Title>
-        <ul style={{ display: 'flex' }}>
+        <FootColumn.Title style={{ marginBottom: '0' }}>Siga o Mufasa</FootColumn.Title>
+        <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
           <ListNavSocialIcon href="/" socialMedia="face" />
           <ListNavSocialIcon href="/" socialMedia="insta" />
           <ListNavSocialIcon href="/" socialMedia="youtube" />

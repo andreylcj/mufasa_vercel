@@ -15,6 +15,12 @@ const HeaderContainer = styled.header`
   font-weight: 500;
   font-size: 18px;
 
+  @media(max-width: 768px){
+    .hide{
+      display: none;
+    }
+  }
+
   @media screen and (min-width: 1024px){
     height: 80px;
   }
@@ -33,6 +39,10 @@ const Nav = styled.nav`
   transition: transform 0.2s ease 0s;
   background-color: #fff;
 
+  @media (max-width: 768px){
+    justify-content: space-between;
+  }
+
   @media screen and (min-width: 1024px){
     height: 80px;
   }
@@ -45,16 +55,25 @@ const LogoContainer = styled.div`
   flex-grow: 0;
   a{
     display: flex;
+    
     img{
       width: 55px;
       height: 55px;
     }
-}
+
+    @media(max-width: 768px){
+      img{
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
 `;
 
 const NavOptions = styled.div`
   margin-left: 20px;
   flex-grow: 1;
+
   ul{
     list-style: none;
     margin: 0;
@@ -117,6 +136,7 @@ function Header() {
   ];
 
   const [navTitles, setNavTitles] = useState(lpHeader);
+  const [showMobile, setShowMobile] = useState(false);
 
   useEffect(() => {
     if (pathName.indexOf('bend-admin') !== -1) {
@@ -137,6 +157,10 @@ function Header() {
     }
   }, [pathName]);
 
+  const handleClickToShowMobileMenu = () => {
+    setShowMobile(!showMobile);
+  };
+
   return (
     <HeaderContainer>
       <Nav>
@@ -148,7 +172,9 @@ function Header() {
           </Link>
         </LogoContainer>
 
-        <NavOptions>
+        <NavOptions
+          className="hide"
+        >
           <ul>
             {
             navTitles.map((navTitle, index) => {
@@ -170,13 +196,137 @@ function Header() {
           href="/entrar"
           color="#c95206"
           bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
+          hide
+          onClick={handleClickToShowMobileMenu}
         >
           Login
           <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
         </ButtonUnderlineHover>
 
+        <MobileLinks
+          showMobile={showMobile}
+          navTitles={navTitles}
+          pathName={pathName}
+          onClick={handleClickToShowMobileMenu}
+        />
+
+        <ButtonShowMenu onClick={handleClickToShowMobileMenu} showMobile={showMobile} />
+
       </Nav>
+
     </HeaderContainer>
+  );
+}
+
+const ButtonOpenMobile = styled.button`
+  background: #fff;
+  border: none;
+  border-radius: 100%;
+  height: 3rem;
+  width: 3rem;
+
+  @media(min-width: 768px){
+    display: none;
+  }
+
+  &:focus{
+    background-color: ${({ theme }) => theme.colors.verySoftMufasaOrange};
+    outline: none;
+  }
+
+  &:active{
+    background-color: #f1bea1;
+    outline: none;
+  }
+
+  i{
+    color: rgb(17,17,17);
+  }
+`;
+
+function ButtonShowMenu({ onClick, showMobile }) {
+  return (
+    <ButtonOpenMobile onClick={onClick}>
+      {
+       showMobile ? (
+         <i className="fas fa-times" />
+       ) : (
+         <i className="fas fa-bars" />
+       )
+     }
+    </ButtonOpenMobile>
+  );
+}
+
+const ContainerMobileLinks = styled.div`
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  overflow-x: auto;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 64px;
+  height: calc(100vh - 64px);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-100vh);
+  transition: transform 0.2s ease-out 0s;
+  will-change: transform;
+
+  &:{
+    .show-mobile-menu{
+      transform: translateY(0) !important;
+    } 
+  }
+`;
+
+function MobileLinks({
+  showMobile, navTitles, pathName, onClick,
+}) {
+  const styleMobile = showMobile ? 'translateY(0)' : 'translateY(-100vh)';
+  return (
+    <ContainerMobileLinks
+      style={{
+        transform: styleMobile,
+      }}
+    >
+      <NavOptions>
+        <ul style={{ display: 'inherit' }}>
+          {
+            navTitles.map((navTitle, index) => {
+              const navTitleId = `navTitle__${index}`;
+              return (
+                <li
+                  key={navTitleId}
+                  style={{ marginBottom: '8px' }}
+                >
+                  <Link href={navTitle.href}>
+                    <a
+                      className={pathName === navTitle.href ? 'selected-nav' : ''}
+                      onClick={onClick}
+                    >
+                      {navTitle.title}
+                    </a>
+                  </Link>
+                </li>
+              );
+            })
+          }
+        </ul>
+        <ButtonUnderlineHover
+          href="/entrar"
+          color="#c95206"
+          bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
+          otherStyles={{ marginLeft: '0' }}
+          onClick={onClick}
+        >
+          Login
+          <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
+        </ButtonUnderlineHover>
+      </NavOptions>
+    </ContainerMobileLinks>
   );
 }
 

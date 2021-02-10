@@ -9,7 +9,7 @@ import WalletLp from '../sections/WalletLp';
 
 const LionBack = styled.div`
   background-image: url("/images/LionBg/LpLion.jpg");
-  background-position-y: -65vh;
+  background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
 `;

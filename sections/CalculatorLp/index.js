@@ -17,12 +17,22 @@ const SideText = styled.div`
   -webkit-box-flex: 1;
   max-width: 100%;
   flex: 0 0 100%;
-  padding-right: 8px;
-  padding-left: 8px;
+  padding: 10vh 0 0 10vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow: 0;
+
+  @media (max-width: 768px) {
+    padding: 10vh 5vw 10vh 5vw;
+  }
+
+  @media (min-width: 768px) {
+    flex: 0 0 41.6666%;
+    max-width: 41.6666%;
+    margin-left: 8.3333%;
+    padding: 10vh 0 10vh 10vw;
+  }
 
   @media (min-width: 1024px) {
     flex: 0 0 41.6666%;

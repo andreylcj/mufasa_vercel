@@ -3,16 +3,13 @@ import styled from 'styled-components';
 
 const DetailContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.85);
-  padding: 48px 16px;
+  padding: 10vh 8vw;
   color: #707070;
   min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  @media (min-width: 768px) {
-  }
 
   @media (min-width: 1024px){
     padding: 10vh 8vw;
@@ -31,13 +28,12 @@ const OnlyMufasa = styled.div`
   display: grid;
   justify-items: stretch;
   gap: 24px 16px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto 14rem 6rem 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto;
 
   @media (min-width: 768px) {
     gap: 48px 32px;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto 1fr;
+    
   }
 
   @media (min-width: 1024px){
@@ -108,9 +104,32 @@ function OnlyInMufasa() {
 }
 
 const DifCont = styled.div`
-  display: flex;
+  
   transform: scale(1);
   transition: all 0.2s;
+
+  .img-div{
+    margin-bottom: 15px;
+  }
+
+  @media(min-width: 768px){
+    display: flex;
+
+    .img-div{
+      display:flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .text-div{
+      text-align: left;
+    }
+
+    img{
+      margin-right: 15px;
+    }
+  }
 
   &:hover{
     transform: scale(1.07);
@@ -124,15 +143,7 @@ const DifCont = styled.div`
     }
   }
 
-  .img-div{
-    display:flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
-
-  .text-div{
-    text-align: left;
-  }
+  
 
   h3{
     font-weight: 500;
@@ -147,7 +158,6 @@ const DifCont = styled.div`
     border: 2px solid #707070;
     border-radius: 100%;
     padding: 5px;
-    margin-right: 15px;
   }
 `;
 

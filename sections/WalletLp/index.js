@@ -23,7 +23,11 @@ const SideText = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  @media (min-width: 1024px) {
+  @media (max-width: 768px) {
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: 768px) {
     flex: 0 0 41.6666%;
     max-width: 41.6666%;
     margin-left: 8.3333%;

@@ -8,6 +8,10 @@ const DeskLoginButon = styled.div`
   margin-right: 16px;
   display: inline-block;
 
+  .hide{
+    display: none;
+  }
+
   a{
     display: flex;
     align-items: center;
@@ -26,12 +30,14 @@ const DeskLoginButon = styled.div`
 `;
 
 function ButtonUnderlineHover({
-  children, href, color, bg, otherStyles,
+  children, href, color, bg, otherStyles, hide, onClick
 }) {
   return (
-    <DeskLoginButon style={
+    <DeskLoginButon
+      style={
       otherStyles
     }
+      className={hide ? 'hide' : ''}
     >
       <Link href={href}>
         <a
@@ -39,6 +45,7 @@ function ButtonUnderlineHover({
             color,
             backgroundImage: bg,
           }}
+          onClick={onClick}
         >
           {children}
         </a>

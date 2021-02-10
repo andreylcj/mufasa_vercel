@@ -34,6 +34,10 @@ const Text = styled.div`
   padding: 10vh 0 10vh 20vw;
   height: 100%;
 
+  @media (max-width: 768px) {
+    padding: 10vh 5vw 10vh 5vw;
+  }
+
   @media (min-width: 1024px) {
     margin-left: 8.3333%;
   }
