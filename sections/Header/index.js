@@ -197,7 +197,6 @@ function Header() {
           color="#c95206"
           bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
           hide
-          onClick={handleClickToShowMobileMenu}
         >
           Login
           <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
@@ -274,12 +273,6 @@ const ContainerMobileLinks = styled.div`
   transform: translateY(-100vh);
   transition: transform 0.2s ease-out 0s;
   will-change: transform;
-
-  &:{
-    .show-mobile-menu{
-      transform: translateY(0) !important;
-    } 
-  }
 `;
 
 function MobileLinks({
