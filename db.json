@@ -1,7 +1,13 @@
 {
     "theme": {
         "colors": {
-            "morant_letter_red": "#ff3859",
+            "mufasaOrange": "#C95206",
+            "lightMufasaOrange": "#E49447",
+            "verySoftMufasaOrange": "#f3d8c8",
+            "fullBlack": "#000000",
+            "fullWhite": "#ffffff",
+            "lightGrayBg": "#ECECEC",
+            "softPurpleBg": "rgb(249, 247, 252);",
             "gold": "#ffd700",
             "beauty_blue": "#00d4ff",
             "silver": "#c0c0c0",

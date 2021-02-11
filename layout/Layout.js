@@ -1,10 +1,26 @@
 import React, { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 import Header from '../sections/Header';
 import Notify from '../snnipets/Notify';
 import Modal from '../snnipets/Modal';
 import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
+import Footer from '../sections/Footer';
+
+const Main = styled.main`
+
+  transform: translateY(64px);
+  will-change: transform;
+  text-align:center;
+
+  @media screen and (min-width: 768px){
+    transform: translateY(64px);
+  }
+  @media screen and (min-width: 1024px){
+    transform: translateY(80px);
+  }
+`;
 
 // eslint-disable-next-line react/prop-types
 function Layout({ children }) {
@@ -16,21 +32,19 @@ function Layout({ children }) {
   const { auth } = state;
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
-      router.push('/bend-admin/denied-access');
-    }
+    //if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
+    //  router.push('/bend-admin/denied-access');
+    //}
   }, [pathName, auth]);
 
   return (
-    <div className="container">
+    <>
 
       {
                 // exclude header from page denied-access ========================
                 (pathName.indexOf('denied-access') !== -1)
                   ? (
                     ''
-                  ) : (pathName.indexOf('bend-admin') !== -1) ? (
-                    <BendHeader />
                   ) : (
                     <Header />
                   )
@@ -48,13 +62,20 @@ function Layout({ children }) {
 
       <Modal />
 
-      <main className="text-center my-4">
-        <div>
-          {children}
-        </div>
-      </main>
+      <Main>
+        {children}
+      </Main>
 
-    </div>
+      {
+                // exclude footer from page denied-access ========================
+                (pathName.indexOf('denied-access') !== -1)
+                  ? (
+                    ''
+                  ) : (
+                    <Footer />
+                  )
+            }
+    </>
   );
 }
 

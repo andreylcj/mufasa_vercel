@@ -94,7 +94,7 @@ function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
+    if (Object.keys(auth).length !== 0) router.push('/inicio');
   }, [auth]);
 
   return (

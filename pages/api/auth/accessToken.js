@@ -4,7 +4,7 @@ import ConnectDB from '../../../assets/utils/ConnectDB';
 import Users from '../../../assets/models/UserModel';
 import { createAccessToken } from '../../../assets/utils/GenerateToken';
 
-ConnectDB();
+//ConnectDB();
 
 /* eslint consistent-return: "error" */
 export default async (req, res) => {
