@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Header from '../sections/Header';
@@ -7,6 +7,13 @@ import Modal from '../snnipets/Modal';
 import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
 import Footer from '../sections/Footer';
+
+const SiteContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.mufasaOrange};
+`;
 
 const Main = styled.main`
 
@@ -30,22 +37,37 @@ function Layout({ children }) {
   const [state, dispatch] = useContext(DataContext);
   const { auth } = state;
 
+  const [showHeader, setShowHeader] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
+
   useEffect(() => {
-    //if (Object.keys(auth).length !== 0 && !auth.user.admin && (pathName.indexOf('bend-admin') !== -1)) {
+    // if (Object.keys(auth).length !== 0 &&
+    //! auth.user.admin &&
+    // (pathName.indexOf('bend-admin') !== -1)){
     //  router.push('/bend-admin/denied-access');
-    //}
+    // }
+
+    if (pathName.indexOf('/denied-access') !== -1
+    || pathName === '/entrar'
+    ) {
+      setShowHeader(false);
+      setShowFooter(false);
+    } else {
+      setShowHeader(true);
+      setShowFooter(true);
+    }
   }, [pathName, auth]);
 
   return (
-    <>
+    <SiteContainer>
 
       {
                 // exclude header from page denied-access ========================
-                (pathName.indexOf('denied-access') !== -1)
+                showHeader
                   ? (
-                    ''
-                  ) : (
                     <Header />
+                  ) : (
+                    ''
                   )
             }
 
@@ -67,14 +89,14 @@ function Layout({ children }) {
 
       {
                 // exclude footer from page denied-access ========================
-                (pathName.indexOf('denied-access') !== -1)
+                showFooter
                   ? (
-                    ''
-                  ) : (
                     <Footer />
+                  ) : (
+                    ''
                   )
             }
-    </>
+    </SiteContainer>
   );
 }
 
