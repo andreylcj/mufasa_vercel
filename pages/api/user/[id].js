@@ -15,6 +15,9 @@ export default async (req, res) => {
     case 'GET':
       await getUser(req, res);
       break;
+    case 'PUT':
+      await uploadInfo(req, res);
+      break;
     default:
   }
 };
@@ -53,7 +56,7 @@ const deleteUser = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     // eslint-disable-next-line no-unused-vars
-    const result = await auth(req, res);
+    //const result = await auth(req, res);
     // if (result.role !== 'admin' && result.role !== 'master admin')
     // return res.status(400).json({ err: 'Autenticação inválida' });
 
@@ -64,6 +67,40 @@ const getUser = async (req, res) => {
     if (!user) return res.status(400).json({ success: false, err: 'User not found' });
 
     res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+
+
+const uploadInfo = async (req, res) => {
+  try {
+    //const result = await auth(req, res);
+
+    const { id } = req.query;
+
+    const { CPF, CEIpassword } = req.body;
+
+
+
+    const {test} =  req.body;
+
+    const newUser = await Users.findOneAndUpdate({ _id: id }, { CPF, CEIpassword, test },{
+      returnNewDocument: true,
+      new: true,
+      strict: false
+    }).select('-password');
+
+    res.json({
+      message: 'Update Success',
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        CPF,
+        CEIpassword,
+        role: newUser.role,
+      },
+    });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
