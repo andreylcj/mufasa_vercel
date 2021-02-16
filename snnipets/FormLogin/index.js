@@ -13,7 +13,9 @@ const FormField = styled.form`
 
 `;
 
-function FormLogin({ children, isRegister, autofocus }) {
+function FormLogin({
+  children, isRegister, autofocus, idAndName,
+}) {
   const [state, dispatch] = useContext(DataContext);
   const { userData, auth } = state;
 
@@ -113,6 +115,15 @@ function FormLogin({ children, isRegister, autofocus }) {
   }, []);
 
   const router = useRouter();
+  const { query } = router;
+
+  useEffect(() => {
+    setSubmitStatus({
+      emailMessage: '',
+      passwordMessage: '',
+      emailAlreadyExist: '',
+    });
+  }, [query]);
 
   useEffect(() => {
   // if (Object.keys(auth).length !== 0) router.push('/inicio');
@@ -132,6 +143,8 @@ function FormLogin({ children, isRegister, autofocus }) {
         email={email}
         initialMessage="E-mail principal"
         type="email"
+        value={userData.email}
+        idAndName={`email__${idAndName}`}
       />
       <InputField
         submitMessage={submitStatus.passwordMessage}
@@ -141,6 +154,8 @@ function FormLogin({ children, isRegister, autofocus }) {
         email={password}
         initialMessage="Senha"
         type="password"
+        value={userData.password}
+        idAndName={`password__${idAndName}`}
       />
       {children}
     </FormField>

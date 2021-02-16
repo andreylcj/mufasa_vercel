@@ -86,6 +86,10 @@ const Card = styled.div`
   transform-style: preserve-3d;
   position: relative;
 
+  .no-clickable{
+    pointer-events: none;
+  }
+
   .card__face{
     position: absolute;
     width: 100%;
@@ -190,12 +194,15 @@ function Login() {
         {/*
       !register ? ( */}
 
-        <FormContainer className="card__face card__face--front">
+        <FormContainer
+          className={`card__face card__face--front ${register ? 'no-clickable' : ''}`}
+        >
           <h4>
             Faça seu login
           </h4>
           <FormLogin
             autofocus
+            idAndName="login"
           >
             <SubmitButton type="submit">
               {
@@ -222,7 +229,17 @@ function Login() {
               </a>
             </Link>
             <Link href="?criar-conta">
-              <a>
+              <a
+                onClick={() => {
+                  dispatch({
+                    type: ACTION.UPDATE_USER_DATA,
+                    payload: {
+                      email: '',
+                      password: '',
+                    },
+                  });
+                }}
+              >
                 Ainda não sou cliente
                 <i
                   className="fas fa-chevron-right"
@@ -240,6 +257,7 @@ function Login() {
           </h4>
           <FormLogin
             autofocus
+            idAndName="register"
           >
             <SubmitButton type="submit">
               {
@@ -258,7 +276,17 @@ function Login() {
           <Facebooke />
           <BottomText>
             <Link href="">
-              <a>
+              <a
+                onClick={() => {
+                  dispatch({
+                    type: ACTION.UPDATE_USER_DATA,
+                    payload: {
+                      email: '',
+                      password: '',
+                    },
+                  });
+                }}
+              >
                 Já tenho uma conta
                 <i
                   className="fas fa-chevron-right"

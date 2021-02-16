@@ -73,18 +73,18 @@ const InputFieldContainer = styled.div`
 `;
 
 function InputField({
-  submitMessage, userDataInfo, onChange, onBlur, value, initialMessage, type, autofocus,
+  submitMessage, userDataInfo, onChange, onBlur, value, initialMessage, type, autofocus, idAndName
 }) {
   return (
     <InputFieldContainer className="mb-3">
-      <label htmlFor={type} className="form-label">
+      <label htmlFor={idAndName} className="form-label">
         <input
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autofocus}
           type={type}
           className={`${submitMessage ? 'border-danger' : ''}
             ${!submitMessage && userDataInfo ? ' border-sucessful' : ''}`}
-          id={type}
+          id={idAndName}
           name={type}
           onChange={onChange}
           value={value}
