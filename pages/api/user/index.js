@@ -68,8 +68,21 @@ const uploadInfo = async (req, res) => {
 
     const { CPF, CEIpassword } = req.body;
 
-    const newUser = await Users.findOneAndUpdate({ _id: result.id }, { CPF, CEIpassword }).select('-password');
+    // (A) LOAD ENCRYPT LIBRARY
+    const CryptoJS = require("crypto-js");
 
+    // (B) SECRET KEY
+    var key = "ASECRET";
+
+    // (C) ENCRYPT
+    var cipher = CryptoJS.AES.encrypt(CEIpassword, key);
+    cipher = cipher.toString();
+    console.log(cipher);
+
+
+    const newUser = await Users.findOneAndUpdate({ _id: result.id }, {$set:{ CPF: CPF, CEIpassword: cipher }}).select('-password');
+    
+    
     res.json({
       message: 'Update Success',
       user: {

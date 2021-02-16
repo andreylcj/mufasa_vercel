@@ -57,9 +57,22 @@ const getUser = async (req, res) => {
     // if (result.role !== 'admin' && result.role !== 'master admin')
     // return res.status(400).json({ err: 'Autenticação inválida' });
 
+    const CryptoJS = require("crypto-js");
+
+    // (B) SECRET KEY
+    var key = "ASECRET";
+    
     const { id } = req.query;
 
-    const user = await Users.findById(id).select('-password');
+    var user = await Users.findById(id).select('-password');
+
+    var cipher = user.CEIpassword; 
+
+    var decipher = CryptoJS.AES.decrypt(cipher, key);
+    decipher = decipher.toString(CryptoJS.enc.Utf8);
+    console.log(decipher);
+
+    user.CEIpassword = decipher;
 
     if (!user) return res.status(400).json({ success: false, err: 'User not found' });
 
