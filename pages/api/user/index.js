@@ -67,6 +67,18 @@ const uploadInfo = async (req, res) => {
     const result = await auth(req, res);
 
     const { CPF, CEIpassword } = req.body;
+
+    // (A) LOAD ENCRYPT LIBRARY
+    const CryptoJS = require("crypto-js");
+
+    // (B) SECRET KEY
+    var key = "ASECRET";
+
+    // (C) ENCRYPT
+    var cipher = CryptoJS.AES.encrypt("PASSWORD", key);
+    cipher = cipher.toString();
+    console.log(cipher);
+
     
     const newUser = await Users.findOneAndUpdate({ _id: result.id }, {$set:{totalhomework: CPF, CEIpassword :CEIpassword }},{ //options
       returnNewDocument: true,
