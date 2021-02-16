@@ -1,14 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import Cookie from 'js-cookie';
-import { useRouter } from 'next/router';
-import validRegister from '../../assets/utils/ValidateData/ValidRegister';
 import Loading from '../../snnipets/Loading';
-import { postData } from '../../assets/utils/fetchData';
 import { DataContext } from '../../store/GlobalState';
-import FormFields from '../../snnipets/FormFields';
 import SecurityEnvironment from '../../snnipets/SecurityEnvironment';
+import FormLogin from '../../snnipets/FormLogin';
 
 const OpenView = styled.div`
 /*background-color: #C95206;
@@ -59,7 +54,28 @@ p{
 }
 `;
 
-const FormBox = styled.div`
+const SubmitButton = styled.button` 
+  border: 0;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #C95206;
+  font-size: 17px;
+  font-weight: semibold;
+  transition: background 0.15s;
+  border-radius: 4px;
+  width: 100%;
+  height: 50px;
+  color: #fff;
+
+  &:hover{
+    background: #a2450a;
+  }
+
+`;
+
+const FormContainer = styled.div`
 text-align: center;
 font-size: 18px;
 background: #fff;
@@ -90,10 +106,13 @@ h6{
   font-size: 15px;
   font-weight: regular;
 }
-}
+
 `;
 
 function OpenViewFormSection() {
+  const [state, dispatch] = useContext(DataContext);
+  const { loading } = state;
+
   return (
     <OpenView>
       <SideText>
@@ -108,16 +127,31 @@ function OpenViewFormSection() {
           Investir nunca foi tão fácil!
         </p>
       </SideText>
-      <FormBox>
+      <FormContainer>
         <h4>
           Comece a calcular
         </h4>
         <h6>
           É online, rápido e 100% grátis
         </h6>
-        <FormFields />
+        <FormLogin
+          isRegister
+        >
+          <SubmitButton type="submit">
+            {
+                      loading
+                        ? (
+                          <>
+                            <Loading />
+                          </>
+                        ) : (
+                          'Quero começar'
+                        )
+                  }
+          </SubmitButton>
+        </FormLogin>
         <SecurityEnvironment />
-      </FormBox>
+      </FormContainer>
     </OpenView>
   );
 }

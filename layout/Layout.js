@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Header from '../sections/Header';
 import Notify from '../snnipets/Notify';
 import Modal from '../snnipets/Modal';
-import BendHeader from '../sections/BendHeader';
 import { DataContext } from '../store/GlobalState';
 import Footer from '../sections/Footer';
 
@@ -13,6 +12,12 @@ const SiteContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.mufasaOrange};
+
+  .no-translate{
+    transform: translateY(0) !important;
+    margin: auto;
+    width: 100%;
+  }
 `;
 
 const Main = styled.main`
@@ -40,6 +45,7 @@ function Layout({ children }) {
 
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
+  const [translate, setTranslate] = useState(true);
 
   useEffect(() => {
     // if (Object.keys(auth).length !== 0 &&
@@ -49,11 +55,13 @@ function Layout({ children }) {
     // }
 
     if (pathName.indexOf('/denied-access') !== -1
-    || pathName === '/entrar'
+    || pathName.indexOf('/login') !== -1
     ) {
+      setTranslate(false);
       setShowHeader(false);
       setShowFooter(false);
     } else {
+      setTranslate(true);
       setShowHeader(true);
       setShowFooter(true);
     }
@@ -84,7 +92,7 @@ function Layout({ children }) {
 
       <Modal />
 
-      <Main>
+      <Main className={translate ? '' : 'no-translate'}>
         {children}
       </Main>
 

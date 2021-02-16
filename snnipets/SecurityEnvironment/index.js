@@ -9,6 +9,7 @@ const SecurityContainer = styled.div`
   align-items: center;
   margin-top: 25px;
   font-weight: bold;
+  justify-content: center;
 
   .security-icon{
     margin-right: 7px;

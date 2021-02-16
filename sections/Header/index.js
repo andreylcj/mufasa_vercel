@@ -193,7 +193,7 @@ function Header() {
         </NavOptions>
 
         <ButtonUnderlineHover
-          href="/entrar"
+          href="/login"
           color="#c95206"
           bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
           hide
@@ -309,7 +309,7 @@ function MobileLinks({
           }
         </ul>
         <ButtonUnderlineHover
-          href="/entrar"
+          href="/login"
           color="#c95206"
           bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
           otherStyles={{ marginLeft: '0' }}
