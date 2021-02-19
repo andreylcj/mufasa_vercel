@@ -79,6 +79,7 @@ const FaceContainer = styled.div`
   justify-content: center;
   align-items: center;
   box-shadow: none;
+  transition: all 0.3s;
 
   &:hover{
       background: rgba(0 0 0 / 10%);
