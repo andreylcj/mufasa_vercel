@@ -174,7 +174,7 @@ function Login() {
   }, []);
 
   const router = useRouter();
-  const { pathname, query } = router;
+  const { query } = router;
 
   useEffect(() => {
     if (query['criar-conta'] === '') {
@@ -220,7 +220,7 @@ function Login() {
           <GoogleLog />
           <Facebooke />
           <BottomText>
-            <Link href="#">
+            <Link href="/login">
               <a>
                 Esqueci minha senha
                 <i
@@ -228,7 +228,7 @@ function Login() {
                 />
               </a>
             </Link>
-            <Link href="?criar-conta">
+            <Link href="/login?criar-conta">
               <a
                 onClick={() => {
                   dispatch({
@@ -275,7 +275,7 @@ function Login() {
           <GoogleLog />
           <Facebooke />
           <BottomText>
-            <Link href="">
+            <Link href="/login">
               <a
                 onClick={() => {
                   dispatch({

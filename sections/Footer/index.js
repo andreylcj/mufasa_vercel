@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 const FooterContainer = styled.footer`
   background-color: #0e0e0e;
-  -webkit-transform: translateY(64px);
-  -ms-transform: translateY(64px);
-  transform: translateY(64px);
+  /*-webkit-transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.general});
+  -ms-transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.general});
+  transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.general});*/
   will-change: transform;
   text-align: center;
   display: grid;
@@ -18,17 +18,14 @@ const FooterContainer = styled.footer`
   line-height: 1rem;
   
   @media screen and (min-width: 768px) {
-    -webkit-transform: translateY(64px);
-    -ms-transform: translateY(64px);
-    transform: translateY(64px);
     grid-template-columns: repeat(2, 1fr);
     padding: 5vh 10vw;
   }
   
   @media screen and (min-width: 1024px){
-    -webkit-transform: translateY(80px);
-    -ms-transform: translateY(80px);
-    transform: translateY(80px);
+    /*-webkit-transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.minWidth1024});
+    -ms-transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.minWidth1024});
+    transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.minWidth1024});*/
 
     -webkit-box-align: center;
     align-items: center;

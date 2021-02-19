@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import Cookie from 'js-cookie';
+import { useRouter } from 'next/router';
 import { DataContext } from '../../store/GlobalState';
 import { ACTION } from '../../store/Actions';
 
@@ -60,6 +61,12 @@ function Home() {
     );
   };
 
+  const router = useRouter();
+
+  useEffect(() => {
+    // if (Object.keys(auth).length === 0) router.push('/');
+  }, [auth]);
+
   return (
     <div className="d-flex flex-column">
       <p>HOME</p>
@@ -77,7 +84,6 @@ function Home() {
             }
 
     </div>
-
   );
 }
 

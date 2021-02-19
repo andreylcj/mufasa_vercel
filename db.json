@@ -6,6 +6,7 @@
             "verySoftMufasaOrange": "#f3d8c8",
             "darkMufasaOrange": "#a2450a",
             "veryDarkMufasaOrange": "#7d3506",
+            "opaqueOrange": "#FFC58E",
             "fullBlack": "#000000",
             "fullWhite": "#ffffff",
             "lightGrayBg": "#ECECEC",
@@ -30,6 +31,24 @@
         },
         "textFonts": {
             "fontAwe": "Font Awesome 5 Free"
+        },
+        "measuresPatterns":{
+            "header":{
+                "height":{
+                    "minWidth1024": "80px",
+                    "general": "64px"
+                }
+            },
+            "subNav":{
+                "height":{
+                    "general": "50px"
+                }
+            },
+            "timeSelectBar":{
+                "height":{
+                    "general": "45px"
+                }
+            }    
         }
     }
 }

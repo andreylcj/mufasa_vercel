@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { DataContext } from '../../store/GlobalState';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
+import SubNavWalletOptions from '../../snnipets/SubNavWalletOptions';
+import TimeOptionBar from '../../snnipets/TimeOptionBar';
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -20,10 +23,6 @@ const HeaderContainer = styled.header`
       display: none;
     }
   }
-
-  @media screen and (min-width: 1024px){
-    height: 80px;
-  }
 `;
 
 const Nav = styled.nav`
@@ -32,7 +31,7 @@ const Nav = styled.nav`
   align-items: center;
   position: relative;
   background-color: rgb(255, 255, 255);
-  height: 64px;
+  height: ${({ theme }) => theme.measuresPatterns.header.height.general};
   padding: 0px 1rem;
   box-shadow: rgb(0 0 0 / 15%) 0px 1px 2px;
   will-change: transform;
@@ -44,7 +43,7 @@ const Nav = styled.nav`
   }
 
   @media screen and (min-width: 1024px){
-    height: 80px;
+    height: ${({ theme }) => theme.measuresPatterns.header.height.minWidth1024};
   }
   @media screen and (min-width: 768px){
     padding: 0px 2rem;
@@ -73,6 +72,10 @@ const LogoContainer = styled.div`
 const NavOptions = styled.div`
   margin-left: 20px;
   flex-grow: 1;
+  
+  @media (min-width: 768px){
+    height: 100%;
+  }  
 
   ul{
     list-style: none;
@@ -80,6 +83,18 @@ const NavOptions = styled.div`
     padding: 0;
     white-space: nowrap;
     display: flex;
+
+    @media (min-width: 768px){
+      height: 100%;
+    }  
+
+    li{
+      @media (min-width: 768px){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }  
+    }
 
     a{
       text-decoration: none;
@@ -94,11 +109,15 @@ const NavOptions = styled.div`
       }   
     }
 
-    .selected-nav{
-      color: #c95206;
+    .selected-nav-li{
+      border-top: 5px solid ${({ theme }) => theme.colors.mufasaOrange};
     }
 
-    a.selected-nav:hover{
+    .selected-nav-a{
+      color: ${({ theme }) => theme.colors.mufasaOrange};
+    }
+
+    a.selected-nav-a:hover{
       color: #c95206;
     }
 
@@ -111,6 +130,8 @@ const NavOptions = styled.div`
 function Header() {
   const router = useRouter();
   const pathName = router.pathname;
+  const [state, dispatch] = useContext(DataContext);
+  const { auth } = state;
 
   const lpHeader = [
     {
@@ -154,29 +175,47 @@ function Header() {
           href: '/bend-admin/users',
         },
       ]);
+    } else if (
+      // Object.keys(auth).length !== 0
+    // && pathName.indexOf('bend-admin') === -1
+      pathName !== '/'
+    ) {
+      setNavTitles([
+        {
+          title: 'Carteira',
+          href: '/carteira',
+        },
+        {
+          title: 'Imposto de Renda',
+          href: '/imposto-de-renda',
+        },
+      ]);
+    } else {
+      setNavTitles(lpHeader);
     }
-  }, [pathName]);
+  }, [pathName, auth]);
 
   const handleClickToShowMobileMenu = () => {
     setShowMobile(!showMobile);
   };
 
   return (
-    <HeaderContainer>
-      <Nav>
-        <LogoContainer>
-          <Link href="/">
-            <a>
-              <img src="/images/logo/icon.png" alt="Logo Mufasa" />
-            </a>
-          </Link>
-        </LogoContainer>
+    <>
+      <HeaderContainer>
+        <Nav>
+          <LogoContainer>
+            <Link href="/">
+              <a>
+                <img src="/images/logo/icon.png" alt="Logo Mufasa" />
+              </a>
+            </Link>
+          </LogoContainer>
 
-        <NavOptions
-          className="hide"
-        >
-          <ul>
-            {
+          <NavOptions
+            className="hide"
+          >
+            <ul>
+              {
             navTitles.map((navTitle, index) => {
               const navTitleId = `navTitle__${index}`;
               return (
@@ -189,31 +228,34 @@ function Header() {
               );
             })
           }
-          </ul>
-        </NavOptions>
+            </ul>
+          </NavOptions>
 
-        <ButtonUnderlineHover
-          href="/login"
-          color="#c95206"
-          bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
-          hide
-        >
-          Login
-          <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
-        </ButtonUnderlineHover>
+          <ButtonUnderlineHover
+            href="/login"
+            color="#c95206"
+            bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
+            hide
+          >
+            Login
+            <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
+          </ButtonUnderlineHover>
 
-        <MobileLinks
-          showMobile={showMobile}
-          navTitles={navTitles}
-          pathName={pathName}
-          onClick={handleClickToShowMobileMenu}
-        />
+          <MobileLinks
+            showMobile={showMobile}
+            navTitles={navTitles}
+            pathName={pathName}
+            onClick={handleClickToShowMobileMenu}
+          />
 
-        <ButtonShowMenu onClick={handleClickToShowMobileMenu} showMobile={showMobile} />
+          <ButtonShowMenu onClick={handleClickToShowMobileMenu} showMobile={showMobile} />
 
-      </Nav>
+        </Nav>
 
-    </HeaderContainer>
+      </HeaderContainer>
+      <SubNavWalletOptions />
+      <TimeOptionBar />
+    </>
   );
 }
 
@@ -325,9 +367,13 @@ function MobileLinks({
 
 function NavTitle({ title, href, pathName }) {
   return (
-    <li>
+    <li
+      className={`${pathName === href ? 'selected-nav-li' : ''}`}
+    >
       <Link href={href}>
-        <a className={`${pathName === href ? 'selected-nav' : ''}`}>
+        <a
+          className={`${pathName === href ? 'selected-nav-a' : ''}`}
+        >
           {title}
         </a>
       </Link>

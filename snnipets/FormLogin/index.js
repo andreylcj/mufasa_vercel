@@ -58,7 +58,7 @@ function FormLogin({
     e.preventDefault();
 
     if (!isRegister) {
-      alert('parte de login ainda esta em desenvolvimento');
+      router.push('/carteira?rentabilidade');
       return;
     }
 
