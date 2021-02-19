@@ -11,17 +11,17 @@ const BgImage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  background-image: url('/images/landingPage/Man_Paying.png');
+  background-image: url('/images/landingPage/orange_man.jpg');
   min-height: calc(100vh - 80px);
   max-height: calc(100vh - 80px);
   display: flex;
   transform: scale(1.1); 
-  filter: blur(3px);
-  -webkit-filter: blur(3px);
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
 `;
 
 const Bg = styled.div`
-  background-color: rgba(265,265,265,0.3);
+  background-color: rgba(0 0 0 / 40%);
   width: 100%;
 `;
 
@@ -43,13 +43,13 @@ const Text = styled.div`
   }
 
   h3{
-    color: ${({ theme }) => theme.colors.mufasaOrange};
+    color: #E49447;
     font-weight: 500;
     font-size: 3rem;
   }
 
   p{
-    color: ${({ theme }) => theme.colors.fullBlack};
+    color: #fff;
     max-width: 20rem;
     font-size: 1.5rem;
   }
@@ -74,8 +74,8 @@ function AutomaticPayment() {
         </p>
         <ButtonUnderlineHover
           href="/entrar"
-          color="#C95206"
-          bg="linear-gradient(120deg, #C95206 0%, #C95206 100%)"
+          color="#E49447"
+          bg="linear-gradient(120deg, #E49447 0%, #E49447 100%)"
           otherStyles={{
             margin: '20px auto 0 0',
             fontSize: '1.125rem',

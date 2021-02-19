@@ -1,89 +1,66 @@
 import React, { useContext, useEffect } from 'react';
-import Link from 'next/link';
-import Cookie from 'js-cookie';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { DataContext } from '../../store/GlobalState';
-import { ACTION } from '../../store/Actions';
+
+const GraphContainer = styled.div`
+  min-height: calc(100vh 
+  - ${({ theme }) => theme.measuresPatterns.header.height.general}
+  - ${({ theme }) => theme.measuresPatterns.subNav.height.general}
+  - ${({ theme }) => theme.measuresPatterns.timeSelectBar.height.general}
+  );
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+`;
+
+GraphContainer.Bg = styled.div`
+  border-radius: 20px;
+  background: #fff;
+  width: 80vw;
+  height: 70vh;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+
+  @media(min-width: 1024px){
+    width: 65vw;
+  }
+
+`;
 
 function Home() {
   const [state, dispatch] = useContext(DataContext);
   const { auth } = state;
 
-  const handleLogout = () => {
-    Cookie.remove('refreshToken', { path: '/api/auth/accessToken' });
-    localStorage.removeItem('firstLogin');
-    dispatch({
-      type: ACTION.AUTH,
-      payload: {},
-    });
-  };
-
-  const loggedRouter = () => {
-    const email = auth.user ? auth.user.email : '';
-    const role = auth.user ? auth.user.role : '';
-    return (
-      <>
-        <div className="m-1 d-flex flex-column align-items-center">
-          <p>
-            Bem vindo,
-            {email}
-          </p>
-          <p>
-            Você é um
-            {role}
-          </p>
-          <Link href="/CEI">
-            <a>CEI</a>
-          </Link>
-          {
-            auth.user && auth.user.admin
-              ? (
-                <>
-                  <Link href="/bend-admin/home">
-                    <a>Área de administrador</a>
-                  </Link>
-                </>
-              ) : (
-                <Link href="/profile/home">
-                  <a>Área do Usuário</a>
-                </Link>
-              )
-          }
-          <button
-            type="submit"
-            onClick={handleLogout}
-            className="my-2"
-          >
-            Logout
-          </button>
-        </div>
-      </>
-    );
-  };
-
   const router = useRouter();
+  const { pathname, query } = router;
 
+  // push to /carteira?rentabilidade if has no query
+  const initialQuery = {
+    opcao: 'rentabilidade',
+    periodo: 'no-mes',
+  };
   useEffect(() => {
-    // if (Object.keys(auth).length === 0) router.push('/');
-  }, [auth]);
+    if ((Object.keys(query).length < 2) && pathname === '/carteira') {
+      router.push({
+        pathname,
+        query: {
+          ...initialQuery,
+          ...query,
+        },
+      });
+    }
+  }, [query]);
 
   return (
-    <div className="d-flex flex-column">
-      <p>HOME</p>
-
-      {
-                Object.keys(auth).length === 0
-                  ? (
-                    <>
-                      <Link href="/entrar"><a>Entrar</a></Link>
-                      <Link href="/registrar"><a>Registrar</a></Link>
-                    </>
-                  ) : (
-                    loggedRouter()
-                  )
-            }
-
-    </div>
+    <GraphContainer>
+      <GraphContainer.Bg>
+        <p>Gráfico...</p>
+      </GraphContainer.Bg>
+    </GraphContainer>
   );
 }
 

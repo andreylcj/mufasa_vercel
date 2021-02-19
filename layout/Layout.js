@@ -23,16 +23,18 @@ const SiteContainer = styled.div`
     width: 100%;
   }
 
-  .translate-sub-nav{
+  .translate-wallet-page{
     transform: translateY(calc(
       ${theme.measuresPatterns.header.height.general}
       + ${theme.measuresPatterns.subNav.height.general}
+      + ${theme.measuresPatterns.timeSelectBar.height.general}
       ));
   
     @media screen and (min-width: 1024px){
       transform: translateY(calc(
         ${theme.measuresPatterns.header.height.minWidth1024}
       + ${theme.measuresPatterns.subNav.height.general}
+      + ${theme.measuresPatterns.timeSelectBar.height.general}
       ))
     }
   }
@@ -90,7 +92,7 @@ function Layout({ children }) {
       <Modal />
 
       <Main
-        className={`${translate ? '' : 'no-translate'} ${translateSubNav ? 'translate-sub-nav' : ''}`}
+        className={`${translate ? '' : 'no-translate'} ${translateSubNav ? 'translate-wallet-page' : ''}`}
       >
         {children}
         {

@@ -8,7 +8,7 @@ const SecContainer = styled.div`
 `;
 
 const ImageBg = styled.div`
-  background-image: url("/images/aboutus/Lion_Laid.png");
+  background-image: url("/images/aboutus/Lion_Laid.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   min-height: calc(100vh - 80px);

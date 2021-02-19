@@ -1,25 +1,12 @@
 import React, {
-  useState, useRef, useEffect, useLayoutEffect,
+  useState, useRef, useEffect,
 } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
-    }
-    window.addEventListener('resize', updateSize);
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-}
+import useWindowSize from '../../assets/utils/GetWindowDimensions';
 
 const SubHeaderContainer = styled.div`
-  background: linear-gradient(120deg, rgba(227,102,20,1) 0%, rgba(239,151,96,1) 86%, rgba(220,139,86,1) 100%);
+  background: ${({ theme }) => theme.measuresPatterns.subNav.background};
   position: fixed;
   left: 0px;
   right: 0px;
@@ -29,6 +16,7 @@ const SubHeaderContainer = styled.div`
   font-weight: 500;
   font-size: 1rem;
   height: ${({ theme }) => theme.measuresPatterns.subNav.height.general};
+  box-shadow: rgb(0 0 0 / 15%) 0px 1px 2px;
 
   @media screen and (min-width: 1024px){
     top:  ${({ theme }) => theme.measuresPatterns.header.height.minWidth1024};
@@ -62,34 +50,44 @@ function SubNavWalletOptions() {
   const subNavOptions = [
     {
       title: 'Rentabilidade',
-      href: '/carteira?rentabilidade',
+      href: '/carteira',
+      query: {
+        opcao: 'rentabilidade',
+      },
     },
     {
       title: 'Posições',
-      href: '/carteira?posicoes',
+      href: '/carteira',
+      query: {
+        opcao: 'posicoes',
+      },
     },
     {
-      title: 'Posições',
-      href: '/carteira?posicoes',
+      title: 'Posições1',
+      href: '/carteira',
+      query: {
+        opcao: 'posicoes1',
+      },
     },
     {
-      title: 'Posições',
-      href: '/carteira?posicoes',
+      title: 'Posições2',
+      href: '/carteira',
+      query: {
+        opcao: 'posicoes2',
+      },
     },
     {
-      title: 'Posições',
-      href: '/carteira?posicoes',
+      title: 'Posições3',
+      href: '/carteira',
+      query: {
+        opcao: 'posicoes3',
+      },
     },
 
   ];
 
   const router = useRouter();
   const { pathname, query } = router;
-
-  // push to /carteira?rentabilidade if has no query
-  useEffect(() => {
-    if ((Object.keys(query).length === 0) && pathname === '/carteira') router.push('/carteira?rentabilidade');
-  }, [query]);
 
   const showSubNav = (pathname === '/carteira');
 
@@ -99,6 +97,39 @@ function SubNavWalletOptions() {
   const [itemsInfo, setItemsInfo] = useState([]);
 
   useEffect(() => {
+    if (itemsInfo.length === 0) return;
+    if (!query.opcao) return;
+
+    let selectedOption = 0;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].query === query.opcao) {
+        selectedOption = itemsInfo[i].elementIndex;
+        break;
+      }
+    }
+
+    let left = 0;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex < selectedOption) {
+        left += itemsInfo[i].elementWidth;
+      }
+    }
+    left += 3;
+    if (selectedOption === 0) left = 3;
+
+    let width;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex === selectedOption) {
+        width = itemsInfo[i].elementWidth - 8;
+        break;
+      }
+    }
+
+    setElementBgLeft(left);
+    setElementBgWidth(width);
+  }, [query, itemsInfo]);
+
+  /* useEffect(() => {
     if (itemsInfo.length === 0) return;
     let left = 0;
     for (let i = 0; i < itemsInfo.length; i++) {
@@ -119,21 +150,9 @@ function SubNavWalletOptions() {
 
     setElementBgLeft(left);
     setElementBgWidth(width);
-  }, [selectedIndex, itemsInfo]);
+  }, [selectedIndex, itemsInfo]); */
 
   const updateItemsInfo = (data) => {
-    // let indexToExclude = -1;
-    /* const check = itemsInfo.filter((item, index) => {
-      const test = (item.elementIndex === data.elementIndex);
-      // indexToExclude = (item.elementIndex === data.elementIndex) ? index : -1;
-      return test;
-    });
-
-     let newArray = itemsInfo.slice();
-    if (indexToExclude >= 0) {
-      newArray = [...newArray.slice(0, indexToExclude),
-        ...newArray.slice(indexToExclude + 1, newArray.length)];
-    } */
     setItemsInfo((prevItemsInfo) => {
       let indexToExclude = -1;
       for (let i = 0; i < prevItemsInfo.length; i++) {
@@ -161,19 +180,26 @@ function SubNavWalletOptions() {
     >
       <ul>
         {
-          subNavOptions.map((suvNavOption, index) => {
+          subNavOptions.map((subNavOption, index) => {
             const subNavId = `suvNavOption__${index}`;
             return (
               <SubNavItem
                 updateParentState={updateItemsInfo}
                 index={index}
                 key={subNavId}
-                href={suvNavOption.href}
-                title={suvNavOption.title}
+                href={subNavOption.href}
+                title={subNavOption.title}
+                query={subNavOption.query.opcao}
                 selectedItem={(selectedIndex === index)}
                 onClick={() => {
                   setSelectedIndex(index);
-                  router.push(suvNavOption.href);
+                  router.push({
+                    pathname: subNavOption.href,
+                    query: {
+                      ...query,
+                      ...subNavOption.query,
+                    },
+                  });
                 }}
               />
             );
@@ -230,29 +256,26 @@ const SubNavItemContainer = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: all 0.15s;
     border-radius: 3px;
     position: relative;
+    cursor: pointer;
   }
 `;
 
 function SubNavItem({
-  href, title, selectedItem, onClick, index, updateParentState,
+  href, title, selectedItem, onClick, index, updateParentState, query,
 }) {
   const [width, height] = useWindowSize();
 
   const ref = useRef(null);
   useEffect(() => {
-    /* console.log(index);
-    console.log(
-      `elementWidth: ${ref.current ? ref.current.offsetWidth : 0}\n`
-      + `elementIndex: ${index}\n`,
-    ); */
     if (!ref.current) return;
     updateParentState(
       {
         elementWidth: ref.current ? ref.current.offsetWidth : 0,
         elementIndex: index,
+        query,
       },
     );
   }, [ref.current, width]);
@@ -261,14 +284,14 @@ function SubNavItem({
     <SubNavItemContainer
       ref={ref}
     >
-      <Link href={href}>
-        <a
-          onClick={onClick}
-          className={selectedItem ? 'selected' : 'no-selected'}
-        >
-          {title}
-        </a>
-      </Link>
+      {/* <Link href={href}> */}
+      <a
+        onClick={onClick}
+        className={selectedItem ? 'selected' : 'no-selected'}
+      >
+        {title}
+      </a>
+      {/* </Link> */}
     </SubNavItemContainer>
   );
 }

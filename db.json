@@ -41,13 +41,15 @@
             },
             "subNav":{
                 "height":{
-                    "general": "50px"
-                }
+                    "general": "45px"
+                },
+                "background": "linear-gradient(120deg, rgba(227,102,20,1) 0%, rgba(239,151,96,1) 86%, rgba(220,139,86,1) 100%)"
             },
             "timeSelectBar":{
                 "height":{
-                    "general": "45px"
-                }
+                    "general": "40px"
+                },
+                "background": "linear-gradient(120deg, rgba(255,197,142,1) 0%, rgba(231,173,119,1) 86%, rgba(250,174,102,1) 100%)"
             }    
         }
     }

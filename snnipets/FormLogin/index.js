@@ -58,7 +58,7 @@ function FormLogin({
     e.preventDefault();
 
     if (!isRegister) {
-      router.push('/carteira?rentabilidade');
+      router.push('/carteira?opcao=rentabilidade&periodo=no-mes');
       return;
     }
 

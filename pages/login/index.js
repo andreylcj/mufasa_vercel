@@ -64,8 +64,8 @@ h4{
 const Scene = styled.div`
   max-width: 350px;
   perspective: 1400px;
-  margin: 8vh auto;
-  height:600px;
+  margin: 3vh auto;
+  height:650px;
 
   .is-flipped{
     transform: rotateY(180deg);
@@ -74,7 +74,7 @@ const Scene = styled.div`
   @media (min-width: 768px){
     min-width: 400px;
     max-width: 450px;
-    height:600px;
+    /*height:600px;*/
   }
 `;
 
@@ -217,6 +217,7 @@ function Login() {
                   }
             </SubmitButton>
           </FormLogin>
+          <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
           <GoogleLog />
           <Facebooke />
           <BottomText>
@@ -272,6 +273,7 @@ function Login() {
                   }
             </SubmitButton>
           </FormLogin>
+          <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
           <GoogleLog />
           <Facebooke />
           <BottomText>

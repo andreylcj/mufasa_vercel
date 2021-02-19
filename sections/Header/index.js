@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useRef, useEffect, useContext,
+} from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,6 +8,7 @@ import { DataContext } from '../../store/GlobalState';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
 import SubNavWalletOptions from '../../snnipets/SubNavWalletOptions';
 import TimeOptionBar from '../../snnipets/TimeOptionBar';
+import useWindowSize from '../../assets/utils/GetWindowDimensions';
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -83,6 +86,7 @@ const NavOptions = styled.div`
     padding: 0;
     white-space: nowrap;
     display: flex;
+    position: relative;
 
     @media (min-width: 768px){
       height: 100%;
@@ -110,7 +114,7 @@ const NavOptions = styled.div`
     }
 
     .selected-nav-li{
-      border-top: 5px solid ${({ theme }) => theme.colors.mufasaOrange};
+      /*border-top: 5px solid ${({ theme }) => theme.colors.mufasaOrange};*/
     }
 
     .selected-nav-a{
@@ -125,6 +129,15 @@ const NavOptions = styled.div`
       color: #fda46b;
     }
   }
+`;
+
+NavOptions.ItemBg = styled.div`
+  position: absolute;
+  top: 0;
+  height: 5px;
+  background: ${({ theme }) => theme.colors.mufasaOrange};
+  pointer-events: none;
+  transition: all ease-out 0.25s;
 `;
 
 function Header() {
@@ -158,45 +171,132 @@ function Header() {
 
   const [navTitles, setNavTitles] = useState(lpHeader);
   const [showMobile, setShowMobile] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [elementBgLeft, setElementBgLeft] = useState(3);
+  const [elementBgWidth, setElementBgWidth] = useState(0);
+  const [itemsInfo, setItemsInfo] = useState([]);
+
+  const [pageTitle, setPageTitle] = useState('');
 
   useEffect(() => {
     if (pathName.indexOf('bend-admin') !== -1) {
-      setNavTitles([
-        {
-          title: 'Website',
-          href: '/',
-        },
-        {
-          title: 'My Profile',
-          href: '/bend-admin/profile',
-        },
-        {
-          title: 'Users',
-          href: '/bend-admin/users',
-        },
-      ]);
+      if (pageTitle.indexOf('bend-admin') !== -1) {
+        setPageTitle('bend-admin');
+        setItemsInfo((previous) => ([]));
+
+        setNavTitles([
+          {
+            title: 'Website',
+            href: '/',
+          },
+          {
+            title: 'My Profile',
+            href: '/bend-admin/profile',
+          },
+          {
+            title: 'Users',
+            href: '/bend-admin/users',
+          },
+        ]);
+      }
     } else if (
       // Object.keys(auth).length !== 0
     // && pathName.indexOf('bend-admin') === -1
-      pathName !== '/'
+      pathName === '/carteira' || pathName === '/imposto-de-renda'
     ) {
-      setNavTitles([
-        {
-          title: 'Carteira',
-          href: '/carteira',
-        },
-        {
-          title: 'Imposto de Renda',
-          href: '/imposto-de-renda',
-        },
-      ]);
-    } else {
+      if (pageTitle !== 'afterLogin') {
+        setPageTitle('afterLogin');
+        setItemsInfo((previous) => ([]));
+
+        setNavTitles([
+          {
+            title: 'Carteira',
+            href: '/carteira',
+          },
+          {
+            title: 'Imposto de Renda',
+            href: '/imposto-de-renda',
+          },
+        ]);
+      }
+    } else if (pageTitle !== 'ladingPage') {
+      setPageTitle('ladingPage');
       setNavTitles(lpHeader);
     }
-  }, [pathName, auth]);
+  }, [pathName]);
 
   const handleClickToShowMobileMenu = () => {
     setShowMobile(!showMobile);
+  };
+
+  useEffect(() => {
+    if (itemsInfo.length === 0) return;
+
+    let selectedOption = 0;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].href === pathName) {
+        selectedOption = i;
+        break;
+      }
+    }
+
+    let left = 0;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex < selectedOption) {
+        left += itemsInfo[i].elementWidth;
+      }
+    }
+
+    let width;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex === selectedOption) {
+        width = itemsInfo[selectedOption].elementWidth;
+        break;
+      }
+    }
+
+    setElementBgLeft(left);
+    setElementBgWidth(width);
+  }, [pathName, itemsInfo]);
+
+  /* useEffect(() => {
+    if (itemsInfo.length === 0) return;
+    let left = 0;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex < selectedIndex) {
+        left += itemsInfo[i].elementWidth;
+      }
+    }
+
+    let width;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex === selectedIndex) {
+        width = itemsInfo[i].elementWidth;
+        break;
+      }
+    }
+
+    setElementBgLeft(left);
+    setElementBgWidth(width);
+  }, [selectedIndex, itemsInfo]); */
+
+  const updateItemsInfo = (data) => {
+    setItemsInfo((prevItemsInfo) => {
+      let indexToExclude = -1;
+      for (let i = 0; i < prevItemsInfo.length; i++) {
+        if ((prevItemsInfo[i].elementIndex === data.elementIndex)) {
+          indexToExclude = i;
+          break;
+        }
+      }
+
+      let newArray = prevItemsInfo.slice();
+      if (indexToExclude >= 0) {
+        newArray = [...newArray.slice(0, indexToExclude),
+          ...newArray.slice(indexToExclude + 1, newArray.length)];
+      }
+      return ([...newArray, data]);
+    });
   };
 
   return (
@@ -220,14 +320,25 @@ function Header() {
               const navTitleId = `navTitle__${index}`;
               return (
                 <NavTitle
+                  updateParentState={updateItemsInfo}
+                  index={index}
                   title={navTitle.title}
                   href={navTitle.href}
                   pathName={pathName}
                   key={navTitleId}
+                  onClick={() => {
+                    setSelectedIndex(index);
+                  }}
                 />
               );
             })
           }
+              <NavOptions.ItemBg
+                style={{
+                  width: elementBgWidth,
+                  left: elementBgLeft,
+                }}
+              />
             </ul>
           </NavOptions>
 
@@ -365,14 +476,32 @@ function MobileLinks({
   );
 }
 
-function NavTitle({ title, href, pathName }) {
+function NavTitle({
+  title, href, pathName, index, updateParentState, onClick,
+}) {
+  const [width, height] = useWindowSize();
+
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    updateParentState(
+      {
+        elementWidth: ref.current ? ref.current.offsetWidth : 0,
+        elementIndex: index,
+        href,
+      },
+    );
+  }, [ref.current, width]);
+
   return (
     <li
       className={`${pathName === href ? 'selected-nav-li' : ''}`}
+      ref={ref}
     >
       <Link href={href}>
         <a
           className={`${pathName === href ? 'selected-nav-a' : ''}`}
+          onClick={onClick}
         >
           {title}
         </a>
