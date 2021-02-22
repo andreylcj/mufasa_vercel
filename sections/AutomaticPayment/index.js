@@ -3,21 +3,29 @@ import styled from 'styled-components';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
 
 const SectionContainer = styled.div`
- overflow: hidden;
- position: relative;
+  min-height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
+  overflow: hidden;
+  position: relative;
 `;
 
 const BgImage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  background-image: url('/images/landingPage/orange_man.jpg');
+  background-image: url('/images/landingPage/OrangeShirtDudeED.webp');
   min-height: calc(100vh - 80px);
   max-height: calc(100vh - 80px);
   display: flex;
-  transform: scale(1.1); 
+  /*transform: scale(1.1); 
   filter: blur(2px);
-  -webkit-filter: blur(2px);
+  -webkit-filter: blur(2px);*/
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
 `;
 
 const Bg = styled.div`
@@ -34,10 +42,8 @@ const Text = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding: 10vh 0 0 10vw;
   height: 100%;
-  position: absolute;
-  top: 20%;
-  left: 10%;
 
   @media (min-width: 1024px) {
   }

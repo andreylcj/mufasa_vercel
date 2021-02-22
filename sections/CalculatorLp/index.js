@@ -112,7 +112,7 @@ function CalculatorLp() {
         </ButtonUnderlineHover>
       </SideText>
       <ImgContainer>
-        <img src="/images/landingPage/handsHoldingCalculator.png" alt="Acompanhamento de Carteira" />
+        <img src="/images/landingPage/Calculator.webp" alt="Acompanhamento de Carteira" />
       </ImgContainer>
     </SectionContainer>
   );

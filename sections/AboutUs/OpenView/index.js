@@ -8,13 +8,13 @@ const SecContainer = styled.div`
 `;
 
 const ImageBg = styled.div`
-  background-image: url("/images/aboutus/Lion_Laid.jpg");
+  background-image: url("/images/aboutus/Lion Laid.webp");
   background-size: cover;
   background-repeat: no-repeat;
   min-height: calc(100vh - 80px);
   transform: scale(1.1); 
-  filter: blur(6px);
-  -webkit-filter: blur(6px);
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
   z-index: -1;
   width: 100%;
   height: 100%;

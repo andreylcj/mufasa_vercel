@@ -142,7 +142,7 @@ NavOptions.ItemBg = styled.div`
 
 function Header() {
   const router = useRouter();
-  const pathName = router.pathname;
+  const { pathname, query } = router;
   const [state, dispatch] = useContext(DataContext);
   const { auth } = state;
 
@@ -150,22 +150,30 @@ function Header() {
     {
       title: 'Início',
       href: '/',
+      query: { },
     },
     {
       title: 'Produtos',
-      href: '/produtos',
+      href: '/sobre-nos',
+      query: {
+        scroll: '',
+      },
+      scroll: '#produtos',
     },
     {
       title: 'Sobre Nós',
       href: '/sobre-nos',
+      query: { },
     },
     {
       title: 'Contato',
       href: '/contato',
+      query: { },
     },
     {
       title: 'Conteúdo',
       href: '/conteudo',
+      query: { },
     },
   ];
 
@@ -179,7 +187,7 @@ function Header() {
   const [pageTitle, setPageTitle] = useState('');
 
   useEffect(() => {
-    if (pathName.indexOf('bend-admin') !== -1) {
+    if (pathname.indexOf('bend-admin') !== -1) {
       if (pageTitle.indexOf('bend-admin') !== -1) {
         setPageTitle('bend-admin');
         setItemsInfo((previous) => ([]));
@@ -188,21 +196,24 @@ function Header() {
           {
             title: 'Website',
             href: '/',
+            query: { },
           },
           {
             title: 'My Profile',
             href: '/bend-admin/profile',
+            query: { },
           },
           {
             title: 'Users',
             href: '/bend-admin/users',
+            query: { },
           },
         ]);
       }
     } else if (
       // Object.keys(auth).length !== 0
-    // && pathName.indexOf('bend-admin') === -1
-      pathName === '/carteira' || pathName === '/imposto-de-renda'
+    // && pathname.indexOf('bend-admin') === -1
+      pathname === '/carteira' || pathname === '/imposto-de-renda'
     ) {
       if (pageTitle !== 'afterLogin') {
         setPageTitle('afterLogin');
@@ -212,18 +223,21 @@ function Header() {
           {
             title: 'Carteira',
             href: '/carteira',
+            query: { },
           },
           {
             title: 'Imposto de Renda',
             href: '/imposto-de-renda',
+            query: { },
           },
         ]);
       }
-    } else if (pageTitle !== 'ladingPage') {
-      setPageTitle('ladingPage');
+    } else if (pageTitle !== 'landingPage') {
+      setItemsInfo((previous) => ([]));
+      setPageTitle('landingPage');
       setNavTitles(lpHeader);
     }
-  }, [pathName]);
+  }, [pathname]);
 
   const handleClickToShowMobileMenu = () => {
     setShowMobile(!showMobile);
@@ -234,7 +248,9 @@ function Header() {
 
     let selectedOption = 0;
     for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].href === pathName) {
+      if (itemsInfo[i].href === pathname
+      && Object.keys(itemsInfo[i].query).length === Object.keys(query).length
+      ) {
         selectedOption = i;
         break;
       }
@@ -257,7 +273,7 @@ function Header() {
 
     setElementBgLeft(left);
     setElementBgWidth(width);
-  }, [pathName, itemsInfo]);
+  }, [pathname, itemsInfo]);
 
   /* useEffect(() => {
     if (itemsInfo.length === 0) return;
@@ -317,15 +333,17 @@ function Header() {
             <ul>
               {
             navTitles.map((navTitle, index) => {
-              const navTitleId = `navTitle__${index}`;
+              const navTitleId = `navTitle__${navTitle.href}_${index}`;
               return (
                 <NavTitle
                   updateParentState={updateItemsInfo}
                   index={index}
                   title={navTitle.title}
                   href={navTitle.href}
-                  pathName={pathName}
+                  pathname={pathname}
                   key={navTitleId}
+                  item={navTitle}
+                  query={query}
                   onClick={() => {
                     setSelectedIndex(index);
                   }}
@@ -355,7 +373,7 @@ function Header() {
           <MobileLinks
             showMobile={showMobile}
             navTitles={navTitles}
-            pathName={pathName}
+            pathname={pathname}
             onClick={handleClickToShowMobileMenu}
           />
 
@@ -429,7 +447,7 @@ const ContainerMobileLinks = styled.div`
 `;
 
 function MobileLinks({
-  showMobile, navTitles, pathName, onClick,
+  showMobile, navTitles, pathname, onClick,
 }) {
   const styleMobile = showMobile ? 'translateY(0)' : 'translateY(-100vh)';
   return (
@@ -442,7 +460,7 @@ function MobileLinks({
         <ul style={{ display: 'inherit' }}>
           {
             navTitles.map((navTitle, index) => {
-              const navTitleId = `navTitle__${index}`;
+              const navTitleId = `navTitle__${navTitle.href}_${index}`;
               return (
                 <li
                   key={navTitleId}
@@ -450,7 +468,7 @@ function MobileLinks({
                 >
                   <Link href={navTitle.href}>
                     <a
-                      className={pathName === navTitle.href ? 'selected-nav' : ''}
+                      className={pathname === navTitle.href ? 'selected-nav' : ''}
                       onClick={onClick}
                     >
                       {navTitle.title}
@@ -477,7 +495,7 @@ function MobileLinks({
 }
 
 function NavTitle({
-  title, href, pathName, index, updateParentState, onClick,
+  title, href, pathname, index, updateParentState, onClick, item, query,
 }) {
   const [width, height] = useWindowSize();
 
@@ -489,18 +507,23 @@ function NavTitle({
         elementWidth: ref.current ? ref.current.offsetWidth : 0,
         elementIndex: index,
         href,
+        query: item.query.scroll === '' ? { scroll: '' } : {},
       },
     );
-  }, [ref.current, width]);
+  }, [ref.current, width, query]);
+
+  const destUrl = `${href}${(item.query.scroll === '') ? '?scroll' : ''}${item.scroll || ''}`;
 
   return (
     <li
-      className={`${pathName === href ? 'selected-nav-li' : ''}`}
+      className={`${(pathname === href
+      && Object.keys(item.query).length === Object.keys(query).length) ? 'selected-nav-li' : ''}`}
       ref={ref}
     >
-      <Link href={href}>
+      <Link href={destUrl}>
         <a
-          className={`${pathName === href ? 'selected-nav-a' : ''}`}
+          className={`${(pathname === href
+      && Object.keys(item.query).length === Object.keys(query).length) ? 'selected-nav-a' : ''}`}
           onClick={onClick}
         >
           {title}

@@ -6,11 +6,8 @@ const SectionContainer = styled.div`
   min-height: calc(100vh - 80px);
   max-height: calc(100vh - 80px);
   display: grid;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-image: url('/images/landingPage/Darf3DCut.png');
-
+  overflow: hidden;
+  position: relative;
 `;
 
 const Bg = styled.div`
@@ -55,10 +52,30 @@ const Text = styled.div`
   }
 `;
 
+const BgImage = styled.div`
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: url('/images/landingPage/Darf3D.webp');
+  min-height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
+  display: flex;
+  transform: scale(1.1); 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+`;
+
 function DarfLp() {
   return (
     <SectionContainer>
-      <Bg>
+      <BgImage>
+        <Bg />
+      </BgImage>
+      <div>
         <Text>
           <h3>
             DARF
@@ -83,7 +100,7 @@ function DarfLp() {
             <i className="fas fa-arrow-right" style={{ marginLeft: '10px' }} />
           </ButtonUnderlineHover>
         </Text>
-      </Bg>
+      </div>
     </SectionContainer>
   );
 }

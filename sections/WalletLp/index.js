@@ -105,7 +105,7 @@ function WalletLp() {
         </ButtonUnderlineHover>
       </SideText>
       <ImgContainer>
-        <img src="/images/wallet/wallet_accompaniment.png" alt="Acompanhamento de Carteira" />
+        <img src="/images/landingPage/StocksGoUp.webp" alt="Acompanhamento de Carteira" />
       </ImgContainer>
     </SectionContainer>
   );

@@ -98,7 +98,7 @@ function SubNavWalletOptions() {
 
   useEffect(() => {
     if (itemsInfo.length === 0) return;
-    if (!query.opcao) return;
+    if (!query.periodo) return;
 
     let selectedOption = 0;
     for (let i = 0; i < itemsInfo.length; i++) {
@@ -117,16 +117,16 @@ function SubNavWalletOptions() {
     left += 3;
     if (selectedOption === 0) left = 3;
 
-    let width;
+    let widthTemp;
     for (let i = 0; i < itemsInfo.length; i++) {
       if (itemsInfo[i].elementIndex === selectedOption) {
-        width = itemsInfo[i].elementWidth - 8;
+        widthTemp = itemsInfo[i].elementWidth - 8;
         break;
       }
     }
 
     setElementBgLeft(left);
-    setElementBgWidth(width);
+    setElementBgWidth(widthTemp);
   }, [query, itemsInfo]);
 
   /* useEffect(() => {
@@ -181,7 +181,7 @@ function SubNavWalletOptions() {
       <ul>
         {
           subNavOptions.map((subNavOption, index) => {
-            const subNavId = `suvNavOption__${index}`;
+            const subNavId = `subNavOption__${index}`;
             return (
               <SubNavItem
                 updateParentState={updateItemsInfo}

@@ -49,32 +49,32 @@ function OnlyInMufasa() {
     {
       title: 'Automação Total',
       description: 'Mufasa possibilita a automação de todas as etapas ao lidar com Impostos: Desde a obtenção da Movimentação até a efetuação do Pagamento à Receita.',
-      img_src: '/images/icons/lightbulb/LightBulbg.png',
+      img_src: '/images/icons/lightbulb/LightBulbg.webp',
     },
     {
       title: 'Suporte',
       description: 'Suporte exclusivo para solucionar dúvidas ou demandas 24h por dia.',
-      img_src: '/images/icons/support/Supportg.png',
+      img_src: '/images/icons/support/Supportg.webp',
     },
     {
       title: 'Grátis',
       description: 'As principais funções da plataforma estão disponíveis de forma inteiramente gratuita.',
-      img_src: '/images/icons/money/Moneyg.png',
+      img_src: '/images/icons/money/Moneyg.webp',
     },
     {
       title: 'Interface Amigável',
       description: 'Plataforma simples e intuitiva para que seus impostos de renda de investimentos sejam calculados de forma agradável.',
-      img_src: '/images/icons/cellphone/Cellphoneg.png',
+      img_src: '/images/icons/cellphone/Cellphoneg.webp',
     },
     {
       title: 'Multi corretoras',
       description: 'Compatível com todas as corretoras através da integração com o Canal Eletrônico do Investidor.',
-      img_src: '/images/icons/diverse/Diverseg.png',
+      img_src: '/images/icons/diverse/Diverseg.webp',
     },
     {
       title: 'Veloz',
       description: 'Com dados atualizados em tempo real, e sincronização da carteira em tempo recorde, pode-se dizer que Mufasa é ágil como todo leão que se preze.',
-      img_src: '/images/icons/bolt/Boltg.png',
+      img_src: '/images/icons/bolt/Boltg.webp',
     },
   ];
 

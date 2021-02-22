@@ -49,7 +49,6 @@ export default function GoogleLog() {
   }, [auth]); return (
     <GoogleContainer>
       <GoogleLogin
-        disabled={false}
         className="beauty-login-with"
         clientId="563786372572-bbe6ifo4eslnm6710fh6b4ujog0qh0nb.apps.googleusercontent.com"
         buttonText="Continuar com o Google"

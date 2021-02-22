@@ -60,24 +60,28 @@ function TimeOptionBar() {
     },
     {
       title: '6 meses',
+      href: '/carteira',
       query: {
         periodo: '6-meses',
       },
     },
     {
       title: '12 meses',
+      href: '/carteira',
       query: {
         periodo: '12-meses',
       },
     },
     {
       title: '2021',
+      href: '/carteira',
       query: {
         periodo: 'no-ano',
       },
     },
     {
       title: 'Máximo',
+      href: '/carteira',
       query: {
         periodo: 'maximo',
       },
@@ -115,14 +119,14 @@ function TimeOptionBar() {
     let width;
     for (let i = 0; i < itemsInfo.length; i++) {
       if (itemsInfo[i].elementIndex === selectedOption) {
-        width = itemsInfo[i].elementWidth - 6;
+        width = itemsInfo[i].elementWidth - 4;
         break;
       }
     }
 
     setElementBgLeft(left);
     setElementBgWidth(width);
-  }, [query]);
+  }, [query, itemsInfo]);
 
   /* useEffect(() => {
     if (itemsInfo.length === 0) return;
@@ -148,14 +152,22 @@ function TimeOptionBar() {
   }, [selectedIndex, itemsInfo.length]); */
 
   const updateItemsInfo = (data) => {
-    const check = itemsInfo.filter((item) => {
-      const test = (item.elementIndex === data.elementIndex);
-      return test;
-    });
+    setItemsInfo((prevItemsInfo) => {
+      let indexToExclude = -1;
+      for (let i = 0; i < prevItemsInfo.length; i++) {
+        if ((prevItemsInfo[i].elementIndex === data.elementIndex)) {
+          indexToExclude = i;
+          break;
+        }
+      }
 
-    if (check.length === 0) {
-      setItemsInfo((prevItemsInfo) => ([...prevItemsInfo, data]));
-    }
+      let newArray = prevItemsInfo.slice();
+      if (indexToExclude >= 0) {
+        newArray = [...newArray.slice(0, indexToExclude),
+          ...newArray.slice(indexToExclude + 1, newArray.length)];
+      }
+      return ([...newArray, data]);
+    });
   };
 
   return (
@@ -168,10 +180,9 @@ function TimeOptionBar() {
       <ul>
         {
           subNavOptions.map((subNavOption, index) => {
-            const subNavId = `suvNavOption__${index}`;
+            const subNavId = `timeOptionBar__${index}`;
             return (
               <SubNavItem
-                background={`${({ theme }) => theme.measuresPatterns.timeSelectBar.background}`}
                 updateParentState={updateItemsInfo}
                 index={index}
                 key={subNavId}
@@ -240,7 +251,7 @@ const SubNavItemContainer = styled.li`
     font-weight: 400;
     padding: 0 3.5vw; 
     height: calc(100% - 6px);
-    margin: 0 3px;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
