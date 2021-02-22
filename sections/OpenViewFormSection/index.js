@@ -4,6 +4,8 @@ import Loading from '../../snnipets/Loading';
 import { DataContext } from '../../store/GlobalState';
 import SecurityEnvironment from '../../snnipets/SecurityEnvironment';
 import FormLogin from '../../snnipets/FormLogin';
+import GoogleLog from '../../snnipets/Googlelogin';
+import Facebooke from '../../snnipets/facebooklogin';
 
 const OpenView = styled.div`
 /*background-color: #C95206;
@@ -149,6 +151,9 @@ function OpenViewFormSection() {
                         )
                   }
           </SubmitButton>
+          <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
+          <GoogleLog />
+          <Facebooke />
         </FormLogin>
         <SecurityEnvironment />
       </FormContainer>

@@ -6,10 +6,8 @@ import styled from 'styled-components';
 import { DataContext } from '../../store/GlobalState';
 import { ACTION } from '../../store/Actions';
 import Loading from '../../snnipets/Loading';
-import validLogin from '../../assets/utils/ValidateData/ValidLogin';
-import { getData, postData } from '../../assets/utils/fetchData';
-import Facebooke from '../api/auth/facebooklogin';
-import GoogleLog from '../api/auth/Googlelogin';
+import Facebooke from '../../snnipets/facebooklogin';
+import GoogleLog from '../../snnipets/Googlelogin';
 import FormLogin from '../../snnipets/FormLogin';
 import SecurityEnvironment from '../../snnipets/SecurityEnvironment';
 

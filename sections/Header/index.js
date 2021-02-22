@@ -9,6 +9,7 @@ import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
 import SubNavWalletOptions from '../../snnipets/SubNavWalletOptions';
 import TimeOptionBar from '../../snnipets/TimeOptionBar';
 import useWindowSize from '../../assets/utils/GetWindowDimensions';
+import headerNavTitles from '../../constants';
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -146,38 +147,7 @@ function Header() {
   const [state, dispatch] = useContext(DataContext);
   const { auth } = state;
 
-  const lpHeader = [
-    {
-      title: 'Início',
-      href: '/',
-      query: { },
-    },
-    {
-      title: 'Produtos',
-      href: '/sobre-nos',
-      query: {
-        scroll: '',
-      },
-      scroll: '#produtos',
-    },
-    {
-      title: 'Sobre Nós',
-      href: '/sobre-nos',
-      query: { },
-    },
-    {
-      title: 'Contato',
-      href: '/contato',
-      query: { },
-    },
-    {
-      title: 'Conteúdo',
-      href: '/conteudo',
-      query: { },
-    },
-  ];
-
-  const [navTitles, setNavTitles] = useState(lpHeader);
+  const [navTitles, setNavTitles] = useState(headerNavTitles.landingPage);
   const [showMobile, setShowMobile] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [elementBgLeft, setElementBgLeft] = useState(3);
@@ -192,23 +162,7 @@ function Header() {
         setPageTitle('bend-admin');
         setItemsInfo((previous) => ([]));
 
-        setNavTitles([
-          {
-            title: 'Website',
-            href: '/',
-            query: { },
-          },
-          {
-            title: 'My Profile',
-            href: '/bend-admin/profile',
-            query: { },
-          },
-          {
-            title: 'Users',
-            href: '/bend-admin/users',
-            query: { },
-          },
-        ]);
+        setNavTitles(headerNavTitles.bend);
       }
     } else if (
       // Object.keys(auth).length !== 0
@@ -219,23 +173,12 @@ function Header() {
         setPageTitle('afterLogin');
         setItemsInfo((previous) => ([]));
 
-        setNavTitles([
-          {
-            title: 'Carteira',
-            href: '/carteira',
-            query: { },
-          },
-          {
-            title: 'Imposto de Renda',
-            href: '/imposto-de-renda',
-            query: { },
-          },
-        ]);
+        setNavTitles(headerNavTitles.afterLogin);
       }
     } else if (pageTitle !== 'landingPage') {
       setItemsInfo((previous) => ([]));
       setPageTitle('landingPage');
-      setNavTitles(lpHeader);
+      setNavTitles(headerNavTitles.landingPage);
     }
   }, [pathname]);
 
@@ -274,27 +217,6 @@ function Header() {
     setElementBgLeft(left);
     setElementBgWidth(width);
   }, [pathname, itemsInfo]);
-
-  /* useEffect(() => {
-    if (itemsInfo.length === 0) return;
-    let left = 0;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex < selectedIndex) {
-        left += itemsInfo[i].elementWidth;
-      }
-    }
-
-    let width;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex === selectedIndex) {
-        width = itemsInfo[i].elementWidth;
-        break;
-      }
-    }
-
-    setElementBgLeft(left);
-    setElementBgWidth(width);
-  }, [selectedIndex, itemsInfo]); */
 
   const updateItemsInfo = (data) => {
     setItemsInfo((prevItemsInfo) => {
