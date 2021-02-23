@@ -1,24 +1,24 @@
   # Patterns
 
-- snnipets
+- snnipets:
 	exporta apenas uma funçao
 	styled component deve estar dentro
 	nao por importar nenhum outro snnipet
 
-- sections
+- sections:
 	junçao de snnipets e as vezes de pequenas sections
 	exporta apenas uma funçao
 	nao pode ter styled component dentro
 
-- components
+- components:
 	exporta a constante, que é no caso o elemento
 	geralmente os arquivos seram os elementos que serao usados nas sections
 
-- pages
+- pages:
 	junçao de uma ou mais sections e/ou snnipets
 	pode ter styled components dentro, desde q seja pouco
 
-- assets
+- assets:
 	funçoes ou modelos q serao importados em outros arquivos
 
 Obs:
