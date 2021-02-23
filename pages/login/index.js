@@ -8,7 +8,7 @@ import { ACTION } from '../../store/Actions';
 import Loading from '../../snnipets/Loading';
 import Facebooke from '../../snnipets/facebooklogin';
 import GoogleLog from '../../snnipets/Googlelogin';
-import FormLogin from '../../snnipets/FormLogin';
+import FormLogin from '../../sections/FormLogin';
 import SecurityEnvironment from '../../snnipets/SecurityEnvironment';
 
 const SubmitButton = styled.button` 

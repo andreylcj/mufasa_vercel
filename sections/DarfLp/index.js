@@ -1,82 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import SectionContainer from '../../components/DarfLp';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
-
-const SectionContainer = styled.div`
-  min-height: calc(100vh - 80px);
-  max-height: calc(100vh - 80px);
-  display: grid;
-  overflow: hidden;
-  position: relative;
-`;
-
-const Bg = styled.div`
-  background-color: rgba(0,0,0,0.65);
-  width: 100%;
-  height:100%;
-
-`;
-
-const Text = styled.div`
-  text-align:left;
-  box-sizing: border-box;
-  -webkit-box-flex: 1;
-  max-width: 100%;
-  flex: 0 0 100%;
-  padding-right: 8px;
-  padding-left: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10vh 0 10vh 20vw;
-  height: 100%;
-
-  @media (max-width: 768px) {
-    padding: 10vh 5vw 10vh 5vw;
-  }
-
-  @media (min-width: 1024px) {
-    margin-left: 8.3333%;
-  }
-
-  h3{
-    color: #8E8E8E;
-    font-weight: 500;
-    font-size: 3rem;
-  }
-
-  p{
-    color: ${({ theme }) => theme.colors.fullWhite};
-    max-width: 20rem;
-    font-size: 1.5rem;
-  }
-`;
-
-const BgImage = styled.div`
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-image: url('/images/landingPage/Darf3D.webp');
-  min-height: calc(100vh - 80px);
-  max-height: calc(100vh - 80px);
-  display: flex;
-  transform: scale(1.1); 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: -1;
-`;
 
 function DarfLp() {
   return (
     <SectionContainer>
-      <BgImage>
-        <Bg />
-      </BgImage>
+      <SectionContainer.BgImage>
+        <SectionContainer.Bg />
+      </SectionContainer.BgImage>
       <div>
-        <Text>
+        <SectionContainer.Text>
           <h3>
             DARF
           </h3>
@@ -99,7 +32,7 @@ function DarfLp() {
             Quero começar
             <i className="fas fa-arrow-right" style={{ marginLeft: '10px' }} />
           </ButtonUnderlineHover>
-        </Text>
+        </SectionContainer.Text>
       </div>
     </SectionContainer>
   );

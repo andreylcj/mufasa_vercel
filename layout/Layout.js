@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Header from '../sections/Header';
-import Notify from '../snnipets/Notify';
+import Notify from '../sections/Short/Notify';
 import Modal from '../snnipets/Modal';
 import { DataContext } from '../store/GlobalState';
 import Footer from '../sections/Footer';
