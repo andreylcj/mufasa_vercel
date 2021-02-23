@@ -60,7 +60,7 @@ const ItemContainer = styled.div`
   }
   
   .face.face1 .content{
-    opacity: 0.2;
+    opacity: 0.65;
     transition: 0.5s;
   }  
 
@@ -85,6 +85,7 @@ const ItemContainer = styled.div`
     padding: 20px;
     box-sizing: border-box;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 10px 20px rgb(0 0 0 / 50%);
     transform: translateY(-${itemHeight / 2}px);
   }
 .face.face2 .content p{

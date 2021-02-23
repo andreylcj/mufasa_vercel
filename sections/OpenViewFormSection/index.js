@@ -83,7 +83,7 @@ font-size: 18px;
 background: #fff;
 border-radius: 5px;
 box-shadow: #2b1304 0px 16px 24px;
-padding: 5vw;
+padding: 3vh 5vw;
 justify-self: center;
 grid-area: 2 / 1 / auto / span 6;
 

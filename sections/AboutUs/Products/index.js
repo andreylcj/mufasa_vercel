@@ -37,11 +37,11 @@ Container.Service = styled.div`
   flex-direction: column;
   align-items:center;
   justify-content: center;
-  min-height: calc(100vh - ${({ theme }) => theme.measuresPatterns.header.height.general});
+  /*min-height: calc(100vh - ${({ theme }) => theme.measuresPatterns.header.height.general});
 
   @media(min-width: 1024px){
     min-height: calc(100vh - ${({ theme }) => theme.measuresPatterns.header.height.minWidth1024});
-  }
+  }*/
 
   h3{
     margin-bottom: 20px;
@@ -113,7 +113,7 @@ function Products() {
 
       <Container.Service
         style={{
-          marginTop: '15vh',
+          marginTop: '50px',
         }}
       >
         <h3>
