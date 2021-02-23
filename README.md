@@ -1,29 +1,29 @@
   # Patterns
 
-- snnipets:
-	exporta apenas uma funçao
-	styled component deve estar dentro
-	nao por importar nenhum outro snnipet
+- snnipets:\
+	exporta apenas uma funçao\
+	styled component deve estar dentro\
+	nao por importar nenhum outro snnipet\
 
-- sections:
-	junçao de snnipets e as vezes de pequenas sections
-	exporta apenas uma funçao
-	nao pode ter styled component dentro
+- sections:\
+	junçao de snnipets e as vezes de pequenas sections\
+	exporta apenas uma funçao\
+	nao pode ter styled component dentro\
 
-- components:
-	exporta a constante, que é no caso o elemento
-	geralmente os arquivos seram os elementos que serao usados nas sections
+- components:\
+	exporta a constante, que é no caso o elemento\
+	geralmente os arquivos seram os elementos que serao usados nas sections\
 
-- pages:
-	junçao de uma ou mais sections e/ou snnipets
-	pode ter styled components dentro, desde q seja pouco
+- pages:\
+	junçao de uma ou mais sections e/ou snnipets\
+	pode ter styled components dentro, desde q seja pouco\
 
-- assets:
-	funçoes ou modelos q serao importados em outros arquivos
+- assets:\
+	funçoes ou modelos q serao importados em outros arquivos\
 
 Obs:
-- folder "Short" inside sections
-	sections que sao pequenas e pelo tamanho poderiam ser um snnipet
+- folder "Short" inside sections\
+	sections que sao pequenas e pelo tamanho poderiam ser um snnipet\
   
   # L&IS
 1. Boas práticas GitHub
