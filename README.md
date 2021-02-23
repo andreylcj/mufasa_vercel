@@ -1,4 +1,4 @@
-  # Patterns
+  # File Patterns
 
 - **snnipets:**\
 	exporta apenas uma funçao\
