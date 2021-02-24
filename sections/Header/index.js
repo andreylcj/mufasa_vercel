@@ -12,6 +12,7 @@ import HeaderContainer from '../../components/Header';
 import NavTitle from '../../snnipets/Header/NavTitle';
 import MobileLinks from './MobileLinks';
 import ButtonShowMenu from '../../snnipets/Header/ButtonShowMenu';
+import FadeOut from '../../components/FadeOutHorizontal';
 
 function Header() {
   const router = useRouter();
@@ -157,6 +158,8 @@ function Header() {
               />
             </ul>
           </HeaderContainer.NavOptions>
+
+          <FadeOut />
 
           <ButtonUnderlineHover
             href="/login"

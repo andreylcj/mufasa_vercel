@@ -65,6 +65,11 @@ a{
 HeaderContainer.NavOptions = styled.div`
 margin-left: 20px;
 flex-grow: 1;
+overflow-x:auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
 @media (min-width: 768px){
   height: 100%;
