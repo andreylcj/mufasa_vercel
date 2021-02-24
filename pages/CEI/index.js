@@ -5,7 +5,7 @@ import Loading from '../../snnipets/Loading';
 import validCpfAuth from '../../assets/utils/ValidateData/ValidCpf';
 import GoBackButton from '../../snnipets/GoBackButton';
 import { getData, patchData } from '../../assets/utils/fetchData';
-import UpdateButton from '../../snnipets/UpdateButton';
+import UpdateButton from '../../sections/Short/UpdateButton';
 
 const CEI = styled.div`
 
