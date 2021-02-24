@@ -70,9 +70,19 @@ function Header() {
       }
     }
 
+    if (pageTitle === 'afterLogin' && selectedOption < 0) {
+      for (let i = 0; i < itemsInfo.length; i++) {
+        if (query.periodo && query.opcao) {
+          selectedOption = i;
+          break;
+        }
+      }
+    }
+
     if (selectedOption < 0) {
       setElementBgLeft(0);
       setElementBgWidth(0);
+      return;
     }
 
     let left = 0;

@@ -45,7 +45,10 @@ export const headerNavTitles = {
     {
       title: 'Carteira',
       href: '/carteira',
-      query: { },
+      query: {
+        carteira: '',
+        periodo: '',
+      },
     },
     {
       title: 'Imposto de Renda',
