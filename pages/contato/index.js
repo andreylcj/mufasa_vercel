@@ -1,16 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import SupportContainer from '../../components/SupportContainer';
 import SupportForm from '../../sections/SupportForm';
 import SectionTitle from '../../snnipets/SectionTitle';
-
-const SupportContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.colors.lightGrayBg}
-`;
 
 function Contato() {
   return (

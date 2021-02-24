@@ -59,7 +59,7 @@ function Header() {
   useEffect(() => {
     if (itemsInfo.length === 0) return;
 
-    let selectedOption = 0;
+    let selectedOption = -1;
     for (let i = 0; i < itemsInfo.length; i++) {
       if (itemsInfo[i].href === pathname
       && Object.keys(itemsInfo[i].query).length === Object.keys(query).length
@@ -67,6 +67,11 @@ function Header() {
         selectedOption = i;
         break;
       }
+    }
+
+    if (selectedOption < 0) {
+      setElementBgLeft(0);
+      setElementBgWidth(0);
     }
 
     let left = 0;
@@ -147,6 +152,7 @@ function Header() {
                 style={{
                   width: elementBgWidth,
                   left: elementBgLeft,
+                  maxWidth: elementBgWidth,
                 }}
               />
             </ul>

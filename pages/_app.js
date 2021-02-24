@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
   html, body {
     min-height: 100vh;
+    scroll-behavior: smooth;
   }
   #__next {
     flex: 1;

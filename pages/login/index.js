@@ -61,6 +61,7 @@ h4{
 
 const Scene = styled.div`
   max-width: 350px;
+  min-width: 350px;
   perspective: 1400px;
   margin: 3vh auto;
   height:650px;
@@ -70,7 +71,7 @@ const Scene = styled.div`
   }
 
   @media (min-width: 768px){
-    min-width: 400px;
+    min-width: 450px;
     max-width: 450px;
     /*height:600px;*/
   }
@@ -187,23 +188,30 @@ function Login() {
   }, [auth]);
 
   return (
-    <Scene>
-      <Card className={register ? 'is-flipped' : ''}>
-        {/*
+    <div
+      style={{
+        display: 'flex',
+        background: 'linear-gradient(120deg,rgba(228,101,18,1) 0%,rgba(201,82,6,1) 52%,rgba(187,76,4,1) 100%)',
+      }}
+    >
+
+      <Scene>
+        <Card className={register ? 'is-flipped' : ''}>
+          {/*
       !register ? ( */}
 
-        <FormContainer
-          className={`card__face card__face--front ${register ? 'no-clickable' : ''}`}
-        >
-          <h4>
-            Faça seu login
-          </h4>
-          <FormLogin
-            autofocus
-            idAndName="login"
+          <FormContainer
+            className={`card__face card__face--front ${register ? 'no-clickable' : ''}`}
           >
-            <SubmitButton type="submit">
-              {
+            <h4>
+              Faça seu login
+            </h4>
+            <FormLogin
+              autofocus
+              idAndName="login"
+            >
+              <SubmitButton type="submit">
+                {
                       loading
                         ? (
                           <>
@@ -213,53 +221,53 @@ function Login() {
                           'Continuar'
                         )
                   }
-            </SubmitButton>
-          </FormLogin>
-          <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
-          <GoogleLog />
-          <Facebooke />
-          <BottomText>
-            <Link href="/login">
-              <a>
-                Esqueci minha senha
-                <i
-                  className="fas fa-chevron-right"
-                />
-              </a>
-            </Link>
-            <Link href="/login?criar-conta">
-              <a
-                onClick={() => {
-                  dispatch({
-                    type: ACTION.UPDATE_USER_DATA,
-                    payload: {
-                      email: '',
-                      password: '',
-                    },
-                  });
-                }}
-              >
-                Ainda não sou cliente
-                <i
-                  className="fas fa-chevron-right"
-                />
-              </a>
-            </Link>
+              </SubmitButton>
+            </FormLogin>
+            <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
+            <GoogleLog />
+            <Facebooke />
+            <BottomText>
+              <Link href="/login">
+                <a>
+                  Esqueci minha senha
+                  <i
+                    className="fas fa-chevron-right"
+                  />
+                </a>
+              </Link>
+              <Link href="/login?criar-conta">
+                <a
+                  onClick={() => {
+                    dispatch({
+                      type: ACTION.UPDATE_USER_DATA,
+                      payload: {
+                        email: '',
+                        password: '',
+                      },
+                    });
+                  }}
+                >
+                  Ainda não sou cliente
+                  <i
+                    className="fas fa-chevron-right"
+                  />
+                </a>
+              </Link>
 
-          </BottomText>
-          <SecurityEnvironment />
-        </FormContainer>
+            </BottomText>
+            <SecurityEnvironment />
+          </FormContainer>
 
-        <FormContainer className="card__face card__face--back">
-          <h4>
-            Crie sua conta
-          </h4>
-          <FormLogin
-            autofocus
-            idAndName="register"
-          >
-            <SubmitButton type="submit">
-              {
+          <FormContainer className="card__face card__face--back">
+            <h4>
+              Crie sua conta
+            </h4>
+            <FormLogin
+              autofocus
+              idAndName="register"
+            >
+              <SubmitButton type="submit">
+                {
                       loading
                         ? (
                           <>
@@ -269,36 +277,37 @@ function Login() {
                           'Cadastrar'
                         )
                   }
-            </SubmitButton>
-          </FormLogin>
-          <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
-          <GoogleLog />
-          <Facebooke />
-          <BottomText>
-            <Link href="/login">
-              <a
-                onClick={() => {
-                  dispatch({
-                    type: ACTION.UPDATE_USER_DATA,
-                    payload: {
-                      email: '',
-                      password: '',
-                    },
-                  });
-                }}
-              >
-                Já tenho uma conta
-                <i
-                  className="fas fa-chevron-right"
-                />
-              </a>
-            </Link>
+              </SubmitButton>
+            </FormLogin>
+            <p style={{ color: '#707070', margin: '17px 0 0 0' }}>OU</p>
+            <GoogleLog />
+            <Facebooke />
+            <BottomText>
+              <Link href="/login">
+                <a
+                  onClick={() => {
+                    dispatch({
+                      type: ACTION.UPDATE_USER_DATA,
+                      payload: {
+                        email: '',
+                        password: '',
+                      },
+                    });
+                  }}
+                >
+                  Já tenho uma conta
+                  <i
+                    className="fas fa-chevron-right"
+                  />
+                </a>
+              </Link>
 
-          </BottomText>
-          <SecurityEnvironment />
-        </FormContainer>
-      </Card>
-    </Scene>
+            </BottomText>
+            <SecurityEnvironment />
+          </FormContainer>
+        </Card>
+      </Scene>
+    </div>
   );
 }
 

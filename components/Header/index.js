@@ -127,7 +127,7 @@ top: 0;
 height: 5px;
 background: ${({ theme }) => theme.colors.mufasaOrange};
 pointer-events: none;
-transition: all ease-out 0.25s;
+transition: all 0.35s;
 `;
 
 HeaderContainer.ButtonOpenMobile = styled.button`

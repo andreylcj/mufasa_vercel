@@ -20,18 +20,18 @@ function Footer() {
       <FooterContainer.FootColumn>
         <FooterContainer.FootColumn.Title>Suporte</FooterContainer.FootColumn.Title>
         <ul>
-          <ListNav text="Perguntas Frequentes" href="/" />
-          <ListNav text="Fale Conosco" href="/" />
+          <ListNav text="Dúvidas" href="/duvidas" />
+          <ListNav text="Fale Conosco" href="/contato" />
         </ul>
       </FooterContainer.FootColumn>
 
       <FooterContainer.FootColumn>
         <FooterContainer.FootColumn.Title>Perguntas Frequentes</FooterContainer.FootColumn.Title>
         <ul>
-          <ListNav text="Como Funciona?" href="/" />
-          <ListNav text="Como Começar?" href="/" />
-          <ListNav text="O que preciso para criar a conta?" href="/" />
-          <ListNav text="Não tem nenhuma taxa?" href="/" />
+          <ListNav text="Como Funciona?" href="/duvidas?pergunta=como-funciona#como-funciona" />
+          <ListNav text="Como Começar?" href="/duvidas?pergunta=como-comecar#como-comecar" />
+          <ListNav text="Como crio minha conta?" href="/duvidas?pergunta=como-criar-conta#como-criar-conta" />
+          <ListNav text="Não tem nenhuma taxa?" href="/duvidas?pergunta=taxa#taxa" />
         </ul>
       </FooterContainer.FootColumn>
 

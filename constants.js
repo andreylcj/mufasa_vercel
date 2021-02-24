@@ -201,3 +201,75 @@ export const paidServices = [
     desc2: 'com seus Impostos. Foque em suas operações e Mufasa cuidará de todo o resto.',
   },
 ];
+
+export const questions = [
+  {
+    title: 'O que é a calculadora Mufasa?',
+    response: `A calculadora do Mufasa é nossa alternativa para facilitar sua vida. Assim como tudo no Mufasa, ela foi desenhada para todos que desejam um serviço simples, sem burocracias, e sem tarifas abusivas.
+    
+    Seu propósito é calcular com exatidão os impostos provindos de operações na Bolsa de Valores, para que o investidor tenha mais tempo livre e menos dor de cabeça. Para cumprir esse papel, o Mufasa:
+    
+    — Possibilita automação total, desde apurar as movimentações feitas até efetuar o pagamento dos Impostos quando há lucro;
+    
+    — Possui uma plataforma com interface simples e intuitiva;
+    
+    — Oferece compatibilidade com todas as corretoras;
+    
+    — Disponibiliza suas principais funcionalidades de forma gratuita`,
+    queryQuest: 'o-que',
+  },
+  {
+    title: 'Como funciona?',
+    response: `Após cadastrar-se na plataforma Mufasa, basta sincronizar sua conta do CEI, no menu do site.
+
+    Uma vez feita a sincronização, seus dados se manterão atualizados automaticamente, a todo tempo.
+    
+    A partir daí, tornam-se disponíveis dados em tempo real como:
+    
+    — Evolução Patrimonial
+    — Cálculo Atualizado do Imposto de Renda em Ações
+    
+    Além de serviços como:
+    — Emissão da DARF
+    — Pagamento Automático`,
+    queryQuest: 'como-funciona',
+  },
+  {
+    title: 'Como começar?',
+    response: `É bem simples! Basta criar sua conta! Para isso, siga o passo-a-passo:
+
+    No canto superior direito, clique em "Login".
+    Na página de Login, selecione a opção "Ainda não sou Cliente".
+    
+    Pronto! Agora é só completar com seu e-mail e a senha desejada!`,
+    queryQuest: 'como-comecar',
+  },
+  {
+    title: 'Como crio minha conta?',
+    response: `No canto superior direito, clique em "Login".
+    Na página de Login, selecione a opção "Ainda não sou Cliente".
+    
+    Pronto! Agora é só completar com seu e-mail e a senha desejada!`,
+    queryQuest: 'como-criar-conta',
+  },
+  {
+    title: 'Não tem nenhuma tarifa?',
+    response: 'A calculadora do Mufasa não tem tarifa, você não paga nada para calcular seus impostos nem para emitir suas DARFs. Você também não tem nenhum custo para sincronizar sua conta do CEI e acompanhar a evolução de sua carteira de investimentos em tempo real.',
+    queryQuest: 'taxa',
+  },
+  {
+    title: 'Qual a vantagem em ser Mufasa?',
+    response: `Ao optar por usar as soluções desenvolvidas pelo Mufasa, você está optando por:
+
+    — Automação no cálculo dos Impostos
+    
+    — Velocidade em todos os processos envolvidos
+    
+    — Custo Zero no levantamento, cálculo, e emissão da DARF
+    
+    — Suporte exclusivo
+    
+    — Facilidade no uso`,
+    queryQuest: 'vantagem',
+  },
+];
