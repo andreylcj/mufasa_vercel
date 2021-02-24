@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useState, useEffect } from 'react';
 import { getData, patchData } from '../../../assets/utils/fetchData';
 import GoBackButton from '../../../snnipets/GoBackButton';
-import UpdateButton from '../../../snnipets/UpdateButton';
+import UpdateButton from '../../../sections/Short/UpdateButton';
 import { updateItem } from '../../../store/Actions';
 import { DataContext } from '../../../store/GlobalState';
 
