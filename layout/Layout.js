@@ -23,7 +23,7 @@ const SiteContainer = styled.div`
     width: 100%;
   }
 
-  .translate-wallet-page{
+  .translate-profitability-page{
     transform: translateY(calc(
       ${theme.measuresPatterns.header.height.general}
       + ${theme.measuresPatterns.subNav.height.general}
@@ -38,6 +38,20 @@ const SiteContainer = styled.div`
       ))
     }
   }
+
+  .translate-position-page{
+    transform: translateY(calc(
+      ${theme.measuresPatterns.header.height.general}
+      + ${theme.measuresPatterns.subNav.height.general}
+      ));
+  
+    @media screen and (min-width: 1024px){
+      transform: translateY(calc(
+        ${theme.measuresPatterns.header.height.minWidth1024}
+      + ${theme.measuresPatterns.subNav.height.general}
+      ))
+    }
+  }
 `;
 
 const Main = styled.main`
@@ -45,6 +59,7 @@ const Main = styled.main`
   transform: translateY(64px);
   will-change: transform;
   text-align:center;
+  transition: all 0.4s;
 
   @media screen and (min-width: 1024px){
     transform: translateY(80px);
@@ -57,7 +72,8 @@ function Layout({ children }) {
   const { pathname } = router;
 
   const bgColor = (pathname === '/login') ? theme.colors.mufasaOrange : '';
-  const translateSubNav = (pathname === '/carteira');
+  const translateProf = (pathname.indexOf('/carteira/rentabilidade') !== -1);
+  const translatePos = (pathname.indexOf('/carteira/posicoes') !== -1);
   const translate = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
   const showHeader = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
   const showFooter = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
@@ -92,7 +108,11 @@ function Layout({ children }) {
       <Modal />
 
       <Main
-        className={`${translate ? '' : 'no-translate'} ${translateSubNav ? 'translate-wallet-page' : ''}`}
+        className={`
+        ${translate ? '' : 'no-translate'} 
+        ${translateProf ? 'translate-profitability-page' : ''}
+        ${translatePos ? 'translate-position-page' : ''}        
+        `}
       >
         {children}
         {

@@ -21,17 +21,29 @@ function NavTitle({
   }, [ref.current, width, query]);
 
   const destUrl = `${href}${(item.query.scroll === '') ? '?scroll' : ''}${item.scroll || ''}`;
+  const selected = () => {
+    let resp = false;
+
+    if (pathname === href
+      && Object.keys(item.query).length === Object.keys(query).length) {
+      resp = true;
+    } else if (pathname.indexOf('/carteira') !== -1) {
+      if (href.indexOf('/carteira') !== -1) {
+        resp = true;
+      }
+    }
+
+    return resp;
+  };
 
   return (
     <li
-      className={`${(pathname === href
-      && Object.keys(item.query).length === Object.keys(query).length) ? 'selected-nav-li' : ''}`}
+      className={`${selected() ? 'selected-nav-li' : ''}`}
       ref={ref}
     >
       <Link href={destUrl}>
         <a
-          className={`${(pathname === href
-      && Object.keys(item.query).length === Object.keys(query).length) ? 'selected-nav-a' : ''}`}
+          className={`${selected() ? 'selected-nav-a' : ''}`}
           onClick={onClick}
         >
           {title}

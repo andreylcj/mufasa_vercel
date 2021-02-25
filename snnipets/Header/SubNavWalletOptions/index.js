@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import useWindowSize from '../../../assets/utils/GetWindowDimensions';
 
 const SubNavItemContainer = styled.li`
@@ -50,7 +51,7 @@ const SubNavItemContainer = styled.li`
 `;
 
 function SubNavItem({
-  href, title, selectedItem, onClick, index, updateParentState, query,
+  href, title, selectedItem, index, updateParentState, query,
 }) {
   const [width, height] = useWindowSize();
 
@@ -61,23 +62,31 @@ function SubNavItem({
       {
         elementWidth: ref.current ? ref.current.offsetWidth : 0,
         elementIndex: index,
-        query,
+        href,
       },
     );
   }, [ref.current, width]);
+
+  const stringQuery = () => {
+    let resp = '';
+    const keys = Object.keys(query);
+    for (let i = 0; i < Object.keys(query).length; i++) {
+      resp += `${keys[i]}=${query[keys[i]]}`;
+    }
+    return resp;
+  };
 
   return (
     <SubNavItemContainer
       ref={ref}
     >
-      {/* <Link href={href}> */}
-      <a
-        onClick={onClick}
-        className={selectedItem ? 'selected' : 'no-selected'}
-      >
-        {title}
-      </a>
-      {/* </Link> */}
+      <Link href={`${href}${stringQuery() ? `?${stringQuery()}` : ''}`}>
+        <a
+          className={selectedItem ? 'selected' : 'no-selected'}
+        >
+          {title}
+        </a>
+      </Link>
     </SubNavItemContainer>
   );
 }

@@ -38,7 +38,7 @@ function Header() {
         setNavTitles(headerNavTitles.bend);
       }
     } else if (
-      pathname === '/carteira' || pathname === '/imposto-de-renda'
+      pathname.indexOf('/carteira') !== -1 || pathname.indexOf('/imposto-de-renda') !== -1
     ) {
       if (pageTitle !== 'afterLogin') {
         setPageTitle('afterLogin');
@@ -63,8 +63,7 @@ function Header() {
     let selectedOption = -1;
     for (let i = 0; i < itemsInfo.length; i++) {
       if (itemsInfo[i].href === pathname
-      && Object.keys(itemsInfo[i].query).length === Object.keys(query).length
-      ) {
+        || itemsInfo[i].href.split('/')[1] === pathname.split('/')[1]) {
         selectedOption = i;
         break;
       }
@@ -72,9 +71,27 @@ function Header() {
 
     if (pageTitle === 'afterLogin' && selectedOption < 0) {
       for (let i = 0; i < itemsInfo.length; i++) {
-        if (query.periodo && query.opcao) {
+        if (query.periodo) {
           selectedOption = i;
           break;
+        }
+      }
+    }
+
+    if (pageTitle === 'landingPage') {
+      if (query.scroll === '') {
+        for (let i = 0; i < itemsInfo.length; i++) {
+          if (itemsInfo[i].query.scroll) selectedOption = i;
+          break;
+        }
+      } else {
+        for (let i = 0; i < itemsInfo.length; i++) {
+          if (itemsInfo[i].href === pathname
+            && itemsInfo[i].query.scroll !== ''
+          ) {
+            selectedOption = i;
+            break;
+          }
         }
       }
     }

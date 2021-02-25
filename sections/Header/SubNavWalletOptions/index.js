@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 import { subNavOptions } from '../../../constants';
 import SubHeaderContainer from '../../../components/Header/SubHeaderContainer';
 import SubNavItem from '../../../snnipets/Header/SubNavWalletOptions';
+import { theme } from '../../../db.json';
 
 function SubNavWalletOptions() {
   const router = useRouter();
   const { pathname, query } = router;
 
-  const showSubNav = (pathname === '/carteira');
+  const showSubNav = (pathname.indexOf('/carteira') !== -1);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [elementBgLeft, setElementBgLeft] = useState(3);
@@ -19,12 +20,12 @@ function SubNavWalletOptions() {
 
   useEffect(() => {
     if (itemsInfo.length === 0) return;
-    if (!query.periodo) return;
 
     let selectedOption = 0;
     for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].query === query.opcao) {
+      if (itemsInfo[i].href === pathname) {
         selectedOption = itemsInfo[i].elementIndex;
+        setSelectedIndex(selectedOption);
         break;
       }
     }
@@ -69,11 +70,22 @@ function SubNavWalletOptions() {
     });
   };
 
+  const itemHeight = theme.measuresPatterns.subNav.height.general;
+  const translateTimeNav = () => {
+    let resp;
+    if (pathname.indexOf('carteira') !== -1) {
+      resp = 'translateY(0)';
+    } else {
+      resp = `translateY(-${itemHeight})`;
+    }
+    return resp;
+  };
+
   return (
     <SubHeaderContainer
       style={{
-        opacity: showSubNav ? '1' : '0',
         pointerEvents: showSubNav ? 'inherit' : 'none',
+        transform: translateTimeNav(),
       }}
     >
       <ul>
@@ -87,18 +99,8 @@ function SubNavWalletOptions() {
                 key={subNavId}
                 href={subNavOption.href}
                 title={subNavOption.title}
-                query={subNavOption.query.opcao}
+                query={subNavOption.query}
                 selectedItem={(selectedIndex === index)}
-                onClick={() => {
-                  setSelectedIndex(index);
-                  router.push({
-                    pathname: subNavOption.href,
-                    query: {
-                      ...query,
-                      ...subNavOption.query,
-                    },
-                  });
-                }}
               />
             );
           })

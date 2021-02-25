@@ -12,6 +12,7 @@ const SubHeaderContainer = styled.div`
   font-size: 1rem;
   height: ${({ theme }) => theme.measuresPatterns.subNav.height.general};
   box-shadow: rgb(0 0 0 / 15%) 0px 1px 2px;
+  transition: all 0.4s;
 
   @media screen and (min-width: 1024px){
     top:  ${({ theme }) => theme.measuresPatterns.header.height.minWidth1024};

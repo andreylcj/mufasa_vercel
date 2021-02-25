@@ -44,10 +44,9 @@ export const headerNavTitles = {
   afterLogin: [
     {
       title: 'Carteira',
-      href: '/carteira',
+      href: '/carteira/rentabilidade',
       query: {
-        carteira: '',
-        periodo: '',
+        periodo: 'no-mes',
       },
     },
     {
@@ -61,35 +60,35 @@ export const headerNavTitles = {
 export const timeOptionsNavBar = [
   {
     title: 'No mês',
-    href: '/carteira',
+    href: '/carteira/rentabilidade',
     query: {
       periodo: 'no-mes',
     },
   },
   {
     title: '6 meses',
-    href: '/carteira',
+    href: '/carteira/rentabilidade',
     query: {
       periodo: '6-meses',
     },
   },
   {
     title: '12 meses',
-    href: '/carteira',
+    href: '/carteira/rentabilidade',
     query: {
       periodo: '12-meses',
     },
   },
   {
     title: '2021',
-    href: '/carteira',
+    href: '/carteira/rentabilidade',
     query: {
       periodo: 'no-ano',
     },
   },
   {
     title: 'Máximo',
-    href: '/carteira',
+    href: '/carteira/rentabilidade',
     query: {
       periodo: 'maximo',
     },
@@ -99,40 +98,16 @@ export const timeOptionsNavBar = [
 export const subNavOptions = [
   {
     title: 'Rentabilidade',
-    href: '/carteira',
+    href: '/carteira/rentabilidade',
     query: {
-      opcao: 'rentabilidade',
+      periodo: 'no-mes',
     },
   },
   {
     title: 'Posições',
-    href: '/carteira',
-    query: {
-      opcao: 'posicoes',
-    },
+    href: '/carteira/posicoes',
+    query: { },
   },
-  {
-    title: 'Posições1',
-    href: '/carteira',
-    query: {
-      opcao: 'posicoes1',
-    },
-  },
-  {
-    title: 'Posições2',
-    href: '/carteira',
-    query: {
-      opcao: 'posicoes2',
-    },
-  },
-  {
-    title: 'Posições3',
-    href: '/carteira',
-    query: {
-      opcao: 'posicoes3',
-    },
-  },
-
 ];
 export const differentials = [
   {

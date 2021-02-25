@@ -14,6 +14,8 @@ const SubHeaderTimeOptionsContainer = styled.div`
   font-size: 0.875rem;
   height: ${({ theme }) => theme.measuresPatterns.timeSelectBar.height.general};
   border-bottom: 2px solid #333;
+  transition: all 0.4s;
+  tranform: translateY(0);
 
   @media screen and (min-width: 1024px){
     top: calc(${({ theme }) => theme.measuresPatterns.header.height.minWidth1024}

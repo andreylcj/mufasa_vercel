@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { timeOptionsNavBar } from '../../../constants';
 import SubHeaderContainer from '../../../components/Header/SubHeaderTimeOptionsContainer';
 import SubNavItem from '../../../snnipets/Header/TimeOptionBar';
+import { theme } from '../../../db.json';
 
 function TimeOptionBar() {
   const router = useRouter();
@@ -10,7 +11,7 @@ function TimeOptionBar() {
 
   const subNavOptions = timeOptionsNavBar;
 
-  const showSubNav = (pathname === '/carteira');
+  const showSubNav = (pathname.indexOf('/carteira') !== -1);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [elementBgLeft, setElementBgLeft] = useState(3);
@@ -23,8 +24,9 @@ function TimeOptionBar() {
 
     let selectedOption = 0;
     for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].query === query.periodo) {
+      if (itemsInfo[i].query.periodo === query.periodo) {
         selectedOption = itemsInfo[i].elementIndex;
+        setSelectedIndex(selectedOption);
         break;
       }
     }
@@ -69,11 +71,26 @@ function TimeOptionBar() {
     });
   };
 
+  const itemHeight = theme.measuresPatterns.timeSelectBar.height.general;
+  const itemHeightSubNav = theme.measuresPatterns.subNav.height.general;
+  const translateTimeNav = () => {
+    let resp;
+    if (pathname.indexOf('rentabilidade') !== -1) {
+      resp = 'translateY(0)';
+    } else if (pathname.indexOf('posicoes') !== -1) {
+      resp = `translateY(-${itemHeight})`;
+    } else {
+      const totalHeight = parseFloat(itemHeight.replace('px', '')) + parseFloat(itemHeightSubNav.replace('px', ''));
+      resp = `translateY(-${totalHeight}px)`;
+    }
+    return resp;
+  };
+
   return (
     <SubHeaderContainer
       style={{
-        opacity: showSubNav ? '1' : '0',
         pointerEvents: showSubNav ? 'inherit' : 'none',
+        transform: translateTimeNav(),
       }}
     >
       <ul>
@@ -88,17 +105,7 @@ function TimeOptionBar() {
                 href={subNavOption.href}
                 title={subNavOption.title}
                 selectedItem={(selectedIndex === index)}
-                query={subNavOption.query.periodo}
-                onClick={() => {
-                  setSelectedIndex(index);
-                  router.push({
-                    pathname: subNavOption.href,
-                    query: {
-                      ...query,
-                      ...subNavOption.query,
-                    },
-                  });
-                }}
+                query={subNavOption.query}
               />
             );
           })
