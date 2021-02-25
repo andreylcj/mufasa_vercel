@@ -83,9 +83,9 @@ const uploadInfo = async (req, res) => {
 
 
 
-    const {test} =  req.body;
+    const {data} =  req.body;
 
-    const newUser = await Users.findOneAndUpdate({ _id: id }, { CPF, CEIpassword, test },{
+    const newUser = await Users.findOneAndUpdate({ _id: id }, { CPF, CEIpassword, data },{
       returnNewDocument: true,
       new: true,
       strict: false

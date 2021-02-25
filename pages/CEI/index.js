@@ -4,8 +4,9 @@ import { DataContext } from '../../store/GlobalState';
 import Loading from '../../snnipets/Loading';
 import validCpfAuth from '../../assets/utils/ValidateData/ValidCpf';
 import GoBackButton from '../../snnipets/GoBackButton';
-import { getData, patchData } from '../../assets/utils/fetchData';
+import { getData, patchData,putData } from '../../assets/utils/fetchData';
 import UpdateButton from '../../snnipets/UpdateButton';
+import * as data from './transactions.json';
 
 const CEI = styled.div`
 
@@ -73,10 +74,12 @@ function insertCEIinfo() {
     };
 
     const { CPF, CEIpassword } = CEIdata;
-
+    
     dispatch({ type: 'START_LOADING' });
 
-    await patchData('api/user', { CPF, CEIpassword }, auth.token)
+  
+
+    await putData(`api/user/${id}`, {CPF, CEIpassword, data }, auth.token)
       .then((res) => {
         if (res.err) {
           console.log(res.err);

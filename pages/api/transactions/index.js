@@ -7,7 +7,7 @@ connectDB();
 export default async (req, res) => {
   switch (req.method) {
     case 'GET':
-      await getUsers(req, res);
+      await getUser(req, res);
       break;
     case 'PATCH':
       await uploadInfo(req, res);
@@ -47,13 +47,13 @@ class APIfeatures {
   }
 }
 
-const getUsers = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     //const result = await auth(req, res);
     //if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' });
-    
+    const {test} = req.body;
 
-    const features = new APIfeatures(Users.find().select('-password'), req.query)
+    const features = new APIfeatures(Users.find({ 'test.stockHistory.date': {$gt: test} }, {email:1}), req.query)
       .filtering().sorting();
 
     const users = await features.query;
@@ -63,13 +63,24 @@ const getUsers = async (req, res) => {
   }
 };
 
+
 const uploadInfo = async (req, res) => {
   try {
-    const result = await auth(req, res);
+    //const result = await auth(req, res);
+
+    const { id } = req.body;
 
     const { CPF, CEIpassword } = req.body;
 
-    const newUser = await Users.findOneAndUpdate({ _id: result.id }, { CPF, CEIpassword }).select('-password');
+
+
+    const {data} = req.body;
+
+    const newUser = await Users.findOneAndUpdate({ _id: id }, { CPF, CEIpassword, data },{
+      returnNewDocument: true,
+      new: true,
+      strict: false
+    }).select('-password');
 
     res.json({
       message: 'Update Success',
