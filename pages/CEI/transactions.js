@@ -1,6 +1,6 @@
 
 
-[
+let data =[
     {
       "institution": "90 - EASYNVEST - TITULO CV S.A.",
       "account": "8072632",
@@ -270,5 +270,10 @@
           "quotationFactor": 1
         }
       ]
+    },
+    {
+      "institution": "Marinzada"
     }
-  ]
+    ]
+    export default data;
+  

@@ -4,9 +4,9 @@ import { DataContext } from '../../store/GlobalState';
 import Loading from '../../snnipets/Loading';
 import validCpfAuth from '../../assets/utils/ValidateData/ValidCpf';
 import GoBackButton from '../../snnipets/GoBackButton';
-import { getData, patchData,putData } from '../../assets/utils/fetchData';
+import { getData, patchData, putData } from '../../assets/utils/fetchData';
 import UpdateButton from '../../snnipets/UpdateButton';
-import * as data from './transactions.json';
+import data from './transactions.js';
 
 const CEI = styled.div`
 
@@ -74,18 +74,24 @@ function insertCEIinfo() {
     };
 
     const { CPF, CEIpassword } = CEIdata;
-    
+
     dispatch({ type: 'START_LOADING' });
 
-  
-
-    await putData(`api/user/${id}`, {CPF, CEIpassword, data }, auth.token)
+    await putData(`api/user/${id}`, { CPF, CEIpassword, data }, auth.token)
       .then((res) => {
         if (res.err) {
           console.log(res.err);
           return;
         }
-
+        const institution = data.map((v) => {
+          if (v.institution == 'Marinda') {
+            return 1;
+          }
+          if (v.institution == '90 - EASYNVEST - TITULO CV S.A.') {
+            return 0;
+          }
+        });
+        console.log(institution);
         setDbData({
           cpf: res.user.CPF,
           password: res.user.CEIpassword,

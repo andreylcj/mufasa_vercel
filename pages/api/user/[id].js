@@ -94,11 +94,12 @@ const uploadInfo = async (req, res) => {
     res.json({
       message: 'Update Success',
       user: {
-        name: newUser.name,
+        /*name: newUser.name,
         email: newUser.email,
         CPF,
         CEIpassword,
-        role: newUser.role,
+        role: newUser.role,*/
+        data,
       },
     });
   } catch (err) {
