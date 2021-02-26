@@ -57,6 +57,8 @@ const getUser = async (req, res) => {
       .filtering().sorting();
 
     const users = await features.query;
+
+    //send info as json:
     res.json({ users });
   } catch (err) {
     return res.status(500).json({ err: err.message });

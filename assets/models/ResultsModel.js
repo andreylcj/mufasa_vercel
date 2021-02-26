@@ -1,44 +1,21 @@
 import mongoose from 'mongoose';
+import { number } from 'prop-types';
 
 const resultSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: false,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    default: 'user',
-  },
-  admin: {
-    type: Boolean,
-    default: false,
-  },
-  avatar_image: {
-    type: String,
-    default: '',
-  },
-  transactions: {
-    bsonType: Object,
-    default: {},
-  },
-  CPF: {
-    type: String,
-    default: '',
-  },
-  CEIpassword: {
-    type: String,
-    default: '',
-  },
-}, {
+  mes: {
+    bsontype: Array,
+    uniqueItems: true,
+    imposto:{
+        bsontype: number,
+    },
+    ativos:{
+        bsontype: Array,
+    },
+    lucro:{
+        bsontype: number,
+    },
+},
+{
   timestamps: true,
 });
 
