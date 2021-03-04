@@ -1,23 +1,24 @@
 import mongoose from 'mongoose';
 import { number } from 'prop-types';
 
-const resultSchema = new mongoose.Schema({
-  mes: {
-    bsontype: Array,
-    uniqueItems: true,
-    imposto:{
-        bsontype: number,
+const result3Schema = new mongoose.Schema({
+  "mes":{
+    
+    
+    "name": { "type": "string" },
+    
+    "imposto":{
+        "type": "number",
     },
-    ativos:{
-        bsontype: Array,
+    "ativos":{
+        "type": "Array",
     },
-    lucro:{
-        bsontype: number,
-    },
-},
-{
-  timestamps: true,
+    "lucro":{
+        "type": "number",
+    }
+  }
+  
 });
 
-const dataset = mongoose.models.results || mongoose.model('results', resultSchema);
+const dataset = mongoose.models.results3 || mongoose.model('results', result3Schema);
 export default dataset;

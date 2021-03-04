@@ -1,20 +1,17 @@
 import connectDB from '../../../assets/utils/ConnectDB';
 import auth from '../../../assets/middleware/auth';
-import Results from '../../../assets/models/ResultsModel';
+import Users from '../../../assets/models/UserModel';
 
 connectDB();
 
 export default async (req, res) => {
   switch (req.method) {
     case 'GET':
-      await getUser(req, res);
+      await getUsers(req, res);
       break;
     case 'PATCH':
       await uploadInfo(req, res);
       break;
-      case 'POST':
-        await putResults(req, res);
-        break;
     default:
   }
 };
@@ -50,42 +47,29 @@ class APIfeatures {
   }
 }
 
-const getUser = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
     //const result = await auth(req, res);
     //if (result.role !== 'admin' && result.role !== 'master admin') return res.status(400).json({ err: 'Autenticação inválida' });
-    const {test} = req.body;
+    
 
-    const features = new APIfeatures(Results.find({ 'test.stockHistory.date': {$gt: test} }, {email:1}), req.query)
+    const features = new APIfeatures(Users.find().select('-password'), req.query)
       .filtering().sorting();
 
     const users = await features.query;
-
-    //send info as json:
     res.json({ users });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
 };
 
-
 const uploadInfo = async (req, res) => {
   try {
-    //const result = await auth(req, res);
-
-    const { id } = req.body;
+    const result = await auth(req, res);
 
     const { CPF, CEIpassword } = req.body;
 
-
-
-    const {data} = req.body;
-
-    const newUser = await Results.findOneAndUpdate({ _id: id }, { CPF, CEIpassword, data },{
-      returnNewDocument: true,
-      new: true,
-      strict: false
-    }).select('-password');
+    const newUser = await Users.findOneAndUpdate({ _id: result.id }, { CPF, CEIpassword }).select('-password');
 
     res.json({
       message: 'Update Success',
@@ -99,32 +83,5 @@ const uploadInfo = async (req, res) => {
     });
   } catch (err) {
     return res.status(500).json({ err: err.message });
-  }
-};
-
-const putResults = async (req, res) => {
-  try {
-    const { mes } = req.body;
-
-    const name =  mes.name;
-    //const user = await Users.findOne({ email });
-    //if (user) return res.status(405).json({ emailMessage: 'Email já cadastrado' });
-
-    const newUser = new Results({ 'mes.name': name });
-
-    console.log(newUser);
-
-    await newUser.save();
-
-   // const accessToken = createAccessToken({ id: newUser._id });
-   // const refreshToken = createRefreshToken({ id: newUser._id });
-
-    res.json({
-      msg: 'Register Success',
-      //refreshToken,
-      //accessToken,
-    });
-  } catch (err) {
-    return res.status(500).json({ err: err.message, status: 500 });
   }
 };
