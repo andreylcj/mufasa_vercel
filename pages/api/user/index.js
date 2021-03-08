@@ -72,8 +72,8 @@ const uploadInfo = async (req, res) => {
     const CryptoJS = require("crypto-js");
 
     // (B) SECRET KEY
-    var key = "ASECRET";
-
+    const key = String (process.env.KEY_SECRET);
+    
     // (C) ENCRYPT
     var cipher = CryptoJS.AES.encrypt(CEIpassword, key);
     cipher = cipher.toString();
