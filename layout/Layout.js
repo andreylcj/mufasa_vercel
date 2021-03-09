@@ -79,7 +79,7 @@ function Layout({ children }) {
   const translatePos = pathname.indexOf('/carteira/posicoes') !== -1;
   const translate = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
   const showHeader = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
-  const showFooter = (pathname === '/' || pathname === '/sobre-nos' || pathname === '/contato');
+  const showFooter = (pathname === '/' || pathname === '/sobre-nos' || pathname === '/contato' || pathname === '/duvidas');
 
   return (
     <SiteContainer
