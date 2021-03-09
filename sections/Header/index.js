@@ -13,6 +13,7 @@ import NavTitle from '../../snnipets/Header/NavTitle';
 import MobileLinks from './MobileLinks';
 import ButtonShowMenu from '../../snnipets/Header/ButtonShowMenu';
 import FadeOut from '../../components/FadeOutHorizontal';
+import TaxTimeBar from './TaxTimeBar';
 
 function Header() {
   const router = useRouter();
@@ -188,15 +189,35 @@ function Header() {
 
           <FadeOut />
 
-          <ButtonUnderlineHover
-            href="/login"
-            color="#c95206"
-            bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
-            hide
-          >
-            Login
-            <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
-          </ButtonUnderlineHover>
+          {
+            pathname === '/' ? (
+              <ButtonUnderlineHover
+                href="/login"
+                color="#c95206"
+                bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
+                hide
+              >
+                Login
+                <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
+              </ButtonUnderlineHover>
+            ) : (
+              <div
+                style={{
+                  color: '#C95206',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  padding: '0 20px',
+                }}
+              >
+                <span>
+                  user.email@gmail.com
+                </span>
+                <i className="fas fa-caret-down" style={{ marginLeft: '11px', fontSize: '20px' }} />
+              </div>
+            )
+          }
 
           <MobileLinks
             showMobile={showMobile}
@@ -216,6 +237,7 @@ function Header() {
       </HeaderContainer>
       <SubNavWalletOptions />
       <TimeOptionBar />
+      <TaxTimeBar />
     </>
   );
 }

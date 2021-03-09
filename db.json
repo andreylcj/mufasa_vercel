@@ -1,6 +1,9 @@
 {
     "theme": {
         "colors": {
+            "blueGradienteBg":"linear-gradient(82deg, rgba(12,213,254,1) 0%, rgba(1,173,208,1) 48%, rgba(11,146,180,1) 100%)",
+            "orangeMufasaGradient":"linear-gradient(120deg, rgba(227,102,20,1) 0%, rgba(239,151,96,1) 86%, rgba(220,139,86,1) 100%);",
+            "taxRectangleYellow": "#FFAA00",
             "mufasaOrange": "#C95206",
             "lightMufasaOrange": "#E49447",
             "verySoftMufasaOrange": "#f3d8c8",
@@ -49,8 +52,17 @@
                 "height":{
                     "general": "40px"
                 },
+                "border":{
+                    "bottom": "2px"
+                },
                 "background": "linear-gradient(120deg, rgba(255,197,142,1) 0%, rgba(231,173,119,1) 86%, rgba(250,174,102,1) 100%)"
-            }    
+            },
+            "taxTimeBar":{
+                "elementWidth":{
+                    "general": "120px",
+                    "minWidth1024": "150px"
+                } 
+            }
         }
     }
 }

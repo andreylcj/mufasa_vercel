@@ -60,6 +60,9 @@ const Main = styled.main`
   will-change: transform;
   text-align:center;
   transition: all 0.4s;
+  ${'' /*
+  background: ${theme.colors.lightGrayBg}; */}
+  background: attr(data-validate);
 
   @media screen and (min-width: 1024px){
     transform: translateY(80px);
@@ -71,17 +74,17 @@ function Layout({ children }) {
   const router = useRouter();
   const { pathname } = router;
 
-  const bgColor = (pathname === '/login') ? theme.colors.mufasaOrange : '';
-  const translateProf = (pathname.indexOf('/carteira/rentabilidade') !== -1);
-  const translatePos = (pathname.indexOf('/carteira/posicoes') !== -1);
+  const translateProf = pathname.indexOf('/carteira/rentabilidade') !== -1
+  || pathname.indexOf('/imposto-de-renda') !== -1;
+  const translatePos = pathname.indexOf('/carteira/posicoes') !== -1;
   const translate = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
   const showHeader = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
-  const showFooter = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
+  const showFooter = (pathname === '/' || pathname === '/sobre-nos' || pathname === '/contato');
 
   return (
     <SiteContainer
       style={{
-        background: bgColor,
+        background: pathname === '/login' ? 'linear-gradient(120deg, rgb(228, 101, 18) 0%, rgb(201, 82, 6) 52%, rgb(187, 76, 4) 100%)' : theme.colors.lightGrayBg,
       }}
     >
 

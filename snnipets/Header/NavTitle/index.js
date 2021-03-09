@@ -27,10 +27,10 @@ function NavTitle({
     if (pathname === href
       && Object.keys(item.query).length === Object.keys(query).length) {
       resp = true;
-    } else if (pathname.indexOf('/carteira') !== -1) {
-      if (href.indexOf('/carteira') !== -1) {
-        resp = true;
-      }
+    } else if (pathname.indexOf('/carteira') !== -1 && href.indexOf('/carteira') !== -1) {
+      resp = true;
+    } else if (pathname.indexOf('/imposto-de-renda') !== -1 && href.indexOf('/imposto-de-renda') !== -1) {
+      resp = true;
     }
 
     return resp;

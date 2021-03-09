@@ -13,7 +13,7 @@ const SubHeaderTimeOptionsContainer = styled.div`
   font-weight: 500;
   font-size: 0.875rem;
   height: ${({ theme }) => theme.measuresPatterns.timeSelectBar.height.general};
-  border-bottom: 2px solid #333;
+  border-bottom: ${({ theme }) => theme.measuresPatterns.timeSelectBar.border.bottom} solid #333;
   transition: all 0.4s;
   tranform: translateY(0);
 
