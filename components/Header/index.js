@@ -9,7 +9,7 @@ top: 0px;
 z-index: 9;
 will-change: transform;
 font-weight: 500;
-font-size: 18px;
+font-size: 1rem;
 
 @media(max-width: 768px){
   .hide{
@@ -49,14 +49,14 @@ a{
   display: flex;
   
   img{
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
   }
 
   @media(max-width: 768px){
     img{
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 45px;
     }
   }
 }

@@ -23,7 +23,8 @@
             "element_input": "#c0bbcd",
             "soft_purple_back": "#f9f7fc",
             "purple_text": "rgb(41,23,77)",
-            "contrastText": "#FFFFFF"
+            "contrastText": "#FFFFFF",
+            "textGray": "#B4B4B4"
         },
         "shadows": {
             "shadow_glow_effect": "0 0 10px 2px",
@@ -38,19 +39,19 @@
         "measuresPatterns":{
             "header":{
                 "height":{
-                    "minWidth1024": "80px",
-                    "general": "64px"
+                    "minWidth1024": "56px",
+                    "general": "56px"
                 }
             },
             "subNav":{
                 "height":{
-                    "general": "45px"
+                    "general": "35px"
                 },
                 "background": "linear-gradient(120deg, rgba(227,102,20,1) 0%, rgba(239,151,96,1) 86%, rgba(220,139,86,1) 100%)"
             },
             "timeSelectBar":{
                 "height":{
-                    "general": "40px"
+                    "general": "35px"
                 },
                 "border":{
                     "bottom": "2px"

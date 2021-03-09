@@ -56,7 +56,7 @@ const SiteContainer = styled.div`
 
 const Main = styled.main`
 
-  transform: translateY(64px);
+  transform: translateY(${theme.measuresPatterns.header.height.general});
   will-change: transform;
   text-align:center;
   transition: all 0.4s;
@@ -65,7 +65,7 @@ const Main = styled.main`
   background: attr(data-validate);
 
   @media screen and (min-width: 1024px){
-    transform: translateY(80px);
+    transform: translateY(${theme.measuresPatterns.header.height.minWidth1024});
   }
 `;
 
