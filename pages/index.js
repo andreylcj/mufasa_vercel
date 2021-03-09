@@ -8,7 +8,7 @@ import OpenViewFormSection from '../sections/OpenViewFormSection';
 import WalletLp from '../sections/WalletLp';
 
 const LionBack = styled.div`
-  background-image: url("/images/LionBg/LpLion.jpg");
+  background-image: url("/images/webp/lionFREE.webp");
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;

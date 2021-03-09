@@ -15,11 +15,11 @@ const GlobalStyle = createGlobalStyle`
     /* New styles */
     display: flex;
     flex-direction: column;
-    background:  #CDD1DC;
     font-family: 'Montserrat', sans-serif;
   }
   html, body {
     min-height: 100vh;
+    scroll-behavior: smooth;
   }
   #__next {
     flex: 1;

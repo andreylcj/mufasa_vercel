@@ -1,337 +1,244 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, {
+  useState, useEffect, useContext,
+} from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { DataContext } from '../../store/GlobalState';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
-
-const HeaderContainer = styled.header`
-  background-color: #fff;
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  z-index: 9;
-  will-change: transform;
-  font-weight: 500;
-  font-size: 18px;
-
-  @media(max-width: 768px){
-    .hide{
-      display: none;
-    }
-  }
-
-  @media screen and (min-width: 1024px){
-    height: 80px;
-  }
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  position: relative;
-  background-color: rgb(255, 255, 255);
-  height: 64px;
-  padding: 0px 1rem;
-  box-shadow: rgb(0 0 0 / 15%) 0px 1px 2px;
-  will-change: transform;
-  transition: transform 0.2s ease 0s;
-  background-color: #fff;
-
-  @media (max-width: 768px){
-    justify-content: space-between;
-  }
-
-  @media screen and (min-width: 1024px){
-    height: 80px;
-  }
-  @media screen and (min-width: 768px){
-    padding: 0px 2rem;
-  }
-`;
-
-const LogoContainer = styled.div`
-  flex-grow: 0;
-  a{
-    display: flex;
-    
-    img{
-      width: 55px;
-      height: 55px;
-    }
-
-    @media(max-width: 768px){
-      img{
-        width: 50px;
-        height: 50px;
-      }
-    }
-  }
-`;
-
-const NavOptions = styled.div`
-  margin-left: 20px;
-  flex-grow: 1;
-
-  ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-    display: flex;
-
-    a{
-      text-decoration: none;
-      color: #313131;
-
-      @media (min-width: 768px){
-        padding: 0px 20px;
-        -webkit-box-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        align-items: center;
-      }   
-    }
-
-    .selected-nav{
-      color: #c95206;
-    }
-
-    a.selected-nav:hover{
-      color: #c95206;
-    }
-
-    a:hover{
-      color: #fda46b;
-    }
-  }
-`;
+import SubNavWalletOptions from './SubNavWalletOptions';
+import TimeOptionBar from './TimeOptionBar';
+import { headerNavTitles } from '../../constants';
+import HeaderContainer from '../../components/Header';
+import NavTitle from '../../snnipets/Header/NavTitle';
+import MobileLinks from './MobileLinks';
+import ButtonShowMenu from '../../snnipets/Header/ButtonShowMenu';
+import FadeOut from '../../components/FadeOutHorizontal';
+import TaxTimeBar from './TaxTimeBar';
 
 function Header() {
   const router = useRouter();
-  const pathName = router.pathname;
+  const { pathname, query } = router;
+  const [state, dispatch] = useContext(DataContext);
+  const { auth } = state;
 
-  const lpHeader = [
-    {
-      title: 'Início',
-      href: '/',
-    },
-    {
-      title: 'Produtos',
-      href: '/produtos',
-    },
-    {
-      title: 'Sobre Nós',
-      href: '/sobre-nos',
-    },
-    {
-      title: 'Contato',
-      href: '/contato',
-    },
-    {
-      title: 'Conteúdo',
-      href: '/conteudo',
-    },
-  ];
-
-  const [navTitles, setNavTitles] = useState(lpHeader);
+  const [navTitles, setNavTitles] = useState(headerNavTitles.landingPage);
   const [showMobile, setShowMobile] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [elementBgLeft, setElementBgLeft] = useState(3);
+  const [elementBgWidth, setElementBgWidth] = useState(0);
+  const [itemsInfo, setItemsInfo] = useState([]);
+
+  const [pageTitle, setPageTitle] = useState('');
 
   useEffect(() => {
-    if (pathName.indexOf('bend-admin') !== -1) {
-      setNavTitles([
-        {
-          title: 'Website',
-          href: '/',
-        },
-        {
-          title: 'My Profile',
-          href: '/bend-admin/profile',
-        },
-        {
-          title: 'Users',
-          href: '/bend-admin/users',
-        },
-      ]);
+    if (pathname.indexOf('bend-admin') !== -1) {
+      if (pageTitle.indexOf('bend-admin') !== -1) {
+        setPageTitle('bend-admin');
+        setItemsInfo([]);
+
+        setNavTitles(headerNavTitles.bend);
+      }
+    } else if (
+      pathname.indexOf('/carteira') !== -1 || pathname.indexOf('/imposto-de-renda') !== -1
+    ) {
+      if (pageTitle !== 'afterLogin') {
+        setPageTitle('afterLogin');
+        setItemsInfo([]);
+
+        setNavTitles(headerNavTitles.afterLogin);
+      }
+    } else if (pageTitle !== 'landingPage') {
+      setItemsInfo([]);
+      setPageTitle('landingPage');
+      setNavTitles(headerNavTitles.landingPage);
     }
-  }, [pathName]);
+  }, [pathname]);
 
   const handleClickToShowMobileMenu = () => {
     setShowMobile(!showMobile);
   };
 
-  return (
-    <HeaderContainer>
-      <Nav>
-        <LogoContainer>
-          <Link href="/">
-            <a>
-              <img src="/images/logo/icon.png" alt="Logo Mufasa" />
-            </a>
-          </Link>
-        </LogoContainer>
+  useEffect(() => {
+    if (itemsInfo.length === 0) return;
 
-        <NavOptions
-          className="hide"
-        >
-          <ul>
-            {
+    let selectedOption = -1;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].href === pathname
+        || itemsInfo[i].href.split('/')[1] === pathname.split('/')[1]) {
+        selectedOption = i;
+        break;
+      }
+    }
+
+    if (pageTitle === 'afterLogin' && selectedOption < 0) {
+      for (let i = 0; i < itemsInfo.length; i++) {
+        if (query.periodo) {
+          selectedOption = i;
+          break;
+        }
+      }
+    }
+
+    if (pageTitle === 'landingPage') {
+      if (query.scroll === '') {
+        for (let i = 0; i < itemsInfo.length; i++) {
+          if (itemsInfo[i].query.scroll) selectedOption = i;
+          break;
+        }
+      } else {
+        for (let i = 0; i < itemsInfo.length; i++) {
+          if (itemsInfo[i].href === pathname
+            && itemsInfo[i].query.scroll !== ''
+          ) {
+            selectedOption = i;
+            break;
+          }
+        }
+      }
+    }
+
+    if (selectedOption < 0) {
+      setElementBgLeft(0);
+      setElementBgWidth(0);
+      return;
+    }
+
+    let left = 0;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex < selectedOption) {
+        left += itemsInfo[i].elementWidth;
+      }
+    }
+
+    let width;
+    for (let i = 0; i < itemsInfo.length; i++) {
+      if (itemsInfo[i].elementIndex === selectedOption) {
+        width = itemsInfo[selectedOption].elementWidth;
+        break;
+      }
+    }
+
+    setElementBgLeft(left);
+    setElementBgWidth(width);
+  }, [pathname, itemsInfo]);
+
+  const updateItemsInfo = (data) => {
+    setItemsInfo((prevItemsInfo) => {
+      let indexToExclude = -1;
+      for (let i = 0; i < prevItemsInfo.length; i++) {
+        if ((prevItemsInfo[i].elementIndex === data.elementIndex)) {
+          indexToExclude = i;
+          break;
+        }
+      }
+
+      let newArray = prevItemsInfo.slice();
+      if (indexToExclude >= 0) {
+        newArray = [...newArray.slice(0, indexToExclude),
+          ...newArray.slice(indexToExclude + 1, newArray.length)];
+      }
+      return ([...newArray, data]);
+    });
+  };
+
+  return (
+    <>
+      <HeaderContainer>
+        <HeaderContainer.Nav>
+          <HeaderContainer.LogoContainer>
+            <Link href="/">
+              <a>
+                <img src="/images/logo/icon.png" alt="Logo Mufasa" />
+              </a>
+            </Link>
+          </HeaderContainer.LogoContainer>
+
+          <HeaderContainer.NavOptions
+            className="hide"
+          >
+            <ul>
+              {
             navTitles.map((navTitle, index) => {
-              const navTitleId = `navTitle__${index}`;
+              const navTitleId = `navTitle__${navTitle.href}_${index}`;
               return (
                 <NavTitle
+                  updateParentState={updateItemsInfo}
+                  index={index}
                   title={navTitle.title}
                   href={navTitle.href}
-                  pathName={pathName}
+                  pathname={pathname}
                   key={navTitleId}
+                  item={navTitle}
+                  query={query}
+                  onClick={() => {
+                    setSelectedIndex(index);
+                  }}
                 />
               );
             })
           }
-          </ul>
-        </NavOptions>
+              <HeaderContainer.NavOptions.ItemBg
+                style={{
+                  width: elementBgWidth,
+                  left: elementBgLeft,
+                  maxWidth: elementBgWidth,
+                }}
+              />
+            </ul>
+          </HeaderContainer.NavOptions>
 
-        <ButtonUnderlineHover
-          href="/entrar"
-          color="#c95206"
-          bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
-          hide
-        >
-          Login
-          <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
-        </ButtonUnderlineHover>
+          <FadeOut />
 
-        <MobileLinks
-          showMobile={showMobile}
-          navTitles={navTitles}
-          pathName={pathName}
-          onClick={handleClickToShowMobileMenu}
-        />
-
-        <ButtonShowMenu onClick={handleClickToShowMobileMenu} showMobile={showMobile} />
-
-      </Nav>
-
-    </HeaderContainer>
-  );
-}
-
-const ButtonOpenMobile = styled.button`
-  background: #fff;
-  border: none;
-  border-radius: 100%;
-  height: 3rem;
-  width: 3rem;
-
-  @media(min-width: 768px){
-    display: none;
-  }
-
-  &:focus{
-    background-color: ${({ theme }) => theme.colors.verySoftMufasaOrange};
-    outline: none;
-  }
-
-  &:active{
-    background-color: #f5b18a;
-    outline: none;
-  }
-
-  i{
-    color: rgb(17,17,17);
-  }
-`;
-
-function ButtonShowMenu({ onClick, showMobile }) {
-  return (
-    <ButtonOpenMobile onClick={onClick}>
-      {
-       showMobile ? (
-         <i className="fas fa-times" />
-       ) : (
-         <i className="fas fa-bars" />
-       )
-     }
-    </ButtonOpenMobile>
-  );
-}
-
-const ContainerMobileLinks = styled.div`
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  overflow-x: auto;
-  background-color: rgb(255, 255, 255);
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 64px;
-  height: calc(100vh - 64px);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  transform: translateY(-100vh);
-  transition: transform 0.2s ease-out 0s;
-  will-change: transform;
-`;
-
-function MobileLinks({
-  showMobile, navTitles, pathName, onClick,
-}) {
-  const styleMobile = showMobile ? 'translateY(0)' : 'translateY(-100vh)';
-  return (
-    <ContainerMobileLinks
-      style={{
-        transform: styleMobile,
-      }}
-    >
-      <NavOptions>
-        <ul style={{ display: 'inherit' }}>
           {
-            navTitles.map((navTitle, index) => {
-              const navTitleId = `navTitle__${index}`;
-              return (
-                <li
-                  key={navTitleId}
-                  style={{ marginBottom: '8px' }}
-                >
-                  <Link href={navTitle.href}>
-                    <a
-                      className={pathName === navTitle.href ? 'selected-nav' : ''}
-                      onClick={onClick}
-                    >
-                      {navTitle.title}
-                    </a>
-                  </Link>
-                </li>
-              );
-            })
+            pathname === '/' ? (
+              <ButtonUnderlineHover
+                href="/login"
+                color="#c95206"
+                bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
+                hide
+              >
+                Login
+                <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
+              </ButtonUnderlineHover>
+            ) : (
+              <div
+                style={{
+                  color: '#C95206',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  padding: '0 20px',
+                }}
+              >
+                <span>
+                  user.email@gmail.com
+                </span>
+                <i className="fas fa-caret-down" style={{ marginLeft: '11px', fontSize: '20px' }} />
+              </div>
+            )
           }
-        </ul>
-        <ButtonUnderlineHover
-          href="/entrar"
-          color="#c95206"
-          bg="linear-gradient(120deg, rgba(201,82,6,1) 0%, rgba(201,82,6,1) 100%)"
-          otherStyles={{ marginLeft: '0' }}
-          onClick={onClick}
-        >
-          Login
-          <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
-        </ButtonUnderlineHover>
-      </NavOptions>
-    </ContainerMobileLinks>
-  );
-}
 
-function NavTitle({ title, href, pathName }) {
-  return (
-    <li>
-      <Link href={href}>
-        <a className={`${pathName === href ? 'selected-nav' : ''}`}>
-          {title}
-        </a>
-      </Link>
-    </li>
+          <MobileLinks
+            showMobile={showMobile}
+            navTitles={navTitles}
+            pathname={pathname}
+            onClick={handleClickToShowMobileMenu}
+          />
+
+          <ButtonShowMenu
+            onClick={handleClickToShowMobileMenu}
+            showMobile={showMobile}
+
+          />
+
+        </HeaderContainer.Nav>
+
+      </HeaderContainer>
+      <SubNavWalletOptions />
+      <TimeOptionBar />
+      <TaxTimeBar />
+    </>
   );
 }
 

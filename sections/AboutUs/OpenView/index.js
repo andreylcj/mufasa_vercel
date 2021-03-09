@@ -1,78 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const SecContainer = styled.div`
-  position:relative;
-  min-height: calc(100vh - 80px);
-  overflow: hidden;
-`;
-
-const ImageBg = styled.div`
-  background-image: url("/images/aboutus/Lion_Laid.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: calc(100vh - 80px);
-  transform: scale(1.1); 
-  filter: blur(6px);
-  -webkit-filter: blur(6px);
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const BlackBg = styled.div`
-  background-color: rgba(0,0,0,0.65);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const FeaturedTitle = styled.div`
-  text-align: center;
-  padding-top: 10vh;
-  max-width: 700px;
-  margin: auto;
-
-  p{
-    text-align: center;
-    color: #707070;
-    font-size: 1.75rem;
-    font-weight: 600;
-
-    &:after{
-      content: '';
-      border-bottom: 2px solid #707070;
-      width: 100px;
-      display: block;
-      height: 1px;
-      margin: auto;
-      margin-top: 15px;
-    }
-  }
-`;
+import SecContainer from '../../../components/AboutUs/OpenView';
 
 function OpenViewAboutUs() {
   return (
     <SecContainer>
-
-      <FeaturedTitle>
+      <SecContainer.FeaturedTitle>
         <p>
           No ano de 2020, mais de um milhão de
           brasileiros caiu na malha fina.
         </p>
-
-      </FeaturedTitle>
+      </SecContainer.FeaturedTitle>
 
       <div style={{ paddingLeft: '10vw', paddingTop: '20vh', textAlign: 'left' }}>
-        <Title style={{ flexDirection: 'row', justifyContent: 'start' }}>
+        <SecContainer.Title style={{ flexDirection: 'row', justifyContent: 'start' }}>
           Quem Somos
-        </Title>
-        <Text>
+        </SecContainer.Title>
+        <SecContainer.Text>
           O Mufasa é uma fintech brasileira especializada na tributação
           <br />
           relacionada ao mercado de investimentos.
@@ -85,7 +28,7 @@ function OpenViewAboutUs() {
           <br />
           Sabemos que o tempo dos traders é
           {' '}
-          <OrangeColor>precioso</OrangeColor>
+          <SecContainer.OrangeColor>precioso</SecContainer.OrangeColor>
           {' '}
           demais para ser
           <br />
@@ -93,30 +36,30 @@ function OpenViewAboutUs() {
           <br />
           objetivo
           {' '}
-          <OrangeColor>facilitar</OrangeColor>
+          <SecContainer.OrangeColor>facilitar</SecContainer.OrangeColor>
           {' '}
           a vida do investidor.
           <br />
-        </Text>
+        </SecContainer.Text>
       </div>
 
       <div style={{
         paddingRight: '10vw', paddingTop: '20vh', paddingBottom: '20vh', textAlign: 'right',
       }}
       >
-        <Title style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+        <SecContainer.Title style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
           Nossa Missão
-        </Title>
-        <Text>
+        </SecContainer.Title>
+        <SecContainer.Text>
           "Proporcionar
           {' '}
-          <OrangeColor>conforto</OrangeColor>
+          <SecContainer.OrangeColor>conforto</SecContainer.OrangeColor>
           {' '}
           e desenvolver soluções que possibilitem aos
           <br />
           nossos clientes obter melhores
           {' '}
-          <OrangeColor>resultados</OrangeColor>
+          <SecContainer.OrangeColor>resultados</SecContainer.OrangeColor>
           {' '}
           em suas atividades
           <br />
@@ -129,56 +72,15 @@ function OpenViewAboutUs() {
           <br />
           realmente importa:
           {' '}
-          <OrangeColor>Os investimentos</OrangeColor>
+          <SecContainer.OrangeColor>Os investimentos</SecContainer.OrangeColor>
           .
-        </Text>
+        </SecContainer.Text>
       </div>
 
-      <ImageBg>
-        <BlackBg />
-      </ImageBg>
+      <SecContainer.ImageBg>
+        <SecContainer.BlackBg />
+      </SecContainer.ImageBg>
     </SecContainer>
-  );
-}
-
-const ArticleContainer = styled.div`
-`;
-
-const Title = styled.h3`
-
-color: ${({ theme }) => theme.colors.lightMufasaOrange};
-margin-bottom: 20px;
-display: flex;
-align-items: center;
-
-&:before{
-  content: '';
-  border-left: 4px solid ${({ theme }) => theme.colors.mufasaOrange};
-  width: 1px;
-  display: block;
-  height: 30px;
-  margin-right: 20px;
-}
-`;
-const Text = styled.p`
-  display: contents;
-  color: #fff;
-`;
-
-const OrangeColor = styled.strong`
-  color: ${({ theme }) => theme.colors.lightMufasaOrange};
-`;
-
-function ContentArticle({ title, children }) {
-  return (
-    <ArticleContainer>
-      <Title>
-        {title}
-      </Title>
-      <Text>
-        {children}
-      </Text>
-    </ArticleContainer>
   );
 }
 

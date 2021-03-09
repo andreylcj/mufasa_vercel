@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import GoogleLogin from 'react-google-login';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 import { postData } from '../../../assets/utils/fetchData';
@@ -46,14 +47,44 @@ export default function GoogleLog() {
   useEffect(() => {
     if (Object.keys(auth).length !== 0) router.push('/');
   }, [auth]); return (
-    <div>
+    <GoogleContainer>
       <GoogleLogin
+        className="beauty-login-with"
         clientId="563786372572-bbe6ifo4eslnm6710fh6b4ujog0qh0nb.apps.googleusercontent.com"
-        buttonText="Login"
+        buttonText="Continuar com o Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy="single_host_origin"
       />
-    </div>
+    </GoogleContainer>
   );
 }
+
+const GoogleContainer = styled.div`
+  .beauty-login-with{
+    color: #707070 !important;
+    border: 1px solid #707070 !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: none !important;
+    margin: 17px 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    transition: all 0.3s !important;
+    font-family: inherit !important;
+    font-size: 15px !important;
+
+    &:hover{
+      background: rgba(0 0 0 / 10%) !important;
+      opacity: 1 !important;
+    }
+
+    div{
+      background: transparent !important;
+    }
+  }
+`;

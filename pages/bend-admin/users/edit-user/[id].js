@@ -4,7 +4,7 @@ import { DataContext } from '../../../../store/GlobalState';
 import { getData, patchData } from '../../../../assets/utils/fetchData';
 import { updateItem } from '../../../../store/Actions';
 import GoBackButton from '../../../../snnipets/GoBackButton';
-import UpdateButton from '../../../../snnipets/UpdateButton';
+import UpdateButton from '../../../../sections/Short/UpdateButton';
 
 function EditUser() {
   const router = useRouter();
