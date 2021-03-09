@@ -190,7 +190,7 @@ function Header() {
           <FadeOut />
 
           {
-            pathname === '/' ? (
+            pageTitle === 'landingPage' ? (
               <ButtonUnderlineHover
                 href="/login"
                 color="#c95206"
