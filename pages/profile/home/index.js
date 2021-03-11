@@ -57,28 +57,28 @@ function Home() {
 
     const router = useRouter()
 
-    /*useEffect(() => {
+    useEffect(() => {
         if (Object.keys(auth).length === 0) {
             router.push('/bend-admin/')
         } else if (Object.keys(auth).length !== 0 && !auth.user.admin) {
             router.push('/bend-admin/denied-access')
         }
 
-    }, [auth])*/
+    }, [auth])
 
     return (
         <div className="d-flex flex-column">
             <p className="mx-auto my-4">User HOME</p>
             
 
-           {/*{
+           {{
                 Object.keys(auth).length === 0 ?
                     (
                         ''
                     ) : (
                         loggedRouter()
                     )
-            }*/}
+            }}
         </div>
 
     )

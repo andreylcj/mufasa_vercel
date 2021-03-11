@@ -41,24 +41,30 @@ export default function GoogleLog() {
         user: data.user,
       },
     });
+    
+      
+    }
   };
   const router = useRouter();
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
-  }, [auth]); return (
+    if (Object.keys(auth).length !== 0) router.push('/carteira/rentabilidade?periodo=no-mes');
+  }, [auth]);
+  
+  
+  return (
     <GoogleContainer>
       <GoogleLogin
         className="beauty-login-with"
         clientId="563786372572-bbe6ifo4eslnm6710fh6b4ujog0qh0nb.apps.googleusercontent.com"
         buttonText="Continuar com o Google"
         onSuccess={responseGoogle}
-        onFailure={responseGoogle}
+        onFailure={console.log("deu ruim ")}
         cookiePolicy="single_host_origin"
       />
     </GoogleContainer>
   );
-}
+};
 
 const GoogleContainer = styled.div`
   .beauty-login-with{

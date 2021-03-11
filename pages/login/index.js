@@ -116,7 +116,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    /* const { emailMessage, passwordMessage } = validLogin(userData.email, userData.password);
+    const { emailMessage, passwordMessage } = validLogin(userData.email, userData.password);
 
     setSubmitStatus({
       emailMessage,
@@ -159,7 +159,7 @@ function Login() {
         token: new_auth.accessToken,
         user: new_auth.user,
       },
-    }); */
+    }); 
   };
 
   useEffect(() => {

@@ -8,7 +8,7 @@ const initialState = {
 
   },
   auth: {
-
+    
   },
   notify: {
 

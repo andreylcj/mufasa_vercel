@@ -12,10 +12,12 @@ export default function GoogleLog() {
   const { auth } = state;
 
   const responseGoogle = async (response) => {
+    
     const userData = {
-      email: response.Es.kt,
-    };
-    console.log(response);
+      email: response.profileObj.email,
+    }; 
+    console.log(userData);
+    
 
     const res = await postData('api/auth/login', userData);
     if (res.emailMessage) {
@@ -41,12 +43,17 @@ export default function GoogleLog() {
         user: data.user,
       },
     });
+    const router = useRouter();
+    router.push('/carteira/rentabilidade?periodo=no-mes');
+  
   };
   const router = useRouter();
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
-  }, [auth]); return (
+    //if (Object.keys(auth).length !== 0) router.push('/carteira/rentabilidade?periodo=no-mes');
+  }, [auth]); 
+  
+  return (
     <GoogleContainer>
       <GoogleLogin
         className="beauty-login-with"
