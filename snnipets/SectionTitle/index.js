@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Title = styled.div`
 padding: 8vh 10vw;
@@ -17,5 +18,12 @@ function SectionTitle({ children }) {
     </Title>
   );
 }
+
+SectionTitle.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
+};
 
 export default SectionTitle;

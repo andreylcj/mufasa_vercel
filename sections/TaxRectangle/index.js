@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import TaxRectangle from '../../components/TaxRectangle';
 
 function TaxRect({ data, setTaxHeight }) {
@@ -136,5 +137,12 @@ function TaxRect({ data, setTaxHeight }) {
     </TaxRectangle>
   );
 }
+
+TaxRect.propTypes = {
+  data: PropTypes.objectOf(
+    PropTypes.any,
+  ).isRequired,
+  setTaxHeight: PropTypes.func.isRequired,
+};
 
 export default TaxRect;

@@ -51,7 +51,7 @@ function OpenViewAboutUs() {
           Nossa Missão
         </SecContainer.Title>
         <SecContainer.Text>
-          "Proporcionar
+          &quot;Proporcionar
           {' '}
           <SecContainer.OrangeColor>conforto</SecContainer.OrangeColor>
           {' '}
@@ -63,7 +63,7 @@ function OpenViewAboutUs() {
           {' '}
           em suas atividades
           <br />
-          financeiras."
+          financeiras.&quot;
           <br />
           <br />
           Ao assumir a responsabilidade da parte tributária do trade, a nossa

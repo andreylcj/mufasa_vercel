@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types';
 import Layout from '../layout/Layout';
 import { DataProvider } from '../store/GlobalState';
 import db from '../db.json';
@@ -47,7 +48,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps }) {
-  console.log(theme);
   return (
     <>
       <Head>
@@ -69,5 +69,20 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.element,
+    PropTypes.array,
+    PropTypes.string,
+  ]),
+  // eslint-disable-next-line react/forbid-prop-types
+  pageProps: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+MyApp.defaultProps = {
+  Component: undefined,
+};
 
 export default MyApp;

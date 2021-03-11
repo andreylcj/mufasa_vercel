@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 const transition = 'ease-out 0.5s';
 
@@ -109,10 +110,9 @@ function ToggleQuestion({
   title, response, queryQuest,
 }) {
   const router = useRouter();
-  const { pathname, query } = router;
+  const { query } = router;
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState(0);
-  const [destUrl, setDestUrl] = useState('');
   const ref = useRef();
 
   useEffect(() => {
@@ -169,5 +169,11 @@ function ToggleQuestion({
     </ToggleContain>
   );
 }
+
+ToggleQuestion.propTypes = {
+  title: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
+  queryQuest: PropTypes.string.isRequired,
+};
 
 export default ToggleQuestion;

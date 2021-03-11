@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const InputFieldContainer = styled.div`
 
@@ -73,7 +74,7 @@ const InputFieldContainer = styled.div`
 `;
 
 function InputField({
-  submitMessage, userDataInfo, onChange, onBlur, value, initialMessage, type, autofocus, idAndName
+  submitMessage, userDataInfo, onChange, onBlur, value, initialMessage, type, autofocus, idAndName,
 }) {
   return (
     <InputFieldContainer className="mb-3">
@@ -91,22 +92,30 @@ function InputField({
             // onFocus={() => console.log('onFocus')}
           onBlur={onBlur}
         />
-        <InputPlaceHolder
-          text={submitMessage || initialMessage}
-          insertInfo={!!userDataInfo}
-          wrongInfo={submitMessage}
-        />
+        <span className={`input-placeholder ${userDataInfo ? 'inserted-info' : ''} ${submitMessage ? 'text-danger' : ''}`}>
+          {submitMessage || initialMessage}
+        </span>
       </label>
     </InputFieldContainer>
   );
 }
 
-function InputPlaceHolder({ text, insertInfo, wrongInfo }) {
-  return (
-    <span className={`input-placeholder ${insertInfo ? 'inserted-info' : ''} ${wrongInfo ? 'text-danger' : ''}`}>
-      {text}
-    </span>
-  );
-}
+InputField.propTypes = {
+  submitMessage: PropTypes.string.isRequired,
+  userDataInfo: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  initialMessage: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  autofocus: PropTypes.bool,
+  idAndName: PropTypes.string.isRequired,
+};
+
+InputField.defaultProps = {
+  userDataInfo: undefined,
+  initialMessage: undefined,
+  autofocus: false,
+};
 
 export default InputField;

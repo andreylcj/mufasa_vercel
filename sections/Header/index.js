@@ -1,9 +1,8 @@
 import React, {
-  useState, useEffect, useContext,
+  useState, useEffect,
 } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { DataContext } from '../../store/GlobalState';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
 import SubNavWalletOptions from './SubNavWalletOptions';
 import TimeOptionBar from './TimeOptionBar';
@@ -19,8 +18,6 @@ import UserInfoOnHover from '../../snnipets/Header/UserInfoOnHover';
 function Header() {
   const router = useRouter();
   const { pathname, query } = router;
-  const [state, dispatch] = useContext(DataContext);
-  const { auth } = state;
 
   const [navTitles, setNavTitles] = useState(headerNavTitles.landingPage);
   const [showMobile, setShowMobile] = useState(false);

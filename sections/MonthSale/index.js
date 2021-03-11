@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 function MonthSale({ sales, maxHeight }) {
   return (
@@ -162,5 +163,12 @@ MonthSales.FadeOut = styled.div`
   height: 50px;
   z-index: 2;
 `;
+
+MonthSale.propTypes = {
+  sales: PropTypes.arrayOf(
+    PropTypes.any,
+  ).isRequired,
+  maxHeight: PropTypes.number.isRequired,
+};
 
 export default MonthSale;

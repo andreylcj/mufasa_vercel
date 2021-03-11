@@ -1,7 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
-import { DataContext } from '../../../store/GlobalState';
 import { theme } from '../../../db.json';
 
 const GraphContainer = styled.div`
@@ -33,11 +31,6 @@ GraphContainer.Bg = styled.div`
 `;
 
 function Home() {
-  const [state, dispatch] = useContext(DataContext);
-  const { auth } = state;
-
-  const router = useRouter();
-
   const translate = parseFloat(theme.measuresPatterns.header.height.general.replace('px', ''))
   + parseFloat(theme.measuresPatterns.subNav.height.general.replace('px', ''));
 

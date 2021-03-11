@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Cookie from 'js-cookie';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import validRegister from '../../assets/utils/ValidateData/ValidRegister';
 import { postData } from '../../assets/utils/fetchData';
 import { DataContext } from '../../store/GlobalState';
 import InputField from '../../snnipets/InputField';
 
 function FormLogin({
-  children, isRegister, autofocus, idAndName,
+  children, isRegister, autofocus,
 }) {
   const [state, dispatch] = useContext(DataContext);
   const { userData, auth } = state;
@@ -140,7 +141,7 @@ function FormLogin({
         initialMessage="E-mail principal"
         type="email"
         value={userData.email}
-        idAndName={`email__${idAndName}`}
+        idAndName={`email_isRegister_${isRegister}`}
       />
       <InputField
         submitMessage={submitStatus.passwordMessage}
@@ -151,11 +152,25 @@ function FormLogin({
         initialMessage="Senha"
         type="password"
         value={userData.password}
-        idAndName={`password__${idAndName}`}
+        idAndName={`password_isRegister_${isRegister}`}
       />
       {children}
     </form>
   );
 }
+
+FormLogin.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
+  isRegister: PropTypes.bool,
+  autofocus: PropTypes.bool,
+};
+
+FormLogin.defaultProps = {
+  autofocus: false,
+  isRegister: false,
+};
 
 export default FormLogin;

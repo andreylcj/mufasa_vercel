@@ -12,8 +12,8 @@ export default function GoogleLog() {
   const { auth } = state;
 
   const responseGoogle = async (response) => {
-    return;
-    const userData = {
+
+    /* const userData = {
       email: response.Es.kt,
     };
     console.log(response);
@@ -41,7 +41,7 @@ export default function GoogleLog() {
         token: data.accessToken,
         user: data.user,
       },
-    });
+    }); */
   };
   const router = useRouter();
 

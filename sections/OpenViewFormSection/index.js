@@ -8,7 +8,7 @@ import Facebooke from '../../snnipets/facebooklogin';
 import OpenView from '../../components/OpenViewLp';
 
 function OpenViewFormSection() {
-  const [state, dispatch] = useContext(DataContext);
+  const [state] = useContext(DataContext);
   const { loading } = state;
 
   return (

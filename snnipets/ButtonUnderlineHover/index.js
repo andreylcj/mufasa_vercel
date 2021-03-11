@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 const DeskLoginButon = styled.div`
   flex-grow: 0;
@@ -30,7 +31,7 @@ const DeskLoginButon = styled.div`
 `;
 
 function ButtonUnderlineHover({
-  children, href, color, bg, otherStyles, hide, onClick
+  children, href, color, bg, otherStyles, hide, onClick,
 }) {
   return (
     <DeskLoginButon
@@ -53,5 +54,26 @@ function ButtonUnderlineHover({
     </DeskLoginButon>
   );
 }
+
+ButtonUnderlineHover.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
+  href: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  bg: PropTypes.string,
+  otherStyles: PropTypes.objectOf(PropTypes.any),
+  hide: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+ButtonUnderlineHover.defaultProps = {
+  color: undefined,
+  bg: undefined,
+  otherStyles: undefined,
+  hide: undefined,
+  onClick: () => {},
+};
 
 export default ButtonUnderlineHover;

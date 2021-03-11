@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import HeaderContainer from '../../../components/Header';
 import ButtonUnderlineHover from '../../../snnipets/ButtonUnderlineHover';
 
@@ -50,5 +51,17 @@ function MobileLinks({
     </HeaderContainer.ContainerMobileLinks>
   );
 }
+
+MobileLinks.propTypes = {
+  showMobile: PropTypes.bool.isRequired,
+  navTitles: PropTypes.arrayOf(PropTypes.any).isRequired,
+  pathname: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+MobileLinks.defaultProps = {
+  onClick: () => {},
+  pathname: '',
+};
 
 export default MobileLinks;

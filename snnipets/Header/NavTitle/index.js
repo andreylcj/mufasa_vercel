@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 function NavTitle({
   title, href, pathname, onClick, item, query,
@@ -98,5 +99,18 @@ position: relative;
     color: #fda46b;
   }
 `;
+
+NavTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  item: PropTypes.oneOfType([PropTypes.any]).isRequired,
+  query: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+NavTitle.defaultProps = {
+  onClick: () => {},
+};
 
 export default NavTitle;

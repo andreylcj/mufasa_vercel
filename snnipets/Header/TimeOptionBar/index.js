@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import useWindowSize from '../../../assets/utils/GetWindowDimensions';
+import PropTypes from 'prop-types';
 
 const SubNavItemContainer = styled.li`
 height: 100%;
@@ -72,7 +72,7 @@ a{
 `;
 
 function SubNavItem({
-  href, title, selectedItem, index, updateParentState, query,
+  href, title, selectedItem, query,
 }) {
   const stringQuery = () => {
     let resp = '';
@@ -95,5 +95,12 @@ function SubNavItem({
     </SubNavItemContainer>
   );
 }
+
+SubNavItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  selectedItem: PropTypes.bool.isRequired,
+  query: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default SubNavItem;

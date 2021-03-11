@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
   color: #C95206;
@@ -107,7 +108,7 @@ function UserInfoOnHover() {
 function UserTitle({ children, noBorder }) {
   return (
     <UserTitleContainer>
-      <Link href="">
+      <Link href="/">
         <a className={noBorder ? 'no-border' : ''}>
           {children}
         </a>
@@ -150,5 +151,14 @@ alignt-items: center;
     border-bottom: none;
   }
 `;
+
+UserTitle.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.any]).isRequired,
+  noBorder: PropTypes.bool,
+};
+
+UserTitle.defaultProps = {
+  noBorder: false,
+};
 
 export default UserInfoOnHover;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ListNavItem = styled.li`
 
@@ -42,5 +43,20 @@ function ListNav({
     </ListNavItem>
   );
 }
+
+ListNav.propTypes = {
+  text: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  color: PropTypes.string,
+  iconClassName: PropTypes.string,
+  fontSize: PropTypes.string,
+};
+
+ListNav.defaultProps = {
+  href: '',
+  color: undefined,
+  iconClassName: undefined,
+  fontSize: undefined,
+};
 
 export default ListNav;

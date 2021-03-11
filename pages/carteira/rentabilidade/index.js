@@ -1,13 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { DataContext } from '../../../store/GlobalState';
 import GraphContainer from '../../../components/GraphContainer';
 import { theme } from '../../../db.json';
 
 function Home() {
-  const [state, dispatch] = useContext(DataContext);
-  const { auth } = state;
-
   const router = useRouter();
   const { pathname, query } = router;
 

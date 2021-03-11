@@ -3,59 +3,9 @@ import React, { useEffect, useState } from 'react';
 import SubHeaderContainer from '../../../components/Header/TaxBarTimeMonth';
 import { theme } from '../../../db.json';
 import SubNavItem from '../../../snnipets/Header/TaxTimeBar/MonthItem';
+import { months } from '../../../constants';
 
 function TaxTimeBar() {
-  const months = [
-    {
-      title: 'FEV 21',
-      tax: 23.12,
-    },
-    {
-      title: 'JAN 21',
-      tax: 2.12,
-    },
-    {
-      title: 'DEZ 20',
-      tax: 0,
-    },
-    {
-      title: 'NOV 20',
-      tax: 0,
-    },
-    {
-      title: 'OUT 20',
-      tax: 0,
-    },
-    {
-      title: 'SET 20',
-      tax: 23.12,
-    },
-    {
-      title: 'AGO 20',
-      tax: 23.12,
-    },
-    {
-      title: 'JUL 20',
-      tax: 23.12,
-    },
-    {
-      title: 'JUN 20',
-      tax: 23.12,
-    },
-    {
-      title: 'MAI 20',
-      tax: 23.12,
-    },
-    {
-      title: 'ABR 20',
-      tax: 23.12,
-    },
-    {
-      title: 'MAR 20',
-      tax: 23.12,
-    },
-  ];
-
   months.reverse();
   const itemsCount = months.length;
 
@@ -150,13 +100,6 @@ function TaxTimeBar() {
           );
         })
       }
-          {/* <SubHeaderContainer.ItemBg
-            style={{
-              width: elementBgWidth,
-              left: elementBgLeft,
-              borderRadius: '0',
-            }}
-          /> */}
         </SubHeaderContainer.UL>
       </SubHeaderContainer.UlContain>
 

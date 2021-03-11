@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ButtonContain = styled.div`
   display: flex;
@@ -58,5 +59,13 @@ function SubmitButton({ children, arrowIcon }) {
     </ButtonContain>
   );
 }
+
+SubmitButton.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
+  arrowIcon: PropTypes.bool.isRequired,
+};
 
 export default SubmitButton;

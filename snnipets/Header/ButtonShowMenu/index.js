@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ButtonOpenMobile = styled.button`
   background: #fff;
@@ -40,5 +41,15 @@ function ButtonShowMenu({ onClick, showMobile }) {
     </ButtonOpenMobile>
   );
 }
+
+ButtonShowMenu.propTypes = {
+  onClick: PropTypes.func,
+  showMobile: PropTypes.bool,
+};
+
+ButtonShowMenu.defaultProps = {
+  showMobile: false,
+  onClick: () => {},
+};
 
 export default ButtonShowMenu;
