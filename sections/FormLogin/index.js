@@ -52,7 +52,7 @@ function FormLogin({
     e.preventDefault();
 
     if (!isRegister) {
-      router.push('/carteira/rentabilidade?periodo=no-mes');
+      router.push('/app/carteira/rentabilidade?periodo=no-mes');
       return;
     }
 

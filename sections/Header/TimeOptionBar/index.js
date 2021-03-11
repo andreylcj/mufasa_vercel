@@ -11,15 +11,15 @@ function TimeOptionBar() {
 
   const subNavOptions = timeOptionsNavBar;
 
-  const showSubNav = (pathname.indexOf('/carteira') !== -1);
+  const showSubNav = (pathname.indexOf('/app/carteira') !== -1);
 
   const itemHeight = theme.measuresPatterns.timeSelectBar.height.general;
   const itemHeightSubNav = theme.measuresPatterns.subNav.height.general;
   const translateTimeNav = () => {
     let resp;
-    if (pathname.indexOf('rentabilidade') !== -1) {
+    if (pathname.indexOf('/app/carteira/rentabilidade') !== -1) {
       resp = 'translateY(0)';
-    } else if (pathname.indexOf('posicoes') !== -1) {
+    } else if (pathname.indexOf('/app/carteira/posicoes') !== -1) {
       resp = `translateY(-${itemHeight})`;
     } else {
       const totalHeight = parseFloat(itemHeight.replace('px', '')) + parseFloat(itemHeightSubNav.replace('px', ''));

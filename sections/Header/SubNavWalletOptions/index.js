@@ -9,12 +9,12 @@ function SubNavWalletOptions() {
   const router = useRouter();
   const { pathname } = router;
 
-  const showSubNav = (pathname.indexOf('/carteira') !== -1);
+  const showSubNav = (pathname.indexOf('/app/carteira') !== -1);
 
   const itemHeight = theme.measuresPatterns.subNav.height.general;
   const translateTimeNav = () => {
     let resp;
-    if (pathname.indexOf('carteira') !== -1) {
+    if (pathname.indexOf('/app/carteira') !== -1) {
       resp = 'translateY(0)';
     } else {
       resp = `translateY(-${itemHeight})`;

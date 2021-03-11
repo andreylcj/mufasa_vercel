@@ -64,8 +64,14 @@ SubmitButton.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
   ]).isRequired,
-  arrowIcon: PropTypes.bool.isRequired,
+  arrowIcon: PropTypes.bool,
+};
+
+SubmitButton.defaultProps = {
+  arrowIcon: undefined,
 };
 
 export default SubmitButton;

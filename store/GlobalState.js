@@ -1,20 +1,72 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import reducers from './Reducers';
 import { ACTION } from './Actions';
 import { getData } from '../assets/utils/fetchData';
 import initialState from './InitialState';
+import { headerNavTitles } from '../constants';
 
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducers, initialState);
 
-  const { auth } = state;
+  const { auth, pageTitle } = state;
 
-  // AUTH
+  const router = useRouter();
+  const { pathname } = router;
+
+  // PAGE TITLE & NAV TITLE
+  useEffect(() => {
+    if (pathname.indexOf('/bend-admin/') !== -1) {
+      if (pageTitle !== 'bendAdmin') {
+        dispatch({
+          type: ACTION.PAGE_TITLE,
+          payload: 'bendAdmin',
+        });
+
+        dispatch({
+          type: ACTION.NAV_TITLES,
+          payload: headerNavTitles.bend,
+        });
+      }
+    } else if (
+      pathname.indexOf('/app/') !== -1
+    ) {
+      if (pageTitle !== 'afterLogin') {
+        dispatch({
+          type: ACTION.PAGE_TITLE,
+          payload: 'afterLogin',
+        });
+
+        dispatch({
+          type: ACTION.NAV_TITLES,
+          payload: headerNavTitles.afterLogin,
+        });
+      }
+    } else {
+      dispatch({
+        type: ACTION.PAGE_TITLE,
+        payload: 'landingPage',
+      });
+
+      dispatch({
+        type: ACTION.NAV_TITLES,
+        payload: headerNavTitles.landingPage,
+      });
+    }
+  }, [pathname]);
+
+  // AUTH & IS OLD USER
   useEffect(async () => {
     const firstLogin = localStorage.getItem('firstLogin');
+
+    dispatch({
+      type: ACTION.UPDATE_OLD_USER,
+      payload: true,
+    });
+
     if (firstLogin) {
       const res = await getData('api/auth/accessToken');
 

@@ -84,13 +84,13 @@ function UserInfoOnHover() {
       </span>
       <i className="fas fa-caret-down" style={{ marginLeft: '11px', fontSize: '20px' }} />
       <Container.OptionsBox className="user-options">
-        <UserTitle>
+        <UserTitle href="">
           Meus Dados
         </UserTitle>
-        <UserTitle>
+        <UserTitle href="/app/dados-cei">
           Sincronizar dados do CEI
         </UserTitle>
-        <UserTitle noBorder>
+        <UserTitle noBorder href="/">
           Sair
           <i
             className="fas fa-sign-out-alt"
@@ -105,10 +105,10 @@ function UserInfoOnHover() {
   );
 }
 
-function UserTitle({ children, noBorder }) {
+function UserTitle({ children, noBorder, href }) {
   return (
     <UserTitleContainer>
-      <Link href="/">
+      <Link href={href}>
         <a className={noBorder ? 'no-border' : ''}>
           {children}
         </a>
@@ -155,6 +155,7 @@ alignt-items: center;
 UserTitle.propTypes = {
   children: PropTypes.oneOfType([PropTypes.any]).isRequired,
   noBorder: PropTypes.bool,
+  href: PropTypes.string.isRequired,
 };
 
 UserTitle.defaultProps = {

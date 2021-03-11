@@ -1,12 +1,16 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SubHeaderContainer from '../../../components/Header/TaxBarTimeMonth';
 import { theme } from '../../../db.json';
 import SubNavItem from '../../../snnipets/Header/TaxTimeBar/MonthItem';
-import { months } from '../../../constants';
+import { requestedMonths } from '../../../constants';
+import { DataContext } from '../../../store/GlobalState';
 
 function TaxTimeBar() {
-  months.reverse();
+  const [state] = useContext(DataContext);
+  const { oldUser } = state;
+
+  const months = requestedMonths.slice().reverse();
   const itemsCount = months.length;
 
   const router = useRouter();
@@ -16,27 +20,21 @@ function TaxTimeBar() {
   const [translate, setTranslate] = useState('');
 
   useEffect(() => {
-    if (showSubNav && !query.periodo && months.length > 0) {
-      router.push(`/imposto-de-renda?periodo=${months[months.length - 1].title.replace(' ', '-').toLocaleLowerCase()}`);
-    }
-
     if (!oldUser) {
       setTranslate(`translateY(-${realHeight}px)`);
       setShowSubNav(false);
-    } else if (pathname.indexOf('/imposto-de-renda') !== -1) {
+    } else if (pathname.indexOf('/app/imposto-de-renda') !== -1) {
       setTranslate('translateY(0)');
       setShowSubNav(true);
     } else {
       setTranslate(`translateY(-${realHeight}px)`);
       setShowSubNav(false);
     }
-  }, [pathname]);
+  }, [pathname, oldUser]);
 
   const itemHeight = theme.measuresPatterns.timeSelectBar.height.general;
   const itemHeightSubNav = theme.measuresPatterns.subNav.height.general;
   const realHeight = parseFloat(itemHeight.replace('px', '')) + parseFloat(itemHeightSubNav.replace('px', ''));
-
-  const oldUser = false;
 
   const elementWidth = parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.replace('px', ''));
 
@@ -57,7 +55,7 @@ function TaxTimeBar() {
   return (
     <SubHeaderContainer
       style={{
-        pointerEvents: showSubNav ? 'intial' : 'none',
+        pointerEvents: showSubNav ? 'initial' : 'none',
         opacity: showSubNav ? '1' : '0',
         transform: translate,
       }}

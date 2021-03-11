@@ -1,12 +1,12 @@
 import React, {
-  useState, useEffect,
+  useState, useContext,
 } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { DataContext } from '../../store/GlobalState';
 import ButtonUnderlineHover from '../../snnipets/ButtonUnderlineHover';
 import SubNavWalletOptions from './SubNavWalletOptions';
 import TimeOptionBar from './TimeOptionBar';
-import { headerNavTitles } from '../../constants';
 import HeaderContainer from '../../components/Header';
 import NavTitle from '../../snnipets/Header/NavTitle';
 import MobileLinks from './MobileLinks';
@@ -19,31 +19,10 @@ function Header() {
   const router = useRouter();
   const { pathname, query } = router;
 
-  const [navTitles, setNavTitles] = useState(headerNavTitles.landingPage);
+  const [state] = useContext(DataContext);
+  const { navTitles, pageTitle } = state;
+
   const [showMobile, setShowMobile] = useState(false);
-
-  const [pageTitle, setPageTitle] = useState('');
-
-  useEffect(() => {
-    if (pathname.indexOf('bend-admin') !== -1) {
-      if (pageTitle.indexOf('bend-admin') !== -1) {
-        setPageTitle('bend-admin');
-
-        setNavTitles(headerNavTitles.bend);
-      }
-    } else if (
-      pathname.indexOf('/carteira') !== -1 || pathname.indexOf('/imposto-de-renda') !== -1
-    ) {
-      if (pageTitle !== 'afterLogin') {
-        setPageTitle('afterLogin');
-
-        setNavTitles(headerNavTitles.afterLogin);
-      }
-    } else if (pageTitle !== 'landingPage') {
-      setPageTitle('landingPage');
-      setNavTitles(headerNavTitles.landingPage);
-    }
-  }, [pathname]);
 
   const handleClickToShowMobileMenu = () => {
     setShowMobile(!showMobile);

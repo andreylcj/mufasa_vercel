@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import GraphContainer from '../../../components/GraphContainer';
-import { theme } from '../../../db.json';
+import GraphContainer from '../../../../components/GraphContainer';
+import { theme } from '../../../../db.json';
 
 function Home() {
   const router = useRouter();
@@ -12,13 +12,13 @@ function Home() {
     periodo: 'no-mes',
   };
   useEffect(() => {
-    if (Object.keys(query).length === 0) {
+    if (!query.periodo) {
       router.push({
-        pathname,
+        pathname: '/app/carteira/rentabilidade',
         query: initialQuery,
       });
     }
-  }, [query]);
+  }, [pathname, query]);
 
   const translate = parseFloat(theme.measuresPatterns.header.height.general.replace('px', ''))
   + parseFloat(theme.measuresPatterns.subNav.height.general.replace('px', ''))

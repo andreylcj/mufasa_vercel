@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import cpfMask from '../../../assets/utils/InputDataMask/cpfMask';
+import { DataContext } from '../../../store/GlobalState';
 
 const InputContain = styled.div`
 position: relative;
@@ -138,6 +139,18 @@ function InputContainer({
       setFocus(false);
     }
   }, [sendClick]);
+
+  const [state] = useContext(DataContext);
+  const { oldUser } = state;
+
+  useEffect(() => {
+    if (!oldUser) return;
+    if (inputName === 'cpf') {
+      setInputValue(cpfMask('23434234334'));
+    } else {
+      setInputValue('adsadavsas');
+    }
+  }, [oldUser]);
 
   const [focus, setFocus] = useState(true);
   const [viewPassword, setViewPassword] = useState(false);

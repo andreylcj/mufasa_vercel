@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../../db.json';
+import { theme } from '../../../../db.json';
 
 const GraphContainer = styled.div`
   min-height: calc(100vh 

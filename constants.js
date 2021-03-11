@@ -44,14 +44,14 @@ export const headerNavTitles = {
   afterLogin: [
     {
       title: 'Carteira',
-      href: '/carteira/rentabilidade',
+      href: '/app/carteira/rentabilidade',
       query: {
         periodo: 'no-mes',
       },
     },
     {
       title: 'Imposto de Renda',
-      href: '/imposto-de-renda',
+      href: '/app/imposto-de-renda',
       query: { },
     },
   ],
@@ -60,35 +60,35 @@ export const headerNavTitles = {
 export const timeOptionsNavBar = [
   {
     title: 'No mês',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'no-mes',
     },
   },
   {
     title: '6 meses',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: '6-meses',
     },
   },
   {
     title: '12 meses',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: '12-meses',
     },
   },
   {
     title: '2021',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'no-ano',
     },
   },
   {
     title: 'Máximo',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'maximo',
     },
@@ -98,14 +98,14 @@ export const timeOptionsNavBar = [
 export const subNavOptions = [
   {
     title: 'Rentabilidade',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'no-mes',
     },
   },
   {
     title: 'Posições',
-    href: '/carteira/posicoes',
+    href: '/app/carteira/posicoes',
     query: { },
   },
 ];
@@ -252,7 +252,7 @@ export const questions = [
   },
 ];
 
-export const months = [
+export const requestedMonths = [
   {
     title: 'FEV 21',
     tax: 23.12,

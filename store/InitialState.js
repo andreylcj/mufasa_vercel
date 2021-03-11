@@ -1,4 +1,7 @@
 const initialState = {
+  navTitles: [],
+  pageTitle: 'landingPage',
+  oldUser: false,
   roles: [
     'master admin',
     'admin',

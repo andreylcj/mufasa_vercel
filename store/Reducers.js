@@ -5,6 +5,27 @@ const reducers = (state, action) => {
   const draftState = { ...state };
 
   switch (action.type) {
+    // NAV_TITLES
+    case ACTION.NAV_TITLES:
+      return {
+        ...draftState,
+        navTitles: action.payload,
+      };
+
+    // UPDATE_OLD_USER
+    case ACTION.PAGE_TITLE:
+      return {
+        ...draftState,
+        pageTitle: action.payload,
+      };
+
+    // UPDATE_OLD_USER
+    case ACTION.UPDATE_OLD_USER:
+      return {
+        ...draftState,
+        oldUser: action.payload,
+      };
+
     // ADD_MODAL
     case ACTION.ADD_MODAL:
       return {

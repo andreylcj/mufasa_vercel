@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
-import GraphContainer from '../../components/GraphContainer';
-import MonthSale from '../../sections/MonthSale';
-import NewUserAddCeiInfo from '../../sections/NewUserAddCeiInfo';
-import TaxRect from '../../sections/TaxRectangle';
-import { theme } from '../../db.json';
-import { monthSales } from '../../constants';
+import React, { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import GraphContainer from '../../../components/GraphContainer';
+import MonthSale from '../../../sections/MonthSale';
+import NewUserAddCeiInfo from '../../../sections/NewUserAddCeiInfo';
+import TaxRect from '../../../sections/TaxRectangle';
+import { theme } from '../../../db.json';
+import { monthSales, requestedMonths } from '../../../constants';
+import { DataContext } from '../../../store/GlobalState';
 
 function IncomeTax() {
   const data = monthSales;
 
+  const router = useRouter();
+  const { pathname, query } = router;
+
   const [taxHeight, setTaxHeight] = useState(0);
-  const oldUser = false;
+  const [state] = useContext(DataContext);
+  const { oldUser } = state;
+
+  useEffect(() => {
+    if (!query.periodo) {
+      router.push(`${pathname}?periodo=${requestedMonths[0].title.replace(' ', '-').toLocaleLowerCase()}`);
+    }
+  }, [pathname, query]);
 
   const translate = parseFloat(theme.measuresPatterns.header.height.general.replace('px', ''))
   + parseFloat(theme.measuresPatterns.subNav.height.general.replace('px', ''))
