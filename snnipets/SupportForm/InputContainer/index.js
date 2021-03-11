@@ -146,9 +146,17 @@ function InputContainer({
   useEffect(() => {
     if (!oldUser) return;
     if (inputName === 'cpf') {
-      setInputValue(cpfMask('23434234334'));
+      setInputValue(cpfMask('14461876756'));
+      setUserData((previous) => ({
+        ...previous,
+        [inputName]: cpfMask('14461876756'),
+      }));
     } else {
-      setInputValue('adsadavsas');
+      setInputValue('senha_teste');
+      setUserData((previous) => ({
+        ...previous,
+        [inputName]: 'senha_teste',
+      }));
     }
   }, [oldUser]);
 

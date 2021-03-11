@@ -18,6 +18,7 @@ function OldUserCeiInfo() {
 
     if (!validCpf
       || !userData.password) {
+      console.log(userData);
       console.log('error on submit');
       return;
     }
