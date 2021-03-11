@@ -6,6 +6,23 @@ max-width: 1160px;
 width: 100%;
 `;
 
+FormContainer.LeftSide = styled.div`
+  width: 33.5%;
+  display: flex;
+  flex-direction: column;
+
+  p{
+    text-align: left;
+  }
+
+  img{
+    text-align: left;
+    margin-bottom: 20px;
+    width: 80%;
+    border-radius: 5px;
+  }
+`;
+
 FormContainer.Bg = styled.div`
 background: #fff;
 display: flex;
@@ -15,6 +32,10 @@ justify-content: space-between;
 align-items: center;
 width: 100%;
 height: 600px;
+
+@media(min-width: 768px){
+  height: initial;
+}
 
 border-radius: 10px;
 overflow: hidden;

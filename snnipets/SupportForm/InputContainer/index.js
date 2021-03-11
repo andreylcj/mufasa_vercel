@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import cpfMask from '../../../assets/utils/InputDataMask/cpfMask';
 
 const InputContain = styled.div`
 position: relative;
 width: 100%;
 z-index: 1;
 margin-bottom: 20px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+
+div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+}
 
 div.alert-validate{
 
@@ -96,10 +109,24 @@ textarea.beautyInput{
 `;
 
 function InputContainer({
-  inputType, inputName, inputPlaceholder, userData, setUserData, dataValidate, valid, sendClick,
+  inputType,
+  inputName,
+  inputPlaceholder,
+  userData,
+  setUserData,
+  dataValidate,
+  valid,
+  sendClick,
+  defaultSpellCheck,
 }) {
+  const [inputValue, setInputValue] = useState('');
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (inputName === 'cpf') {
+      setInputValue(cpfMask(value));
+    } else {
+      setInputValue(value);
+    }
     setUserData((previous) => ({
       ...previous,
       [name]: value,
@@ -113,22 +140,32 @@ function InputContainer({
   }, [sendClick]);
 
   const [focus, setFocus] = useState(true);
+  const [viewPassword, setViewPassword] = useState(false);
   return (
-    <InputContain>
+    <InputContain
+      style={{
+        justifyContent: inputType === 'password' ? 'flex-start' : null,
+      }}
+    >
       <div
         data-validate={dataValidate}
         className={!valid && !focus ? 'alert-validate' : ''}
+        style={{
+          width: inputType === 'password' ? '85%' : '100%',
+        }}
       >
         {
         inputType
           ? (
             <input
               className="beautyInput"
-              type={inputType}
+              type={inputType === 'password' ? (viewPassword ? 'text' : 'password') : inputType}
               name={inputName}
               placeholder={inputPlaceholder}
               onChange={handleInputChange}
               onFocus={() => setFocus(true)}
+              value={inputValue}
+              spellCheck={defaultSpellCheck === undefined}
             />
           ) : (
             <textarea
@@ -142,8 +179,60 @@ function InputContainer({
           )
       }
       </div>
+
+      {
+        inputType === 'password' ? (
+          <InputContain.PasswordIconContain
+            onClick={() => {
+              setViewPassword(!viewPassword);
+            }}
+          >
+            <i
+              className="far fa-eye-slash"
+              style={{
+                opacity: viewPassword ? '0' : '1',
+                pointerEvents: viewPassword ? 'none' : 'initial',
+              }}
+            />
+            <i
+              className="far fa-eye"
+              style={{
+                opacity: viewPassword ? '1' : '0',
+                pointerEvents: viewPassword ? 'initial' : 'none',
+              }}
+            />
+          </InputContain.PasswordIconContain>
+        ) : (
+          null
+        )
+      }
     </InputContain>
   );
 }
+
+InputContain.PasswordIconContain = styled.div`
+
+cursor: pointer;
+width: 15%;
+position: absolute;
+right: 0;
+height: 50px;
+
+  i{
+    color: #666666;
+    font-size: 25px;
+    position: absolute;
+    left: 50%;
+    cursor: pointer;
+    transform: translateX(-50%);
+    transition: all 0.2s;
+    padding: 9px;
+    border-radius: 6px;
+
+    &:hover{
+      background-color: rgb(255 99 0 / 10%);
+    }
+  }
+`;
 
 export default InputContainer;

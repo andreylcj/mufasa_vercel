@@ -16,57 +16,12 @@ const SiteContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-
-  .no-translate{
-    transform: translateY(0) !important;
-    margin: auto;
-    width: 100%;
-  }
-
-  .translate-profitability-page{
-    transform: translateY(calc(
-      ${theme.measuresPatterns.header.height.general}
-      + ${theme.measuresPatterns.subNav.height.general}
-      + ${theme.measuresPatterns.timeSelectBar.height.general}
-      ));
-  
-    @media screen and (min-width: 1024px){
-      transform: translateY(calc(
-        ${theme.measuresPatterns.header.height.minWidth1024}
-      + ${theme.measuresPatterns.subNav.height.general}
-      + ${theme.measuresPatterns.timeSelectBar.height.general}
-      ))
-    }
-  }
-
-  .translate-position-page{
-    transform: translateY(calc(
-      ${theme.measuresPatterns.header.height.general}
-      + ${theme.measuresPatterns.subNav.height.general}
-      ));
-  
-    @media screen and (min-width: 1024px){
-      transform: translateY(calc(
-        ${theme.measuresPatterns.header.height.minWidth1024}
-      + ${theme.measuresPatterns.subNav.height.general}
-      ))
-    }
-  }
 `;
 
 const Main = styled.main`
-
-  transform: translateY(${theme.measuresPatterns.header.height.general});
   will-change: transform;
-  text-align:center;
+  text-align: center;
   transition: all 0.4s;
-  ${'' /*
-  background: ${theme.colors.lightGrayBg}; */}
-  background: attr(data-validate);
-
-  @media screen and (min-width: 1024px){
-    transform: translateY(${theme.measuresPatterns.header.height.minWidth1024});
-  }
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -74,10 +29,6 @@ function Layout({ children }) {
   const router = useRouter();
   const { pathname } = router;
 
-  const translateProf = pathname.indexOf('/carteira/rentabilidade') !== -1
-  || pathname.indexOf('/imposto-de-renda') !== -1;
-  const translatePos = pathname.indexOf('/carteira/posicoes') !== -1;
-  const translate = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
   const showHeader = (pathname.indexOf('/denied-access') !== -1 || pathname !== '/login');
   const showFooter = (pathname === '/' || pathname === '/sobre-nos' || pathname === '/contato' || pathname === '/duvidas');
 
@@ -89,46 +40,38 @@ function Layout({ children }) {
     >
 
       {
-                // exclude header from page denied-access ========================
-                showHeader
-                  ? (
-                    <Header />
-                  ) : (
-                    ''
-                  )
-            }
+        // exclude header from page denied-access ========================
+        showHeader
+          ? (
+            <Header />
+          ) : (
+            ''
+          )
+      }
 
       {
-                // notify only in bend ========================
-                (pathname.indexOf('bend-admin') !== -1)
-                  ? (
-                    <Notify />
-                  ) : (
-                    ''
-                  )
-            }
+        // notify only in bend ========================
+        (pathname.indexOf('bend-admin') !== -1)
+          ? (
+            <Notify />
+          ) : (
+            ''
+          )
+      }
 
       <Modal />
 
-      <Main
-        className={`
-        ${translate ? '' : 'no-translate'} 
-        ${translateProf ? 'translate-profitability-page' : ''}
-        ${translatePos ? 'translate-position-page' : ''}        
-        `}
-      >
+      <Main>
         {children}
-        {
-                // exclude footer from page denied-access ========================
-                showFooter
-                  ? (
-                    <Footer />
-                  ) : (
-                    ''
-                  )
-            }
       </Main>
-
+      {
+        showFooter
+          ? (
+            <Footer />
+          ) : (
+            ''
+          )
+      }
     </SiteContainer>
   );
 }

@@ -5,6 +5,8 @@ import Layout from '../layout/Layout';
 import { DataProvider } from '../store/GlobalState';
 import db from '../db.json';
 
+const { theme } = db;
+
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -16,6 +18,22 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
+
+    a{
+      text-decoration: none;
+      color: #000;
+    }
+
+    ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .translate-header{
+      transform: translateY(${theme.measuresPatterns.header.height.general});
+      transition: all 0.4s;
+    }
   }
   html, body {
     min-height: 100vh;
@@ -28,9 +46,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const { theme } = db;
-
 function MyApp({ Component, pageProps }) {
+  console.log(theme);
   return (
     <>
       <Head>

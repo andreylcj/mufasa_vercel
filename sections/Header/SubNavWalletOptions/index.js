@@ -1,6 +1,4 @@
-import React, {
-  useState, useEffect,
-} from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { subNavOptions } from '../../../constants';
 import SubHeaderContainer from '../../../components/Header/SubHeaderContainer';
@@ -9,66 +7,9 @@ import { theme } from '../../../db.json';
 
 function SubNavWalletOptions() {
   const router = useRouter();
-  const { pathname, query } = router;
+  const { pathname } = router;
 
   const showSubNav = (pathname.indexOf('/carteira') !== -1);
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [elementBgLeft, setElementBgLeft] = useState(3);
-  const [elementBgWidth, setElementBgWidth] = useState(0);
-  const [itemsInfo, setItemsInfo] = useState([]);
-
-  useEffect(() => {
-    if (itemsInfo.length === 0) return;
-
-    let selectedOption = 0;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].href === pathname) {
-        selectedOption = itemsInfo[i].elementIndex;
-        setSelectedIndex(selectedOption);
-        break;
-      }
-    }
-
-    let left = 0;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex < selectedOption) {
-        left += itemsInfo[i].elementWidth;
-      }
-    }
-    left += 3;
-    if (selectedOption === 0) left = 3;
-
-    let widthTemp;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex === selectedOption) {
-        widthTemp = itemsInfo[i].elementWidth - 8;
-        break;
-      }
-    }
-
-    setElementBgLeft(left);
-    setElementBgWidth(widthTemp);
-  }, [query, itemsInfo]);
-
-  const updateItemsInfo = (data) => {
-    setItemsInfo((prevItemsInfo) => {
-      let indexToExclude = -1;
-      for (let i = 0; i < prevItemsInfo.length; i++) {
-        if ((prevItemsInfo[i].elementIndex === data.elementIndex)) {
-          indexToExclude = i;
-          break;
-        }
-      }
-
-      let newArray = prevItemsInfo.slice();
-      if (indexToExclude >= 0) {
-        newArray = [...newArray.slice(0, indexToExclude),
-          ...newArray.slice(indexToExclude + 1, newArray.length)];
-      }
-      return ([...newArray, data]);
-    });
-  };
 
   const itemHeight = theme.measuresPatterns.subNav.height.general;
   const translateTimeNav = () => {
@@ -84,7 +25,8 @@ function SubNavWalletOptions() {
   return (
     <SubHeaderContainer
       style={{
-        pointerEvents: showSubNav ? 'inherit' : 'none',
+        pointerEvents: showSubNav ? 'initial' : 'none',
+        opacity: showSubNav ? '1' : '0',
         transform: translateTimeNav(),
       }}
     >
@@ -94,23 +36,16 @@ function SubNavWalletOptions() {
             const subNavId = `subNavOption__${index}`;
             return (
               <SubNavItem
-                updateParentState={updateItemsInfo}
                 index={index}
                 key={subNavId}
                 href={subNavOption.href}
                 title={subNavOption.title}
                 query={subNavOption.query}
-                selectedItem={(selectedIndex === index)}
+                selectedItem={(subNavOption.href === pathname)}
               />
             );
           })
         }
-        <SubHeaderContainer.ItemBg
-          style={{
-            width: elementBgWidth,
-            left: elementBgLeft,
-          }}
-        />
       </ul>
     </SubHeaderContainer>
   );

@@ -14,6 +14,7 @@ import MobileLinks from './MobileLinks';
 import ButtonShowMenu from '../../snnipets/Header/ButtonShowMenu';
 import FadeOut from '../../components/FadeOutHorizontal';
 import TaxTimeBar from './TaxTimeBar';
+import UserInfoOnHover from '../../snnipets/Header/UserInfoOnHover';
 
 function Header() {
   const router = useRouter();
@@ -23,10 +24,6 @@ function Header() {
 
   const [navTitles, setNavTitles] = useState(headerNavTitles.landingPage);
   const [showMobile, setShowMobile] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [elementBgLeft, setElementBgLeft] = useState(3);
-  const [elementBgWidth, setElementBgWidth] = useState(0);
-  const [itemsInfo, setItemsInfo] = useState([]);
 
   const [pageTitle, setPageTitle] = useState('');
 
@@ -34,7 +31,6 @@ function Header() {
     if (pathname.indexOf('bend-admin') !== -1) {
       if (pageTitle.indexOf('bend-admin') !== -1) {
         setPageTitle('bend-admin');
-        setItemsInfo([]);
 
         setNavTitles(headerNavTitles.bend);
       }
@@ -43,12 +39,10 @@ function Header() {
     ) {
       if (pageTitle !== 'afterLogin') {
         setPageTitle('afterLogin');
-        setItemsInfo([]);
 
         setNavTitles(headerNavTitles.afterLogin);
       }
     } else if (pageTitle !== 'landingPage') {
-      setItemsInfo([]);
       setPageTitle('landingPage');
       setNavTitles(headerNavTitles.landingPage);
     }
@@ -56,89 +50,6 @@ function Header() {
 
   const handleClickToShowMobileMenu = () => {
     setShowMobile(!showMobile);
-  };
-
-  useEffect(() => {
-    if (itemsInfo.length === 0) return;
-
-    let selectedOption = -1;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].href === pathname
-        || itemsInfo[i].href.split('/')[1] === pathname.split('/')[1]) {
-        selectedOption = i;
-        break;
-      }
-    }
-
-    if (pageTitle === 'afterLogin' && selectedOption < 0) {
-      for (let i = 0; i < itemsInfo.length; i++) {
-        if (query.periodo) {
-          selectedOption = i;
-          break;
-        }
-      }
-    }
-
-    if (pageTitle === 'landingPage') {
-      if (query.scroll === '') {
-        for (let i = 0; i < itemsInfo.length; i++) {
-          if (itemsInfo[i].query.scroll) selectedOption = i;
-          break;
-        }
-      } else {
-        for (let i = 0; i < itemsInfo.length; i++) {
-          if (itemsInfo[i].href === pathname
-            && itemsInfo[i].query.scroll !== ''
-          ) {
-            selectedOption = i;
-            break;
-          }
-        }
-      }
-    }
-
-    if (selectedOption < 0) {
-      setElementBgLeft(0);
-      setElementBgWidth(0);
-      return;
-    }
-
-    let left = 0;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex < selectedOption) {
-        left += itemsInfo[i].elementWidth;
-      }
-    }
-
-    let width;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex === selectedOption) {
-        width = itemsInfo[selectedOption].elementWidth;
-        break;
-      }
-    }
-
-    setElementBgLeft(left);
-    setElementBgWidth(width);
-  }, [pathname, itemsInfo]);
-
-  const updateItemsInfo = (data) => {
-    setItemsInfo((prevItemsInfo) => {
-      let indexToExclude = -1;
-      for (let i = 0; i < prevItemsInfo.length; i++) {
-        if ((prevItemsInfo[i].elementIndex === data.elementIndex)) {
-          indexToExclude = i;
-          break;
-        }
-      }
-
-      let newArray = prevItemsInfo.slice();
-      if (indexToExclude >= 0) {
-        newArray = [...newArray.slice(0, indexToExclude),
-          ...newArray.slice(indexToExclude + 1, newArray.length)];
-      }
-      return ([...newArray, data]);
-    });
   };
 
   return (
@@ -162,7 +73,6 @@ function Header() {
               const navTitleId = `navTitle__${navTitle.href}_${index}`;
               return (
                 <NavTitle
-                  updateParentState={updateItemsInfo}
                   index={index}
                   title={navTitle.title}
                   href={navTitle.href}
@@ -170,20 +80,10 @@ function Header() {
                   key={navTitleId}
                   item={navTitle}
                   query={query}
-                  onClick={() => {
-                    setSelectedIndex(index);
-                  }}
                 />
               );
             })
           }
-              <HeaderContainer.NavOptions.ItemBg
-                style={{
-                  width: elementBgWidth,
-                  left: elementBgLeft,
-                  maxWidth: elementBgWidth,
-                }}
-              />
             </ul>
           </HeaderContainer.NavOptions>
 
@@ -201,21 +101,7 @@ function Header() {
                 <i className="fas fa-sign-in-alt" style={{ marginLeft: '10px' }} />
               </ButtonUnderlineHover>
             ) : (
-              <div
-                style={{
-                  color: '#C95206',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  padding: '0 20px',
-                }}
-              >
-                <span>
-                  user.email@gmail.com
-                </span>
-                <i className="fas fa-caret-down" style={{ marginLeft: '11px', fontSize: '20px' }} />
-              </div>
+              <UserInfoOnHover />
             )
           }
 

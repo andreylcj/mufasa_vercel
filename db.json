@@ -62,7 +62,8 @@
                 "elementWidth":{
                     "general": "120px",
                     "minWidth1024": "150px"
-                } 
+                },
+                "buttonSideWidth": "60px" 
             }
         }
     }

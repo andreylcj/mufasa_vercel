@@ -39,14 +39,21 @@ const ButtonContain = styled.div`
   }
 `;
 
-function SubmitButton() {
+function SubmitButton({ children, arrowIcon }) {
   return (
     <ButtonContain>
       <button
         type="submit"
       >
-        Enviar
-        <i className="fas fa-long-arrow-alt-right" />
+        {children}
+        {
+          arrowIcon ? (
+            <i className="fas fa-long-arrow-alt-right" />
+          ) : (
+            null
+          )
+        }
+
       </button>
     </ButtonContain>
   );

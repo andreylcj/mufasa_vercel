@@ -7,8 +7,12 @@ justify-content: center;
 align-items: center;
 background: #fff;
 box-shadow: rgb(0 0 0 / 25%) 0px 1px 2px;
-width: 35%;
+width: 100%;
 align-self: flex-start;
+
+@media(min-width: 768px){
+  width: 35%;
+}
 
 .d-flex-alig-justify-center{
   display: flex;

@@ -1,25 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import useWindowSize from '../../../assets/utils/GetWindowDimensions';
+import styled from 'styled-components';
 
 function NavTitle({
-  title, href, pathname, index, updateParentState, onClick, item, query,
+  title, href, pathname, onClick, item, query,
 }) {
-  const [width, height] = useWindowSize();
-
-  const ref = useRef(null);
-  useEffect(() => {
-    if (!ref.current) return;
-    updateParentState(
-      {
-        elementWidth: ref.current ? ref.current.offsetWidth : 0,
-        elementIndex: index,
-        href,
-        query: item.query.scroll === '' ? { scroll: '' } : {},
-      },
-    );
-  }, [ref.current, width, query]);
-
   const destUrl = `${href}${(item.query.scroll === '') ? '?scroll' : ''}${item.scroll || ''}`;
   const selected = () => {
     let resp = false;
@@ -37,9 +22,8 @@ function NavTitle({
   };
 
   return (
-    <li
+    <LI
       className={`${selected() ? 'selected-nav-li' : ''}`}
-      ref={ref}
     >
       <Link href={destUrl}>
         <a
@@ -49,7 +33,70 @@ function NavTitle({
           {title}
         </a>
       </Link>
-    </li>
+    </LI>
   );
 }
+
+const LI = styled.li`
+position: relative;
+
+  @media (min-width: 768px){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }  
+
+
+  a{
+    text-decoration: none;
+    color: #313131;
+
+    @media (min-width: 768px){
+      padding: 0px 20px;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+    }   
+
+    &:before{
+      opacity: 0;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: ${({ theme }) => theme.colors.mufasaOrange};
+      pointer-events: none;
+      transition: all 0.4s;
+    }
+  }
+
+  .selected-nav-a{
+    color: ${({ theme }) => theme.colors.mufasaOrange};
+
+    &:before{
+      opacity: 1;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: ${({ theme }) => theme.colors.mufasaOrange};
+      pointer-events: none;
+      transition: all 0.4s;
+    }
+  }
+
+  a.selected-nav-a:hover{
+    color: #c95206;
+  }
+
+  a:hover{
+    color: #fda46b;
+  }
+`;
+
 export default NavTitle;

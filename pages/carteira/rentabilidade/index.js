@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { DataContext } from '../../../store/GlobalState';
 import GraphContainer from '../../../components/GraphContainer';
+import { theme } from '../../../db.json';
 
 function Home() {
   const [state, dispatch] = useContext(DataContext);
@@ -23,8 +24,12 @@ function Home() {
     }
   }, [query]);
 
+  const translate = parseFloat(theme.measuresPatterns.header.height.general.replace('px', ''))
+  + parseFloat(theme.measuresPatterns.subNav.height.general.replace('px', ''))
+  + parseFloat(theme.measuresPatterns.timeSelectBar.height.general.replace('px', ''));
+
   return (
-    <GraphContainer>
+    <GraphContainer style={{ transform: `translateY(${translate}px)` }}>
       <GraphContainer.Bg>
         <h3>Gráfico</h3>
         <p>Em breve...</p>

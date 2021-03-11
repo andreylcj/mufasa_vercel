@@ -17,6 +17,19 @@ const SubNavItemContainer = styled.li`
   h5{
     font-weight: 700;
   }
+
+  &:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #fff;
+    opacity: .25;
+    z-index: -1;
+    transition: all 0.4s;
+  }
 }
 
 .no-selected{
@@ -47,9 +60,22 @@ a{
   transition: all 0.2s;
   width: 100%;
 
-  @media(min-width: 1024px){
-    min-width: ${({ theme }) => theme.measuresPatterns.taxTimeBar.elementWidth.minWidth1024};
+  &:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #fff;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.4s;
   }
+
+  ${'' /* @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 9}px){
+    min-width: ${({ theme }) => theme.measuresPatterns.taxTimeBar.elementWidth.general};
+  } */}
 
   &:hover{
     color: white;
@@ -59,9 +85,9 @@ a{
 `;
 
 function SubNavItem({
-  href, title, selectedItem, index, updateParentState, query, value
+  href, title, selectedItem, index, updateParentState, query, value,
 }) {
-  const [width, height] = useWindowSize();
+  /* const [width, height] = useWindowSize();
 
   const ref = useRef(null);
   useEffect(() => {
@@ -73,7 +99,7 @@ function SubNavItem({
         query,
       },
     );
-  }, [ref.current, width]);
+  }, [ref.current, width]); */
 
   const stringQuery = () => {
     let resp = '';
@@ -85,9 +111,7 @@ function SubNavItem({
   };
 
   return (
-    <SubNavItemContainer
-      ref={ref}
-    >
+    <SubNavItemContainer>
       <Link href={`${href}${stringQuery() ? `?${stringQuery()}` : ''}`}>
         <a
           className={selectedItem ? 'selected' : 'no-selected'}

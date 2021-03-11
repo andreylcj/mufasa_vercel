@@ -6,34 +6,41 @@ function MonthSale({ sales, maxHeight }) {
     <MonthSales>
       <MonthSales.FadeIn />
       <MonthSales.SalesContain style={{ maxHeight: `${maxHeight}px` }}>
-        {sales.map((sale, index) => (
-          <div>
-            <i className="fas fa-circle" />
-            <div>
+        {sales.map((sale, index) => {
+          const saleId = `sale__${index}`;
+          return (
+            <div key={saleId}>
+              <i className="fas fa-circle" />
+              <div>
+                <p>
+                  {sale.date}
+                </p>
+                <p>
+                  Venda de
+                  {' '}
+                  <span>
+                    {sale.ticker}
+                  </span>
+                </p>
+              </div>
               <p>
-                {sale.date}
-              </p>
-              <p>
-                Venda de
-                {' '}
-                <span>
-                  {sale.ticker}
-                </span>
+                {`R$ ${sale.value.toString().replace('.', ',')}`}
               </p>
             </div>
-            <p>
-              {`R$ ${sale.value.toString().replace('.', ',')}`}
-            </p>
-          </div>
-        ))}
+          );
+        })}
       </MonthSales.SalesContain>
       <MonthSales.FadeOut />
     </MonthSales>
   );
 }
 const MonthSales = styled.div`
-  width: 50%;
+  width: 100%;
   position: relative;
+
+  @media(min-width: 768px){
+    width: 50%;
+  }
 
   &::-webkit-scrollbar {
     display: none;

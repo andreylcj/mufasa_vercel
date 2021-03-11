@@ -5,7 +5,7 @@ import SectionTitle from '../../snnipets/SectionTitle';
 
 function Duvidas() {
   return (
-    <SupportContainer>
+    <SupportContainer className="translate-header">
       <SectionTitle>
         Dúvidas?
       </SectionTitle>

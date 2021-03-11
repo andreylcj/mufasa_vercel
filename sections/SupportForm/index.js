@@ -85,7 +85,9 @@ function SupportForm() {
             valid={userData.message}
             sendClick={sendClick}
           />
-          <SubmitButton />
+          <SubmitButton arrowIcon>
+            Enviar
+          </SubmitButton>
         </FormContainer.Form>
       </FormContainer.Bg>
     </FormContainer>

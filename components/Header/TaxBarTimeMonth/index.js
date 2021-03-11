@@ -70,10 +70,23 @@ SubHeaderContainer.UlContain = styled.div`
   overflow-x: hidden;
   position: relative;
   justify-content: flex-end;
-  width: calc(100% - 120px);
+  width: 100%;
 
-  @media(max-width: 768px){
-    width: 100%;
+   @media(min-width: 
+   ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6}px;
+   }
+
+   @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 8 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 8}px;
+   }
+
+   @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 10 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 10}px;
+   }
+
+   @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 12 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 12}px;
    }
 
   &::-webkit-scrollbar {
@@ -91,10 +104,11 @@ SubHeaderContainer.ItemBg = styled.div`
   pointer-events: none;
   transition: all ease-out 0.2s;
   opacity: 0.25;
+  display: none;
 `;
 
 SubHeaderContainer.ArrowContain = styled.button`
-   min-width: 60px;
+   min-width: ${({ theme }) => theme.measuresPatterns.taxTimeBar.buttonSideWidth};
    display:flex;
    justify-content: center;
    align-items: center;
