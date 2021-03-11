@@ -141,10 +141,10 @@ function InputContainer({
   }, [sendClick]);
 
   const [state] = useContext(DataContext);
-  const { oldUser } = state;
+  const { oldUser, pageTitle } = state;
 
   useEffect(() => {
-    if (!oldUser) return;
+    if (!oldUser || pageTitle === 'landingPage') return;
     if (inputName === 'cpf') {
       setInputValue(cpfMask('14461876756'));
       setUserData((previous) => ({
