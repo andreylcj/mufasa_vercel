@@ -50,7 +50,7 @@ function OldUserCeiInfo() {
 
             <p>
               No entanto, se você tiver alterado seus dados do CEI,
-              use os campos ao lado para atualizá-los.
+              use os campos a seguir para atualizá-los.
             </p>
 
             <ul>
