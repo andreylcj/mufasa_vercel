@@ -25,6 +25,7 @@ const ButtonOpenMobile = styled.button`
 
   i{
     color: rgb(17,17,17);
+    font-size: 1.25rem;
   }
 `;
 
