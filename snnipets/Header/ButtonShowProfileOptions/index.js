@@ -18,7 +18,7 @@ const ButtonOpenMobile = styled.button`
   }
 
   .show-focus-overlay{
-    opacity: .1;
+    opacity: .2;
   }
 
   @media(min-width: 768px){

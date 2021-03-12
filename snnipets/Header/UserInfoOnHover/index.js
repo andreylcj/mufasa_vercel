@@ -34,7 +34,7 @@ const Container = styled.div`
     }
 
     .show-focus-overlay{
-      opacity: .1;
+      opacity: .2;
     }
   }
 `;
