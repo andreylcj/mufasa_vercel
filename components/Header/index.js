@@ -158,6 +158,7 @@ HeaderContainer.ButtonOpenMobile = styled.button`
 `;
 
 HeaderContainer.ContainerMobileLinks = styled.div`
+  border-top: 1px solid rgba(112, 112, 112, 0.314);
   -webkit-box-flex: 1;
   flex-grow: 1;
   overflow-x: auto;
