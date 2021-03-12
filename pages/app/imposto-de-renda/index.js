@@ -20,7 +20,9 @@ function IncomeTax() {
 
   useEffect(() => {
     if (!query.periodo) {
-      router.push(`${pathname}?periodo=${requestedMonths[0].title.replace(' ', '-').toLocaleLowerCase()}`);
+      router.push(
+        `${pathname}?periodo=${requestedMonths[0].title.replace(' ', '-').toLocaleLowerCase()}#${requestedMonths[0].title.replace(' ', '-').toLocaleLowerCase()}`,
+      );
     }
   }, [pathname, query]);
 

@@ -23,6 +23,12 @@ div{
 
 div.alert-validate{
 
+  @media (max-width: 768px){
+    input, textarea{
+      border: 1px solid #c80000 !important;
+    }
+  }
+
   @media (max-width: 992px){
     &:before {
       visibility: visible !important;

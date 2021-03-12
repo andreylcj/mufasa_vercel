@@ -22,12 +22,21 @@ const Content = styled.div`
     justify-content: flex-start;
     align-items: center;
 
+    @media(max-width: 768px){
+      padding: 15px 35px 15px 15px;
+      text-align: left;
+    }
+
     i{
       position: absolute;
       right: 15px;
       top: 50%;
       transform: translate(-100%, -50%);
       transition: ${transition};
+
+      @media(max-width: 768px){
+        right: 0px;
+      }
 
       .fa-minus{
         opacity: 0;
@@ -68,9 +77,9 @@ const ToggleContain = styled.div`
 
     border: 3px solid ${({ theme }) => theme.colors.mufasaOrange};
 
-    max-height: 700px;
+    max-height: 1100px;
 
-    @media(min-width: 992px){
+    @media(min-width: 768px){
       max-height: 700px;
     }
 

@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
 
+    *{
+      transition: all 0.4s;
+    }
+
     a{
       text-decoration: none;
       color: #000;

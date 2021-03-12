@@ -55,6 +55,10 @@ MonthSales.SalesContain = styled.div`
   padding: 20px 10px 30px 10px;
   overflow-y: auto;
 
+  @media(max-width: 768px){
+    max-height: initial !important;
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -65,6 +69,10 @@ MonthSales.SalesContain = styled.div`
     align-items: center;
     border-bottom: 2px solid ${({ theme }) => theme.colors.textGray}50;
     position: relative;
+
+    @media(max-width: 768px){
+      align-items: flex-end;
+    }
 
     i{
       font-size: 10px;
@@ -104,19 +112,40 @@ MonthSales.SalesContain = styled.div`
       padding: 10px;    
       padding-left: 20px;  
 
+      @media(max-width: 768px){
+        justify-content: flex-start;
+        flex-direction: column;
+      }
+
       p:first-child{
         color: ${({ theme }) => theme.colors.textGray};
         margin-right: 50px;
         font-weight: 600;
         display: flex;
         align-items: center;
+
+        @media(max-width: 768px){
+          margin-right: 0;
+        }
       }
     }
 
     p{
-      margin: 0;
+      margin: 0;  
+
+      @media(max-width: 768px){
+        align-self: flex-start;
+      }
+
       span{
         color: ${({ theme }) => theme.colors.mufasaOrange};
+      }
+    }
+
+    & > p:last-child{
+      @media(max-width: 768px){
+        align-self: flex-end;
+        padding-bottom: 10px;
       }
     }
 

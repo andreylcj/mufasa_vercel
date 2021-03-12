@@ -38,7 +38,7 @@ function SupportForm() {
     <FormContainer>
       <FormContainer.Bg>
         <FormContainer.ImgContain>
-          <img src="/images/icons/sendEmail.png" alt="E-mail" />
+          <img src="/images/icons/mailNEWtrans.webp" alt="E-mail" />
         </FormContainer.ImgContain>
         <FormContainer.Form
           onSubmit={handleSubmit}

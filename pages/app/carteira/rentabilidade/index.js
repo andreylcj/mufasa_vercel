@@ -25,7 +25,7 @@ function Home() {
   + parseFloat(theme.measuresPatterns.timeSelectBar.height.general.replace('px', ''));
 
   return (
-    <GraphContainer style={{ transform: `translateY(${translate}px)` }}>
+    <GraphContainer style={{ transform: `translateY(${translate}px)`, alignSelf: 'flex-start' }}>
       <GraphContainer.Bg>
         <h3>Gráfico</h3>
         <p>Em breve...</p>

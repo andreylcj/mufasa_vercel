@@ -14,6 +14,7 @@ import ButtonShowMenu from '../../snnipets/Header/ButtonShowMenu';
 import FadeOut from '../../components/FadeOutHorizontal';
 import TaxTimeBar from './TaxTimeBar';
 import UserInfoOnHover from '../../snnipets/Header/UserInfoOnHover';
+import ButtonShowProfileOptions from '../../snnipets/Header/ButtonShowProfileOptions';
 
 function Header() {
   const router = useRouter();
@@ -33,7 +34,7 @@ function Header() {
       <HeaderContainer>
         <HeaderContainer.Nav>
           <HeaderContainer.LogoContainer>
-            <Link href="/">
+            <Link href={pathname.indexOf('/app/') !== -1 ? '' : '/'}>
               <a>
                 <img src="/images/logo/icon.png" alt="Logo Mufasa" />
               </a>
@@ -84,18 +85,30 @@ function Header() {
           <MobileLinks
             showMobile={showMobile}
             navTitles={navTitles}
-            pathname={pathname}
             onClick={handleClickToShowMobileMenu}
           />
 
-          <ButtonShowMenu
-            onClick={handleClickToShowMobileMenu}
-            showMobile={showMobile}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+          >
+            <ButtonShowMenu
+              onClick={handleClickToShowMobileMenu}
+              showMobile={showMobile}
+            />
 
-          />
+            {
+            pageTitle === 'afterLogin' ? (
+              <ButtonShowProfileOptions />
+            ) : (
+              null
+            )
+          }
+          </div>
 
         </HeaderContainer.Nav>
-
       </HeaderContainer>
       <SubNavWalletOptions />
       <TimeOptionBar />

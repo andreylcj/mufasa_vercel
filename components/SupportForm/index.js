@@ -11,6 +11,10 @@ FormContainer.LeftSide = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media(max-width: 768px){
+    width: 100%;
+  }
+
   p{
     text-align: left;
   }
@@ -20,6 +24,11 @@ FormContainer.LeftSide = styled.div`
     margin-bottom: 20px;
     width: 80%;
     border-radius: 5px;
+
+    @media(max-width: 768px){
+      display: flex;
+      align-self: center;
+    }
   }
 `;
 
@@ -31,15 +40,14 @@ flex-wrap: wrap;
 justify-content: space-between;
 align-items: center;
 width: 100%;
-height: 600px;
+padding: 3vh 5vw;
 
 @media(min-width: 768px){
-  height: initial;
+  padding: 10vh 5vw;
 }
 
 border-radius: 10px;
 overflow: hidden;
-padding: 10vh 5vw;
 box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
 `;
 
@@ -48,6 +56,15 @@ width: 33.5%;
 will-change: transform;
 transform: perspective(300px) rotateX(0deg) rotateY(0deg);
 transition: all 0.2s;
+display: none;
+
+@media(min-width: 768px){
+  display: initial;
+}
+
+img{
+  width: 100%;
+}
 
 &:hover{
   transform: perspective(300px) rotate(20deg) scale(1.25);
@@ -55,11 +72,19 @@ transition: all 0.2s;
 `;
 
 FormContainer.Form = styled.form`
-  width: 44%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media(min-width: 768px){
+    width: 44%;
+  }
+
+  @media(max-width: 768px){
+    margin: 30px 0 !important;
+  }
 
 span{
   margin-bottom: 40px;
@@ -67,6 +92,7 @@ span{
   color: #333333;
   font-weight: 600;
 }
+
 `;
 
 export default FormContainer;

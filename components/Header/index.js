@@ -87,15 +87,15 @@ ul{
     height: 100%;
   }  
 
-  ${'' /* li{
+   ${'' /* li{
     @media (min-width: 768px){
       display: flex;
       align-items: center;
       justify-content: center;
     }
-  }
+  } */}
 
-  a{
+  ${'' /* a{
     text-decoration: none;
     color: #313131;
 
@@ -106,18 +106,13 @@ ul{
       -webkit-box-align: center;
       align-items: center;
     }
-  }
+  } */}
 
   .selected-nav-a{
     color: ${({ theme }) => theme.colors.mufasaOrange};
-
-    &:before{
-      content: '',
-      position:
-    }
   }
 
-  a.selected-nav-a:hover{
+  ${'' /* a.selected-nav-a:hover{
     color: #c95206;
   }
 

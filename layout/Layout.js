@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Header from '../sections/Header';
 import Notify from '../sections/Short/Notify';
 import Modal from '../snnipets/Modal';
-import { DataContext } from '../store/GlobalState';
 import Footer from '../sections/Footer';
 import db from '../db.json';
 
 const { theme } = db;
-
-console.log();
 
 const SiteContainer = styled.div`
   flex: 1;
@@ -22,6 +19,14 @@ const Main = styled.main`
   will-change: transform;
   text-align: center;
   transition: all 0.4s;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    flex: 1;
+  }
 `;
 
 // eslint-disable-next-line react/prop-types

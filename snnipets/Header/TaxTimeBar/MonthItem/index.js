@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -87,18 +87,19 @@ a{
 function SubNavItem({
   href, title, selectedItem, query, value,
 }) {
-  const stringQuery = () => {
+  const destUrl = () => {
     let resp = '';
     const keys = Object.keys(query);
     for (let i = 0; i < Object.keys(query).length; i++) {
       resp += `${keys[i]}=${query[keys[i]]}`;
     }
+    resp = `${href}${resp ? `?${resp}` : ''}`;
+    resp = `${resp}${`#${query.periodo}`}`;
     return resp;
   };
-
   return (
-    <SubNavItemContainer>
-      <Link href={`${href}${stringQuery() ? `?${stringQuery()}` : ''}`}>
+    <SubNavItemContainer id={query.periodo}>
+      <Link href={destUrl()}>
         <a
           className={selectedItem ? 'selected' : 'no-selected'}
         >

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const SupportContainer = styled.div`
 display: flex;
+flex: 1;
 flex-direction: column;
 flex-wrap: wrap;
 justify-content: center;

@@ -11,6 +11,10 @@ flex-direction:column;
 align-items: center;
 justify-content: center;
 background: ${({ theme }) => theme.colors.lightGrayBg};
+
+@media(max-width: 768px){
+  padding: 3vh 5vw !important; 
+}
 `;
 
 GraphContainer.Bg = styled.div`

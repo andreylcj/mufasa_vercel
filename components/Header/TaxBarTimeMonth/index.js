@@ -49,8 +49,8 @@ SubHeaderContainer.UL = styled.ul`
     position: absolute;
     top: 0;
 
-    
-  @media(max-width: 768px){
+   @media(max-width: 840px){
+    right: -0px !important;
     position: relative;
     overflow-x: auto;
    }
@@ -118,7 +118,7 @@ SubHeaderContainer.ArrowContain = styled.button`
    transform: scale(1);
    transition: all 0.2s;
 
-   @media(max-width: 768px){
+   @media(max-width: 840px){
      display: none;
    }
 

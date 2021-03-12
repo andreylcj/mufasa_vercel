@@ -12,6 +12,7 @@ const GraphContainer = styled.div`
   flex-direction:column;
   align-items: center;
   justify-content: center;
+  align-self: flex-start;
 `;
 
 GraphContainer.Bg = styled.div`

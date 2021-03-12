@@ -64,7 +64,7 @@ export const DataProvider = ({ children }) => {
 
     dispatch({
       type: ACTION.UPDATE_OLD_USER,
-      payload: true,
+      payload: false,
     });
 
     if (firstLogin) {
