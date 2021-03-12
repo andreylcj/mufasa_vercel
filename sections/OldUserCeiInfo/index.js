@@ -41,7 +41,7 @@ function OldUserCeiInfo() {
         <FormContainer.Bg style={{ height: 'initial' }}>
           <FormContainer.LeftSide>
             <SecContainer.Title style={{ flexDirection: 'row', justifyContent: 'start', color: '#8E8E8E' }}>
-              Olá, [Usuário]!
+              Olá, (Usuário)!
             </SecContainer.Title>
             <img src="/images/oldUser/Lion_Sun.webp" alt="Leão filhote" />
             <p>
