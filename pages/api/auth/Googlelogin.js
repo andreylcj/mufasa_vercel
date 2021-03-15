@@ -13,7 +13,7 @@ export default function GoogleLog() {
 
   const responseGoogle = async (response) => {
     const userData = {
-      email: response.Es.kt,
+      email: response.profileObj.email,
     };
     console.log(response);
 
