@@ -15,6 +15,7 @@ export const DataProvider = ({ children }) => {
   // AUTH
   useEffect(async () => {
     const firstLogin = localStorage.getItem('firstLogin');
+    return
     if (firstLogin) {
       const res = await getData('api/auth/accessToken');
 
