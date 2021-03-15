@@ -120,6 +120,7 @@ function insertCEIinfo() {
         flexDirection: 'initial',
         padding: '5vh 10vw',
         justifyContent: 'space-around',
+        alignItems: 'flex-start',
       }}
       className="translate-header"
     >

@@ -11,7 +11,7 @@ function Duvidas() {
       </SectionTitle>
       <SupportContainer.QuestionContain
         style={{
-          padding: '10vh 10vw',
+          padding: '5vh 10vw',
         }}
       >
         <h3>

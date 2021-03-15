@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 function UserTitle({ children, noBorder, href }) {
+  const { pathname } = useRouter();
   return (
     <UserTitleContainer>
       <Link href={href}>
-        <a className={noBorder ? 'no-border' : ''}>
+        <a className={`${noBorder ? 'no-border' : ''} 
+        ${pathname === href ? 'selected' : ''}`}
+        >
           {children}
         </a>
       </Link>
@@ -19,6 +23,24 @@ const UserTitleContainer = styled.div`
 display: flex;
 justify-content: center;
 alignt-items: center;
+
+.selected{
+  color: ${({ theme }) => theme.colors.mufasaOrange};
+}
+
+&:hover{
+  .selected{
+    background-color: rgb(255 99 0 / 10%);
+    color: ${({ theme }) => theme.colors.mufasaOrange};
+    box-shadow: none;
+    transform: scale(1);
+    font-weight: 500;
+
+    i{
+      color: ${({ theme }) => theme.colors.mufasaOrange};
+    }
+  }
+}
 
   a{
     padding: 15px 20px;

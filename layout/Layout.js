@@ -26,6 +26,7 @@ const Main = styled.main`
 
   & > div {
     flex: 1;
+    align-self: flex-start;
   }
 `;
 

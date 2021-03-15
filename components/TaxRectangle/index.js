@@ -12,6 +12,8 @@ align-self: flex-start;
 
 @media(min-width: 768px){
   width: 35%;
+  min-width: 320px;
+  max-width: 400px;
 }
 
 .d-flex-alig-justify-center{

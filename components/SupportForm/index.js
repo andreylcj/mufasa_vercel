@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
-padding: 10vh 5vw;
+padding: 5vh 5vw;
 max-width: 1160px;
 width: 100%;
 `;
@@ -11,7 +11,7 @@ FormContainer.LeftSide = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media(max-width: 768px){
+  @media(max-width: 767px){
     width: 100%;
   }
 
@@ -24,10 +24,12 @@ FormContainer.LeftSide = styled.div`
     margin-bottom: 20px;
     width: 80%;
     border-radius: 5px;
+    align-self: flex-start;
 
     @media(max-width: 768px){
       display: flex;
-      align-self: center;
+      align-self: flex-start;
+      width: 50%;
     }
   }
 `;
@@ -40,10 +42,10 @@ flex-wrap: wrap;
 justify-content: space-between;
 align-items: center;
 width: 100%;
-padding: 3vh 5vw;
+padding: 5vh 5vw;
 
 @media(min-width: 768px){
-  padding: 10vh 5vw;
+  padding: 5h 5vw;
 }
 
 border-radius: 10px;

@@ -5,8 +5,8 @@ import UserTitle from './UserTitle';
 function UserOptionsBox({ className }) {
   return (
     <OptionsBox className={className}>
-      <UserTitle href="">
-        Meus Dados
+      <UserTitle href="/app/conta">
+        Conta
       </UserTitle>
       <UserTitle href="/app/dados-cei">
         Sincronizar dados do CEI
@@ -48,7 +48,7 @@ const OptionsBox = styled.div`
     border-right: 6px solid transparent;
   }
 
-  @media(max-width: 768px){
+  @media(max-width: 767px){
     width: 90vw;
     top: calc(50% + 0.5rem + 10px);
     right: 0;

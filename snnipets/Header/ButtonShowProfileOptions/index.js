@@ -51,7 +51,11 @@ function ButtonShowProfileOptions() {
     <ButtonOpenMobile onClick={handleClick}>
       <i className="fas fa-user" />
       <UserOptionsBox className={showMenu ? 'user-options' : ''} />
-      <SmoothFocusBack className={showMenu ? 'show-focus-overlay' : ''} />
+      <SmoothFocusBack
+        className={showMenu ? 'show-focus-overlay' : ''}
+        show={showMenu}
+        onClick={() => setShowMenu(!showMenu)}
+      />
     </ButtonOpenMobile>
   );
 }

@@ -11,7 +11,7 @@ will-change: transform;
 font-weight: 500;
 font-size: 1rem;
 
-@media(max-width: 768px){
+@media(max-width: 767px){
   .hide{
     display: none;
   }
@@ -31,7 +31,7 @@ will-change: transform;
 transition: transform 0.2s ease 0s;
 background-color: #fff;
 
-@media (max-width: 768px){
+@media (max-width: 767px){
   justify-content: space-between;
 }
 

@@ -32,11 +32,11 @@ function IncomeTax() {
   return (
     <GraphContainer
       style={{
-        flexWrap: 'wrap',
         flexDirection: 'initial',
-        padding: '5vh 10vw',
+        padding: '5vh 5vw',
         justifyContent: 'space-around',
         transform: !oldUser ? `translateY(${theme.measuresPatterns.header.height.general})` : `translateY(${translate}px)`,
+        alignItems: 'flex-start',
       }}
     >
       {

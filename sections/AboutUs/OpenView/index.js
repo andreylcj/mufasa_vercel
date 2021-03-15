@@ -11,7 +11,7 @@ function OpenViewAboutUs() {
         </p>
       </SecContainer.FeaturedTitle>
 
-      <div style={{ paddingLeft: '10vw', paddingTop: '20vh', textAlign: 'left' }}>
+      <div style={{ paddingLeft: '10vw', paddingTop: '10vh', textAlign: 'left' }}>
         <SecContainer.Title style={{ flexDirection: 'row', justifyContent: 'start' }}>
           Quem Somos
         </SecContainer.Title>
@@ -44,7 +44,7 @@ function OpenViewAboutUs() {
       </div>
 
       <div style={{
-        paddingRight: '10vw', paddingTop: '20vh', paddingBottom: '20vh', textAlign: 'right',
+        paddingRight: '10vw', paddingTop: '10vh', paddingBottom: '10vh', textAlign: 'right',
       }}
       >
         <SecContainer.Title style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
@@ -117,7 +117,7 @@ SecContainer.BlackBg = styled.div`
 
 SecContainer.FeaturedTitle = styled.div`
   text-align: center;
-  padding-top: 10vh;
+  padding-top: 7vh;
   max-width: 700px;
   margin: auto;
 

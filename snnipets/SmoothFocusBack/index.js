@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function SmoothFocusBack({ className }) {
+function SmoothFocusBack({ className, show, onClick }) {
   return (
-    <SmoothFocusOnElement className={className} />
+    <SmoothFocusOnElement
+      className={className}
+      style={{ pointerEvents: show ? 'initial' : 'none' }}
+      onClick={onClick}
+    />
   );
 }
 
@@ -18,8 +22,6 @@ const SmoothFocusOnElement = styled.div`
   width: 100vw;
   background: #000;
   z-index: 100;
-  pointer-events: none;
-  cursor: none;
   transition: all 0.2s;
 `;
 

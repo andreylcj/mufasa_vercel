@@ -47,7 +47,7 @@
                 "height":{
                     "general": "35px"
                 },
-                "background": "linear-gradient(120deg, rgba(227,102,20,1) 0%, rgba(239,151,96,1) 86%, rgba(220,139,86,1) 100%)"
+                "background": "linear-gradient(90deg, rgba(201,82,6,1) 0%, rgba(239,151,96,1) 80%, rgba(220,139,86,1) 100%)"
             },
             "timeSelectBar":{
                 "height":{
@@ -60,7 +60,7 @@
             },
             "taxTimeBar":{
                 "elementWidth":{
-                    "general": "120px",
+                    "general": "100px",
                     "minWidth1024": "150px"
                 },
                 "buttonSideWidth": "60px" 

@@ -29,7 +29,7 @@ justify-content: center;
 padding: 10vh 0 10vh 20vw;
 height: 100%;
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   padding: 10vh 5vw 10vh 5vw;
 }
 

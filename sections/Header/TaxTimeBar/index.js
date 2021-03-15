@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useLayoutEffect, useState,
+} from 'react';
 import SubHeaderContainer from '../../../components/Header/TaxBarTimeMonth';
 import { theme } from '../../../db.json';
 import SubNavItem from '../../../snnipets/Header/TaxTimeBar/MonthItem';
@@ -37,6 +39,7 @@ function TaxTimeBar() {
   const realHeight = parseFloat(itemHeight.replace('px', '')) + parseFloat(itemHeightSubNav.replace('px', ''));
 
   const elementWidth = parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.replace('px', ''));
+  const sideArrowButtonWidth = parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.replace('px', ''));
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -44,14 +47,61 @@ function TaxTimeBar() {
     }
   }, [typeof window]);
 
-  const leftRealItems = typeof window !== 'undefined' ? itemsCount - Math.round((window.innerWidth - elementWidth) / elementWidth) : 0;
+  const [size, setSize] = useState([0, 0]);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  console.log(size);
+
+  const leftRealItems = () => {
+    let resp;
+    if (6 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 8 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 6) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 6;
+      }
+    } else if (8 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 10 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 8) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 8;
+      }
+    } else if (10 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 12 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 10) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 10;
+      }
+    } else if (12 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 14 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 12) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 12;
+      }
+    }
+    return resp;
+  };
 
   const [leftItems, setLeftItems] = useState(0);
   const [rightItems, setRightItems] = useState(0);
 
+  console.log(leftRealItems());
+
   useEffect(() => {
-    setLeftItems(leftRealItems - rightItems);
-  }, [leftRealItems]);
+    setLeftItems(leftRealItems() - rightItems);
+  }, [leftRealItems()]);
   return (
     <SubHeaderContainer
       style={{
@@ -73,6 +123,7 @@ function TaxTimeBar() {
         <i className="fas fa-angle-double-left" />
       </SubHeaderContainer.ArrowContain>
       <SubHeaderContainer.UlContain>
+        <SubHeaderContainer.UlContain.FadeIn />
         <SubHeaderContainer.UL
           style={{
             right: `-${rightItems * elementWidth}px`,
@@ -100,6 +151,8 @@ function TaxTimeBar() {
       }
         </SubHeaderContainer.UL>
       </SubHeaderContainer.UlContain>
+
+      <SubHeaderContainer.UlContain.FadeOut />
 
       <SubHeaderContainer.ArrowContain
         disabled={!rightItems}

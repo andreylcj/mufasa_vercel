@@ -55,7 +55,7 @@ MonthSales.SalesContain = styled.div`
   padding: 20px 10px 30px 10px;
   overflow-y: auto;
 
-  @media(max-width: 768px){
+  @media(max-width: 767px){
     max-height: initial !important;
   }
 
@@ -70,7 +70,7 @@ MonthSales.SalesContain = styled.div`
     border-bottom: 2px solid ${({ theme }) => theme.colors.textGray}50;
     position: relative;
 
-    @media(max-width: 768px){
+    @media(max-width: 767px){
       align-items: flex-end;
     }
 
@@ -112,7 +112,7 @@ MonthSales.SalesContain = styled.div`
       padding: 10px;    
       padding-left: 20px;  
 
-      @media(max-width: 768px){
+      @media(max-width: 767px){
         justify-content: flex-start;
         flex-direction: column;
       }
@@ -124,7 +124,7 @@ MonthSales.SalesContain = styled.div`
         display: flex;
         align-items: center;
 
-        @media(max-width: 768px){
+        @media(max-width: 767px){
           margin-right: 0;
         }
       }
@@ -133,7 +133,7 @@ MonthSales.SalesContain = styled.div`
     p{
       margin: 0;  
 
-      @media(max-width: 768px){
+      @media(max-width: 767px){
         align-self: flex-start;
       }
 
@@ -143,7 +143,7 @@ MonthSales.SalesContain = styled.div`
     }
 
     & > p:last-child{
-      @media(max-width: 768px){
+      @media(max-width: 767px){
         align-self: flex-end;
         padding-bottom: 10px;
       }
@@ -184,9 +184,9 @@ MonthSales.FadeIn = styled.div`
 
 MonthSales.FadeOut = styled.div`
   width: 100%;
-  background: linear-gradient(0deg, rgba(236,236,236,1) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(0deg, rgba(236,236,236,1) 0%, rgba(236,236,236,1) 20%, rgba(255,255,255,0) 100%);
   position: absolute;
-  bottom: 0px;
+  bottom: -5px;
   left: 0;
   right: 0;
   height: 50px;

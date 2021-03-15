@@ -11,6 +11,13 @@ const { theme } = db;
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
+    transition: all 0.4s;
+    scroll-behavior: smooth;
+    font-family: 'Montserrat', sans-serif;
+  }
+  html, body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
   }
   body {
     margin: 0;
@@ -18,11 +25,7 @@ const GlobalStyle = createGlobalStyle`
     /* New styles */
     display: flex;
     flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
-
-    *{
-      transition: all 0.4s;
-    }
+    
 
     a{
       text-decoration: none;
@@ -39,10 +42,6 @@ const GlobalStyle = createGlobalStyle`
       transform: translateY(${theme.measuresPatterns.header.height.general});
       transition: all 0.4s;
     }
-  }
-  html, body {
-    min-height: 100vh;
-    scroll-behavior: smooth;
   }
   #__next {
     flex: 1;

@@ -65,6 +65,7 @@ const Scene = styled.div`
   perspective: 1400px;
   margin: 3vh auto;
   height:650px;
+  align-self: center !important;
 
   .is-flipped{
     transform: rotateY(180deg);
