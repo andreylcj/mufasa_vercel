@@ -21,7 +21,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   margin-bottom: 30px;
 }
 

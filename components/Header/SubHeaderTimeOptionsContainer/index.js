@@ -11,7 +11,7 @@ const SubHeaderTimeOptionsContainer = styled.div`
   z-index: 4;
   will-change: transform;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   height: ${({ theme }) => theme.measuresPatterns.timeSelectBar.height.general};
   border-bottom: ${({ theme }) => theme.measuresPatterns.timeSelectBar.border.bottom} solid #333;
   transition: all 0.4s;

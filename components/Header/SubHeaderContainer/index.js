@@ -9,7 +9,7 @@ const SubHeaderContainer = styled.div`
   z-index: 5;
   will-change: transform;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.85rem;
   height: ${({ theme }) => theme.measuresPatterns.subNav.height.general};
   box-shadow: rgb(0 0 0 / 15%) 0px 1px 2px;
   transition: all 0.4s;

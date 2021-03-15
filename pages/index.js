@@ -16,7 +16,7 @@ const LionBack = styled.div`
 
 function Home() {
   return (
-    <div>
+    <div className="translate-header">
       <LionBack>
         <OpenViewFormSection />
         <OnlyInMufasa />

@@ -44,14 +44,14 @@ export const headerNavTitles = {
   afterLogin: [
     {
       title: 'Carteira',
-      href: '/carteira/rentabilidade',
+      href: '/app/carteira/rentabilidade',
       query: {
         periodo: 'no-mes',
       },
     },
     {
       title: 'Imposto de Renda',
-      href: '/imposto-de-renda',
+      href: '/app/imposto-de-renda',
       query: { },
     },
   ],
@@ -60,35 +60,35 @@ export const headerNavTitles = {
 export const timeOptionsNavBar = [
   {
     title: 'No mês',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'no-mes',
     },
   },
   {
     title: '6 meses',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: '6-meses',
     },
   },
   {
     title: '12 meses',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: '12-meses',
     },
   },
   {
     title: '2021',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'no-ano',
     },
   },
   {
     title: 'Máximo',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'maximo',
     },
@@ -98,14 +98,14 @@ export const timeOptionsNavBar = [
 export const subNavOptions = [
   {
     title: 'Rentabilidade',
-    href: '/carteira/rentabilidade',
+    href: '/app/carteira/rentabilidade',
     query: {
       periodo: 'no-mes',
     },
   },
   {
     title: 'Posições',
-    href: '/carteira/posicoes',
+    href: '/app/carteira/posicoes',
     query: { },
   },
 ];
@@ -251,3 +251,176 @@ export const questions = [
     queryQuest: 'vantagem',
   },
 ];
+
+export const requestedMonths = [
+  {
+    title: 'FEV 21',
+    tax: 23.12,
+  },
+  {
+    title: 'JAN 21',
+    tax: 2.12,
+  },
+  {
+    title: 'DEZ 20',
+    tax: 0,
+  },
+  {
+    title: 'NOV 20',
+    tax: 0,
+  },
+  {
+    title: 'OUT 20',
+    tax: 0,
+  },
+  {
+    title: 'SET 20',
+    tax: 23.12,
+  },
+  {
+    title: 'AGO 20',
+    tax: 23.12,
+  },
+  {
+    title: 'JUL 20',
+    tax: 23.12,
+  },
+  {
+    title: 'JUN 20',
+    tax: 23.12,
+  },
+  {
+    title: 'MAI 20',
+    tax: 23.12,
+  },
+  {
+    title: 'ABR 20',
+    tax: 23.12,
+  },
+  {
+    title: 'MAR 20',
+    tax: 23.12,
+  },
+];
+
+export const monthSales = {
+  total: 231.23,
+  tax: {
+    swing: 32.12,
+    dayTrade: 21.23,
+    fii: 12.32,
+  },
+  compensation: {
+    swing: 12.12,
+    dayTrade: 1.23,
+    fii: 2.32,
+  },
+  sale: 503.12,
+  sales: [
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRPR3',
+      value: 12.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'HASG3',
+      value: 1.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'XINA11',
+      value: 1232.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+    {
+      ticker: 'BRML3',
+      value: 123.23,
+      date: 'Seg, 01 de FEV',
+    },
+  ],
+};

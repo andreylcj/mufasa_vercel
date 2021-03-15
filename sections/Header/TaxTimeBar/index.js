@@ -1,163 +1,113 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useLayoutEffect, useState,
+} from 'react';
 import SubHeaderContainer from '../../../components/Header/TaxBarTimeMonth';
 import { theme } from '../../../db.json';
 import SubNavItem from '../../../snnipets/Header/TaxTimeBar/MonthItem';
+import { requestedMonths } from '../../../constants';
+import { DataContext } from '../../../store/GlobalState';
 
 function TaxTimeBar() {
-  const months = [
-    {
-      title: 'FEV 21',
-      tax: 23.12,
-    },
-    {
-      title: 'JAN 21',
-      tax: 2.12,
-    },
-    {
-      title: 'DEZ 20',
-      tax: 0,
-    },
-    {
-      title: 'NOV 20',
-      tax: 0,
-    },
-    {
-      title: 'OUT 20',
-      tax: 0,
-    },
-    {
-      title: 'SET 20',
-      tax: 23.12,
-    },
-    {
-      title: 'AGO 20',
-      tax: 23.12,
-    },
-    {
-      title: 'JUL 20',
-      tax: 23.12,
-    },
-    {
-      title: 'JUN 20',
-      tax: 23.12,
-    },
-    {
-      title: 'MAI 20',
-      tax: 23.12,
-    },
-    {
-      title: 'ABR 20',
-      tax: 23.12,
-    },
-    {
-      title: 'MAR 20',
-      tax: 23.12,
-    },
-  ];
+  const [state] = useContext(DataContext);
+  const { oldUser } = state;
 
-  months.reverse();
+  const months = requestedMonths.slice().reverse();
   const itemsCount = months.length;
 
   const router = useRouter();
   const { pathname, query } = router;
 
-  const showSubNav = (pathname.indexOf('/imposto-de-renda') !== -1);
+  const [showSubNav, setShowSubNav] = useState(false);
+  const [translate, setTranslate] = useState('');
 
   useEffect(() => {
-    if (showSubNav && !query.periodo && months.length > 0) {
-      router.push(`/imposto-de-renda?periodo=${months[months.length - 1].title.replace(' ', '-').toLocaleLowerCase()}`);
+    if (!oldUser) {
+      setTranslate(`translateY(-${realHeight}px)`);
+      setShowSubNav(false);
+    } else if (pathname.indexOf('/app/imposto-de-renda') !== -1) {
+      setTranslate('translateY(0)');
+      setShowSubNav(true);
+    } else {
+      setTranslate(`translateY(-${realHeight}px)`);
+      setShowSubNav(false);
     }
-  }, [pathname]);
+  }, [pathname, oldUser]);
 
   const itemHeight = theme.measuresPatterns.timeSelectBar.height.general;
   const itemHeightSubNav = theme.measuresPatterns.subNav.height.general;
   const realHeight = parseFloat(itemHeight.replace('px', '')) + parseFloat(itemHeightSubNav.replace('px', ''));
-  const translateTimeNav = () => {
-    let resp;
-    if (pathname.indexOf('/imposto-de-renda') !== -1) {
-      resp = 'translateY(0)';
-    } else {
-      resp = `translateY(-${realHeight}px)`;
-    }
-    return resp;
-  };
 
-  const elementWidth = parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.minWidth1024.replace('px', ''));
+  const elementWidth = parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.replace('px', ''));
+  const sideArrowButtonWidth = parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.replace('px', ''));
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setWidthScreen(window.innerWidth);
       setLeftItems(itemsCount - Math.round((window.innerWidth - elementWidth) / elementWidth));
     }
   }, [typeof window]);
 
-  const [widthScreen, setWidthScreen] = useState(1000);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [elementBgLeft, setElementBgLeft] = useState(3);
-  const [elementBgWidth, setElementBgWidth] = useState(0);
-  const [leftItems, setLeftItems] = useState(0);
-  const [rightItems, setRightItems] = useState(0);
-  const [itemsInfo, setItemsInfo] = useState([]);
+  const [size, setSize] = useState([0, 0]);
 
-  useEffect(() => {
-    if (itemsInfo.length === 0) return;
-    if (!query.periodo) return;
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
-    let selectedOption = 0;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].query.periodo === query.periodo) {
-        selectedOption = itemsInfo[i].elementIndex;
-        setSelectedIndex(selectedOption);
-        break;
+  console.log(size);
+
+  const leftRealItems = () => {
+    let resp;
+    if (6 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 8 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 6) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 6;
+      }
+    } else if (8 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 10 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 8) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 8;
+      }
+    } else if (10 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 12 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 10) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 10;
+      }
+    } else if (12 * elementWidth + 2 * sideArrowButtonWidth <= size[0]
+      && size[0] < 14 * elementWidth + 2 * sideArrowButtonWidth) {
+      if (itemsCount < 12) {
+        resp = 0;
+      } else {
+        resp = itemsCount - 12;
       }
     }
-
-    let left = 0;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex < selectedOption) {
-        left += itemsInfo[i].elementWidth;
-      }
-    }
-
-    if (selectedOption === 0) left = 0;
-
-    let widthTemp;
-    for (let i = 0; i < itemsInfo.length; i++) {
-      if (itemsInfo[i].elementIndex === selectedOption) {
-        widthTemp = itemsInfo[i].elementWidth;
-        break;
-      }
-    }
-
-    setElementBgLeft(left);
-    setElementBgWidth(widthTemp);
-  }, [query, itemsInfo]);
-
-  const updateItemsInfo = (data) => {
-    setItemsInfo((prevItemsInfo) => {
-      let indexToExclude = -1;
-      for (let i = 0; i < prevItemsInfo.length; i++) {
-        if ((prevItemsInfo[i].elementIndex === data.elementIndex)) {
-          indexToExclude = i;
-          break;
-        }
-      }
-
-      let newArray = prevItemsInfo.slice();
-      if (indexToExclude >= 0) {
-        newArray = [...newArray.slice(0, indexToExclude),
-          ...newArray.slice(indexToExclude + 1, newArray.length)];
-      }
-      return ([...newArray, data]);
-    });
+    return resp;
   };
 
+  const [leftItems, setLeftItems] = useState(0);
+  const [rightItems, setRightItems] = useState(0);
+
+  console.log(leftRealItems());
+
+  useEffect(() => {
+    setLeftItems(leftRealItems() - rightItems);
+  }, [leftRealItems()]);
   return (
     <SubHeaderContainer
       style={{
-        pointerEvents: showSubNav ? 'inherit' : 'none',
-        transform: translateTimeNav(),
+        pointerEvents: showSubNav ? 'initial' : 'none',
+        opacity: showSubNav ? '1' : '0',
+        transform: translate,
       }}
     >
       <SubHeaderContainer.ArrowContain
@@ -172,11 +122,8 @@ function TaxTimeBar() {
       >
         <i className="fas fa-angle-double-left" />
       </SubHeaderContainer.ArrowContain>
-      <SubHeaderContainer.UlContain
-        style={{
-          maxWidth: widthScreen > 768 ? Math.round((widthScreen - elementWidth) / elementWidth) * elementWidth : '100%',
-        }}
-      >
+      <SubHeaderContainer.UlContain>
+        <SubHeaderContainer.UlContain.FadeIn />
         <SubHeaderContainer.UL
           style={{
             right: `-${rightItems * elementWidth}px`,
@@ -192,26 +139,20 @@ function TaxTimeBar() {
           return (
             <SubNavItem
               key={monthId}
-              updateParentState={updateItemsInfo}
               index={index}
               href={pathname}
               title={month.title}
               query={itemQuery}
-              selectedItem={(selectedIndex === index)}
+              selectedItem={(month.title.replace(' ', '-').toLocaleLowerCase() === query.periodo)}
               value={value}
             />
           );
         })
       }
-          <SubHeaderContainer.ItemBg
-            style={{
-              width: elementBgWidth,
-              left: elementBgLeft,
-              borderRadius: '0',
-            }}
-          />
         </SubHeaderContainer.UL>
       </SubHeaderContainer.UlContain>
+
+      <SubHeaderContainer.UlContain.FadeOut />
 
       <SubHeaderContainer.ArrowContain
         disabled={!rightItems}

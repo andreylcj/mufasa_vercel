@@ -5,7 +5,7 @@ import SectionTitle from '../../snnipets/SectionTitle';
 
 function Contato() {
   return (
-    <SupportContainer>
+    <SupportContainer className="translate-header">
       <SectionTitle>
         Como podemos ajudar?
       </SectionTitle>

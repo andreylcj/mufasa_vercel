@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ToggleQuestion from '../../snnipets/FrequentQuestions/ToggleQuestion';
 import { questions } from '../../constants';
 
 function FrequentQuestions() {
-
   return (
     <div>
       {

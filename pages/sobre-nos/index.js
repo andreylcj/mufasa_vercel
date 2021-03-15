@@ -4,10 +4,12 @@ import Products from '../../sections/AboutUs/Products';
 
 function AboutUs() {
   return (
-    <>
+    <div
+      className="translate-header"
+    >
       <OpenViewAboutUs />
       <Products />
-    </>
+    </div>
   );
 }
 

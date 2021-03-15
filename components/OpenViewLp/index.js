@@ -4,27 +4,19 @@ const OpenView = styled.div`
 /*background-color: #C95206;
 opacity: 0.85;*/
 background-color: rgba(201, 82, 6, 0.85);
-display: grid;
-justify-items: stretch;
-gap: 24px 16px;
-padding: 48px 16px;
-grid-template-columns: repeat(6, 1fr);
-grid-template-rows: auto auto;
+display: flex;
+justify-content: space-between;
+padding: 50px 5vw;
+align-items: center;
+flex-direction: column;
 
 @media (min-width: 768px) {
-  min-height: calc(100vh - 80px);
-  gap: 48px 32px;
-  padding: 80px 24px;
+  min-height: calc(100vh - ${({ theme }) => theme.measuresPatterns.header.height.general});
 }
 
 @media (min-width: 1024px){
-  -webkit-box-align: center;
   align-items: center;
-  row-gap: 0px;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 1fr;
-  padding-right: 8vw;
-  padding-left: 8vw;
+  flex-direction: row;
 }
 `;
 
@@ -33,7 +25,7 @@ text-align: left;
 color: #fff;
 grid-column: 1 / span 6;
 font-size: 25px;
-padding: 5vw;
+padding: 5vh 5vw;
 
 h3{
   font-weight: bold;
@@ -44,8 +36,12 @@ p{
   font-weight: medium;
 }
 
-@media (min-width: 1024px) {
-  grid-column: 1 / span 5;
+@media (min-width: 768px){
+  width: 100%;
+}
+
+@media (min-width: 1024px){
+  width: 50%;
 }
 `;
 
@@ -76,19 +72,15 @@ font-size: 18px;
 background: #fff;
 border-radius: 5px;
 box-shadow: #2b1304 0px 16px 24px;
-padding: 3vh 5vw;
-justify-self: center;
-grid-area: 2 / 1 / auto / span 6;
+min-width: 300px;
+padding: 5vh 5vw;
 
 @media (min-width: 768px){
-  grid-area: 2 / 2 / auto / span 4;
-  min-width: 400px;
+  min-width: 450px;  
   padding: 40px;
 }
 
 @media (min-width: 1024px){
-  align-self: auto;
-  grid-area: 1 / 9 / auto / span 4;
 }
 
 h4{
@@ -99,7 +91,6 @@ h4{
 h6{
   color: #707070;
   font-size: 15px;
-  font-weight: regular;
 }
 
 `;

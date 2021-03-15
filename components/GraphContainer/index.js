@@ -7,10 +7,15 @@ min-height: calc(100vh
 - ${({ theme }) => theme.measuresPatterns.timeSelectBar.height.general}
 );
 display:flex;
-flex-direction:column;
+flex-direction: row;
 align-items: center;
 justify-content: center;
 background: ${({ theme }) => theme.colors.lightGrayBg};
+
+@media(max-width: 767px){
+  padding: 3vh 5vw !important; 
+  flex-direction: column;
+}
 `;
 
 GraphContainer.Bg = styled.div`

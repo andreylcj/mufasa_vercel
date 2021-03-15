@@ -1,5 +1,17 @@
 export const ACTION = {
 
+  // UPDATE NAV TITLE
+  NAV_TITLES:
+  'NAV_TITLES',
+
+  // UPDATE PAGE TITLE
+  PAGE_TITLE:
+  'PAGE_TITLE',
+
+  // UPDATE OLD USER
+  UPDATE_OLD_USER:
+        'UPDATE_OLD_USER',
+
   // ADD_MODAL
   ADD_MODAL:
         'ADD_MODAL',

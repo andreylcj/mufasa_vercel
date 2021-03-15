@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import useWindowSize from '../../../../assets/utils/GetWindowDimensions';
+import PropTypes from 'prop-types';
 
 const SubNavItemContainer = styled.li`
   position: relative;
@@ -16,6 +16,19 @@ const SubNavItemContainer = styled.li`
 
   h5{
     font-weight: 700;
+  }
+
+  &:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #fff;
+    opacity: .25;
+    z-index: -1;
+    transition: all 0.4s;
   }
 }
 
@@ -47,9 +60,22 @@ a{
   transition: all 0.2s;
   width: 100%;
 
-  @media(min-width: 1024px){
-    min-width: ${({ theme }) => theme.measuresPatterns.taxTimeBar.elementWidth.minWidth1024};
+  &:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #fff;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.4s;
   }
+
+  ${'' /* @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 9}px){
+    min-width: ${({ theme }) => theme.measuresPatterns.taxTimeBar.elementWidth.general};
+  } */}
 
   &:hover{
     color: white;
@@ -59,36 +85,21 @@ a{
 `;
 
 function SubNavItem({
-  href, title, selectedItem, index, updateParentState, query, value
+  href, title, selectedItem, query, value,
 }) {
-  const [width, height] = useWindowSize();
-
-  const ref = useRef(null);
-  useEffect(() => {
-    if (!ref.current) return;
-    updateParentState(
-      {
-        elementWidth: ref.current ? ref.current.offsetWidth : 0,
-        elementIndex: index,
-        query,
-      },
-    );
-  }, [ref.current, width]);
-
-  const stringQuery = () => {
+  const destUrl = () => {
     let resp = '';
     const keys = Object.keys(query);
     for (let i = 0; i < Object.keys(query).length; i++) {
       resp += `${keys[i]}=${query[keys[i]]}`;
     }
+    resp = `${href}${resp ? `?${resp}` : ''}`;
+    resp = `${resp}${`#${query.periodo}`}`;
     return resp;
   };
-
   return (
-    <SubNavItemContainer
-      ref={ref}
-    >
-      <Link href={`${href}${stringQuery() ? `?${stringQuery()}` : ''}`}>
+    <SubNavItemContainer id={query.periodo}>
+      <Link href={destUrl()}>
         <a
           className={selectedItem ? 'selected' : 'no-selected'}
         >
@@ -104,5 +115,13 @@ function SubNavItem({
     </SubNavItemContainer>
   );
 }
+
+SubNavItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  selectedItem: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
+  query: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default SubNavItem;

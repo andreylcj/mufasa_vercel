@@ -12,7 +12,8 @@ export default function GoogleLog() {
   const { auth } = state;
 
   const responseGoogle = async (response) => {
-    const userData = {
+
+    /* const userData = {
       email: response.Es.kt,
     };
     console.log(response);
@@ -40,13 +41,15 @@ export default function GoogleLog() {
         token: data.accessToken,
         user: data.user,
       },
-    });
+    }); */
   };
   const router = useRouter();
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
-  }, [auth]); return (
+    // if (Object.keys(auth).length !== 0) router.push('/');
+  }, [auth]);
+
+  return (
     <GoogleContainer>
       <GoogleLogin
         className="beauty-login-with"

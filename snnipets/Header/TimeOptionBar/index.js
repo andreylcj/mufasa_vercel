@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import useWindowSize from '../../../assets/utils/GetWindowDimensions';
+import PropTypes from 'prop-types';
 
 const SubNavItemContainer = styled.li`
 height: 100%;
@@ -12,6 +12,19 @@ position: relative;
 
 .selected{
   font-weight: 700;
+
+  &:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #fff;
+    opacity: .25;
+    z-index: -1;
+    transition: all 0.4s;
+  }
 }
 
 .no-selected{
@@ -41,26 +54,26 @@ a{
   position: relative;
   cursor: pointer;
   min-width: 105px;
+
+  &:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #fff;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.4s;
+    border-radius: 4px;
+  }
 }
 `;
 
 function SubNavItem({
-  href, title, selectedItem, index, updateParentState, query,
+  href, title, selectedItem, query,
 }) {
-  const [width, height] = useWindowSize();
-
-  const ref = useRef(null);
-  useEffect(() => {
-    if (!ref.current) return;
-    updateParentState(
-      {
-        elementWidth: ref.current ? ref.current.offsetWidth : 0,
-        elementIndex: index,
-        query,
-      },
-    );
-  }, [ref.current, width]);
-
   const stringQuery = () => {
     let resp = '';
     const keys = Object.keys(query);
@@ -71,9 +84,7 @@ function SubNavItem({
   };
 
   return (
-    <SubNavItemContainer
-      ref={ref}
-    >
+    <SubNavItemContainer>
       <Link href={`${href}${stringQuery() ? `?${stringQuery()}` : ''}`}>
         <a
           className={selectedItem ? 'selected' : 'no-selected'}
@@ -84,5 +95,12 @@ function SubNavItem({
     </SubNavItemContainer>
   );
 }
+
+SubNavItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  selectedItem: PropTypes.bool.isRequired,
+  query: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default SubNavItem;

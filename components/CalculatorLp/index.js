@@ -21,7 +21,7 @@ flex-direction: column;
 justify-content: center;
 flex-grow: 0;
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   padding: 10vh 10vw;
 }
 

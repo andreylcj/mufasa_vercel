@@ -5,13 +5,13 @@ import SectionTitle from '../../snnipets/SectionTitle';
 
 function Duvidas() {
   return (
-    <SupportContainer>
+    <SupportContainer className="translate-header">
       <SectionTitle>
         Dúvidas?
       </SectionTitle>
       <SupportContainer.QuestionContain
         style={{
-          padding: '10vh 10vw',
+          padding: '5vh 10vw',
         }}
       >
         <h3>

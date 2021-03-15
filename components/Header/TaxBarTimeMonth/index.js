@@ -48,11 +48,21 @@ SubHeaderContainer.UL = styled.ul`
     transition: all 0.4s;
     position: absolute;
     top: 0;
-
+    scroll-behavior: smooth;
     
-  @media(max-width: 768px){
+    @media(max-width: 
+   ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2 - 1}px){
+    right: -0px !important;
     position: relative;
-    overflow-x: auto;
+    overflow-x: auto;  
+
+    li:first-child{
+      padding-left: 12px;
+    }
+
+    li:last-child{
+      padding-right: 12px;
+    }
    }
 
     &::-webkit-scrollbar {
@@ -70,15 +80,78 @@ SubHeaderContainer.UlContain = styled.div`
   overflow-x: hidden;
   position: relative;
   justify-content: flex-end;
-  width: calc(100% - 120px);
+  width: 100%;
 
-  @media(max-width: 768px){
-    width: 100%;
+   @media(min-width: 
+   ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6}px;
+   }
+
+   @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 8 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 8}px;
+   }
+
+   @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 10 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 10}px;
+   }
+
+   @media(min-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 12 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      max-width: ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 12}px;
    }
 
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+SubHeaderContainer.UlContain.FadeIn = styled.div`
+
+  height: 100%;
+  margin-right: 0;
+  position: relative;
+  display: none; 
+
+   @media(max-width: 
+   ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      
+      display: block;
+
+      &:before{
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: -3px;
+        width: 18px;
+        height: 100%;
+        z-index:10;
+        background: linear-gradient(90deg, rgba(201,82,6,1) 40%, rgba(255,255,255,0) 100%);
+      }
+   }
+`;
+
+SubHeaderContainer.UlContain.FadeOut = styled.div`
+
+  height: 100%;
+  margin-right: 0;
+  position: relative;
+  display: none; 
+
+   @media(max-width: 
+   ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      
+      display: block;
+
+      &:before{
+        content: '';
+        position: absolute;
+        top: 0px;
+        right: -3px;
+        width: 18px;
+        height: 100%;
+        z-index:10;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(220,139,86,1) 60%);
+      }
+   }
 `;
 
 SubHeaderContainer.ItemBg = styled.div`
@@ -91,10 +164,11 @@ SubHeaderContainer.ItemBg = styled.div`
   pointer-events: none;
   transition: all ease-out 0.2s;
   opacity: 0.25;
+  display: none;
 `;
 
 SubHeaderContainer.ArrowContain = styled.button`
-   min-width: 60px;
+   min-width: ${({ theme }) => theme.measuresPatterns.taxTimeBar.buttonSideWidth};
    display:flex;
    justify-content: center;
    align-items: center;
@@ -104,9 +178,10 @@ SubHeaderContainer.ArrowContain = styled.button`
    transform: scale(1);
    transition: all 0.2s;
 
-   @media(max-width: 768px){
-     display: none;
-   }
+   @media(max-width: 
+   ${({ theme }) => parseFloat(theme.measuresPatterns.taxTimeBar.elementWidth.general.toString().replace('px', '')) * 6 + parseFloat(theme.measuresPatterns.taxTimeBar.buttonSideWidth.toString().replace('px', '')) * 2}px){
+      display: none;  
+    }
 
    i{
      color: #fff;

@@ -14,6 +14,7 @@ const FooterContainer = styled.footer`
   padding: 5vh 5vw;
   font-size: 0.8125rem;
   line-height: 1rem;
+  transform: translateY(${({ theme }) => theme.measuresPatterns.header.height.general});
   
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);

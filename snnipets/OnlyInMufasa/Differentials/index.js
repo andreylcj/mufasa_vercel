@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const DifCont = styled.div`
   
@@ -80,5 +81,16 @@ function Differentials({
     </DifCont>
   );
 }
+
+Differentials.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  img_src: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+};
+
+Differentials.defaultProps = {
+  alt: undefined,
+};
 
 export default Differentials;

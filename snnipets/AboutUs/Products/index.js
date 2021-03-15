@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const itemHeight = 235;
 
@@ -173,5 +174,11 @@ function ServiceProductItem({ item }) {
     </ItemContainer>
   );
 }
+
+ServiceProductItem.propTypes = {
+  item: PropTypes.objectOf(
+    PropTypes.any,
+  ).isRequired,
+};
 
 export default ServiceProductItem;

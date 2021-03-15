@@ -1,13 +1,23 @@
 import React from 'react';
 import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types';
 import Layout from '../layout/Layout';
 import { DataProvider } from '../store/GlobalState';
 import db from '../db.json';
 
+const { theme } = db;
+
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
+    transition: all 0.4s;
+    scroll-behavior: smooth;
+    font-family: 'Montserrat', sans-serif;
+  }
+  html, body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
   }
   body {
     margin: 0;
@@ -15,11 +25,23 @@ const GlobalStyle = createGlobalStyle`
     /* New styles */
     display: flex;
     flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
-  }
-  html, body {
-    min-height: 100vh;
-    scroll-behavior: smooth;
+    
+
+    a{
+      text-decoration: none;
+      color: #000;
+    }
+
+    ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .translate-header{
+      transform: translateY(${theme.measuresPatterns.header.height.general});
+      transition: all 0.4s;
+    }
   }
   #__next {
     flex: 1;
@@ -27,8 +49,6 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
 `;
-
-const { theme } = db;
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -52,5 +72,20 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.element,
+    PropTypes.array,
+    PropTypes.string,
+  ]),
+  // eslint-disable-next-line react/forbid-prop-types
+  pageProps: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+MyApp.defaultProps = {
+  Component: undefined,
+};
 
 export default MyApp;

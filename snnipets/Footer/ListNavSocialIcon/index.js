@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ListNavItemSocialMedia = styled.li`
   margin-top: 15px;
@@ -58,5 +59,14 @@ function ListNavSocialIcon({ href, socialMedia }) {
     </ListNavItemSocialMedia>
   );
 }
+
+ListNavSocialIcon.propTypes = {
+  href: PropTypes.string,
+  socialMedia: PropTypes.string.isRequired,
+};
+
+ListNavSocialIcon.defaultProps = {
+  href: '',
+};
 
 export default ListNavSocialIcon;

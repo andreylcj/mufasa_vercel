@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ButtonContain = styled.div`
   display: flex;
@@ -39,17 +40,38 @@ const ButtonContain = styled.div`
   }
 `;
 
-function SubmitButton() {
+function SubmitButton({ children, arrowIcon }) {
   return (
     <ButtonContain>
       <button
         type="submit"
       >
-        Enviar
-        <i className="fas fa-long-arrow-alt-right" />
+        {children}
+        {
+          arrowIcon ? (
+            <i className="fas fa-long-arrow-alt-right" />
+          ) : (
+            null
+          )
+        }
+
       </button>
     </ButtonContain>
   );
 }
+
+SubmitButton.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]).isRequired,
+  arrowIcon: PropTypes.bool,
+};
+
+SubmitButton.defaultProps = {
+  arrowIcon: undefined,
+};
 
 export default SubmitButton;
