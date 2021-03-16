@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styled from 'styled-components';
 import SmoothFocusBack from '../../SmoothFocusBack';
 import UserOptionsBox from '../UserOptionsBox';
+import { DataContext } from '../../../store/GlobalState';
 
 const Container = styled.div`
   color: #C95206;
@@ -42,10 +43,14 @@ const Container = styled.div`
 
 function UserInfoOnHover() {
   const [show, setShow] = useState(false);
+  const [state, dispatch] = useContext(DataContext);
+  const { auth } = state;
+  const email = auth.user ? auth.user.email : '';
+  const role = auth.user ? auth.user.role : '';
   return (
     <Container onClick={() => setShow(!show)}>
       <span>
-        user.email@gmail.com
+        {email}
       </span>
       <i className="fas fa-caret-down" style={{ marginLeft: '11px', fontSize: '20px' }} />
       <UserOptionsBox className={show ? 'user-options' : ''} />

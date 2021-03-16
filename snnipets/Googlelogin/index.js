@@ -13,8 +13,8 @@ export default function GoogleLog() {
 
   const responseGoogle = async (response) => {
 
-    /* const userData = {
-      email: response.Es.kt,
+     const userData = {
+      email: response.profileObj.email,
     };
     console.log(response);
 
@@ -41,7 +41,7 @@ export default function GoogleLog() {
         token: data.accessToken,
         user: data.user,
       },
-    }); */
+    });
   };
   const router = useRouter();
 
@@ -56,7 +56,7 @@ export default function GoogleLog() {
         clientId="563786372572-bbe6ifo4eslnm6710fh6b4ujog0qh0nb.apps.googleusercontent.com"
         buttonText="Continuar com o Google"
         onSuccess={responseGoogle}
-        onFailure={responseGoogle}
+        //onFailure={responseGoogle}
         cookiePolicy="single_host_origin"
       />
     </GoogleContainer>

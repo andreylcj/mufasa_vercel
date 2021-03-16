@@ -47,11 +47,18 @@ export default function Facebooke() {
         user: data.user,
       },
     });
+    dispatch({
+      
+        type: ACTION.UPDATE_USER_DATA,
+        payload:{
+          email: response.email,
+        }
+    });
   };
   const router = useRouter();
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/');
+    if (Object.keys(auth).length !== 0) router.push('/app/carteira/rentabilidade');
   }, [auth]);
 
   return (

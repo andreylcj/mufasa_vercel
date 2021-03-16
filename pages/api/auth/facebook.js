@@ -23,7 +23,7 @@ export default function Facebook() {
     };
     console.log(userData);
 
-    const res = await postData('api/auth/registerfacebook', userData);
+    const res = await postData('api/auth/login', userData);
     if (res.emailMessage) {
       console.log(res.emailMessage);
       resposta = res.emailMessage;
@@ -48,6 +48,11 @@ export default function Facebook() {
         token: data.accessToken,
         user: data.user,
       },
+      {
+        type: ACTION.UPDATE_USER_DATA,
+        payload:{
+          email: response.email;
+      }
     });
   };
   const router = useRouter();
